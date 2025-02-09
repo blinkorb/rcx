@@ -82,7 +82,7 @@ export type PropsWithChildren<P extends AnyObject> = Omit<P, 'children'> & {
   children?: CXChildren;
 };
 
-export interface CanvasContext {
+export interface CXCanvasContext {
   readonly props: Required<Omit<CanvasProps, 'children'>>;
   readonly canvas: Omit<HTMLCanvasElement, 'width' | 'height'>;
   readonly ctx2d: CanvasRenderingContext2D;

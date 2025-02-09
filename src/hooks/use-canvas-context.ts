@@ -1,5 +1,11 @@
 import { canvasContext } from '../components/canvas/context.ts';
-import type { CanvasContext } from '../types.ts';
 
-export const useCanvasContext = () =>
-  canvasContext.useInject() as CanvasContext;
+export const useCanvasContext = () => {
+  const context = canvasContext.useInject();
+
+  if (!context) {
+    throw new Error('useCanvasContext must be used inside a Canvas component');
+  }
+
+  return context;
+};
