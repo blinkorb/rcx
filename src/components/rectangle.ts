@@ -9,7 +9,6 @@ export type RectangleProps = PropsWithChildren<{
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
-  pixelRatio?: number;
 }>;
 
 export const Rectangle: CXComponent<RectangleProps> = (props) => {
