@@ -63,14 +63,22 @@ const Page: CXComponent = () => {
         radiusY={canvasContext.props.width * 0.1}
         fill="black"
         rotation={((Date.now() % 5000) / 5000) * Math.PI * 2}
+      />
+      <Circle
+        x={canvasContext.props.width * 0.5}
+        y={canvasContext.props.height * 0.5}
+        radius={canvasContext.props.width * 0.05}
+        endAngle={
+          Math.PI +
+          Math.cos(((Date.now() % 5000) / 5000) * Math.PI * 2) * Math.PI
+        }
+        fill="white"
       >
-        <Circle
+        <Point
           x={canvasContext.props.width * 0.5}
           y={canvasContext.props.height * 0.5}
-          radius={canvasContext.props.width * 0.05}
-          fill="white"
         />
-      </Ellipse>
+      </Circle>
       <Line
         startX={10}
         startY={10}
@@ -89,12 +97,14 @@ const Page: CXComponent = () => {
         ]}
         stroke="black"
       />
-      <Path stroke="black">
+      <Path stroke="black" closePath>
         <Point x={0} y={50} />
         <Point x={5} y={55} />
         <Point x={10} y={50} />
         <Point x={15} y={55} />
         <Point x={20} y={50} />
+        <Point x={20} y={75} />
+        <Point x={0} y={75} />
       </Path>
       {reactive.isMounted && <Unmounts />}
     </>

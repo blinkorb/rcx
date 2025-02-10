@@ -1,4 +1,7 @@
-import { useRenderBeforeChildren } from '../hooks/use-render.ts';
+import {
+  useRenderAfterChildren,
+  useRenderBeforeChildren,
+} from '../hooks/use-render.ts';
 import type { CXComponent, PropsWithChildren } from '../types.ts';
 
 export type EllipseProps = PropsWithChildren<{
@@ -29,10 +32,8 @@ export const Ellipse: CXComponent<EllipseProps> = (props) => {
       endAngle = Math.PI * 2,
       counterClockwise = false,
       beginPath = true,
-      closePath = true,
       fill,
       stroke,
-      strokeWidth,
     } = props;
 
     renderingContext.ctx2d.save();
@@ -52,7 +53,13 @@ export const Ellipse: CXComponent<EllipseProps> = (props) => {
         endAngle,
         counterClockwise
       );
+    }
+  });
 
+  useRenderAfterChildren((renderingContext) => {
+    const { closePath = true, fill, stroke, strokeWidth } = props;
+
+    if (typeof fill === 'string' || typeof stroke === 'string') {
       if (closePath) {
         renderingContext.ctx2d.closePath();
       }
