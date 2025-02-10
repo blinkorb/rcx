@@ -1,6 +1,7 @@
 import {
   Canvas,
   CXComponent,
+  Ellipse,
   Rectangle,
   render,
   useCanvasContext,
@@ -50,6 +51,14 @@ const Page: CXComponent = () => {
         width={canvasContext.props.width * 0.5}
         height={canvasContext.props.height * 0.5}
         fill="red"
+      />
+      <Ellipse
+        x={canvasContext.props.width * 0.5}
+        y={canvasContext.props.height * 0.5}
+        radiusX={canvasContext.props.width * 0.2}
+        radiusY={canvasContext.props.width * 0.1}
+        fill="black"
+        rotation={((Date.now() % 5000) / 5000) * Math.PI * 2}
       />
       {reactive.isMounted && <Unmounts />}
     </>
