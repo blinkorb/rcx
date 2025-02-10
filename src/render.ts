@@ -1,12 +1,10 @@
-import { canvasContext } from './components/canvas/context.ts';
+import { renderingContext } from './components/canvas/context.ts';
 import { emitter } from './emitter.ts';
-import { getRecommendedPixelRatio } from './get-recommended-pixel-ratio.ts';
 import { cxGlobal } from './global.ts';
 import type {
   AnyCXElement,
   AnyCXNode,
   AnyObject,
-  CanvasContext,
   CXChild,
   CXChildren,
   CXRenderingContext,
@@ -146,24 +144,20 @@ const getMatchingChildNext = (
 
 const renderElement = (
   element: AnyCXElement,
-  renderingContext: CXRenderingContext,
+  renderingContextState: CXRenderingContext,
   prevNode: AnyCXNode | undefined,
-  initialCanvasContext?: CanvasContext,
   parentContext?: AnyObject
 ): AnyCXNode => {
   const node = updateNode(element, prevNode);
 
+  node.context = {
+    ...parentContext,
+  };
+
   cxGlobal.currentNode = node;
   cxGlobal.hookIndex = 0;
 
-  if (initialCanvasContext) {
-    canvasContext.useProvide(initialCanvasContext);
-  }
-
-  node.context = {
-    ...parentContext,
-    ...node.context,
-  };
+  renderingContext.useProvide(renderingContextState);
 
   node.rendered = element.type(element.props);
 
@@ -213,13 +207,12 @@ const renderElement = (
 
       return renderElement(
         nextRendered,
-        renderingContext,
+        renderingContextState,
         !!prevRendered &&
           typeof prevRendered === 'object' &&
           !isArray(prevRendered)
           ? prevRendered
           : undefined,
-        undefined,
         node.context
       );
     }
@@ -237,7 +230,7 @@ const renderElement = (
 
   node.hooks.forEach((hook) => {
     if (hook.type === 'useRenderBeforeChildren') {
-      hook.value(renderingContext);
+      hook.value(renderingContextState);
     }
   });
 
@@ -245,7 +238,7 @@ const renderElement = (
 
   node.hooks.forEach((hook) => {
     if (hook.type === 'useRenderAfterChildren') {
-      hook.value(renderingContext);
+      hook.value(renderingContextState);
     }
   });
 
@@ -257,7 +250,7 @@ export const render = (element: AnyCXElement, container: HTMLElement) => {
   const ctx2d = canvas.getContext('2d');
 
   if (!ctx2d) {
-    const errorMessage = 'CanvasRenderingContext2D not supported' as const;
+    const errorMessage = 'CanvasRenderingContext2D not supported';
 
     if (window.console && typeof window.console.error === 'function') {
       // eslint-disable-next-line no-console
@@ -269,21 +262,7 @@ export const render = (element: AnyCXElement, container: HTMLElement) => {
     };
   }
 
-  const renderingContext = { canvas, ctx2d };
-
-  const pixelRatio = getRecommendedPixelRatio();
-
-  const initialCanvasContext: CanvasContext = {
-    ...renderingContext,
-    props: {
-      width: canvas.width,
-      height: canvas.height,
-      pixelRatio,
-    },
-  };
-
-  canvas.width = canvas.clientWidth * pixelRatio;
-  canvas.height = canvas.clientHeight * pixelRatio;
+  const renderingContextState = { canvas, ctx2d };
 
   let raf: number | undefined;
   let rootNode: AnyCXNode | undefined;
@@ -296,13 +275,7 @@ export const render = (element: AnyCXElement, container: HTMLElement) => {
     raf = window.requestAnimationFrame(() => {
       // eslint-disable-next-line no-self-assign
       canvas.width = canvas.width;
-      ctx2d.scale(pixelRatio, pixelRatio);
-      rootNode = renderElement(
-        element,
-        renderingContext,
-        rootNode,
-        initialCanvasContext
-      );
+      rootNode = renderElement(element, renderingContextState, rootNode);
     });
   };
 

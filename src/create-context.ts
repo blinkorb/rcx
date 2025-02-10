@@ -27,7 +27,7 @@ export const createContext = <T extends AnyObject>(name?: string) => {
       );
     }
 
-    return currentNode.context[symbol] as T | undefined;
+    return currentNode.context[symbol] as Readonly<T> | undefined;
   };
 
   const Provider: CXComponent<ProviderProps<T>> = ({ children, value }) => {

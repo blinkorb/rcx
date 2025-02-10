@@ -32,7 +32,7 @@ const Page: CXComponent = () => {
   const reactive = useReactive({ isMounted: true, offset: getOffset() });
 
   useLoop(() => {
-    // reactive.offset = getOffset();
+    reactive.offset = getOffset();
   });
 
   useOnMount(() => {

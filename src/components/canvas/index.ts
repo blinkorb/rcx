@@ -1,7 +1,7 @@
-import { useCanvasContext } from '../../hooks/use-canvas-context.ts';
+import { getRecommendedPixelRatio } from '../../get-recommended-pixel-ratio.ts';
 import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
 import type { CXComponent, PropsWithChildren } from '../../types.ts';
-import { canvasContext } from './context.ts';
+import { canvasContext, renderingContext } from './context.ts';
 
 export type CanvasProps = PropsWithChildren<{
   width?: number;
@@ -10,28 +10,36 @@ export type CanvasProps = PropsWithChildren<{
 }>;
 
 export const Canvas: CXComponent<CanvasProps> = (props) => {
-  const context = useCanvasContext();
+  const renderingContextStateRoot = renderingContext.useInject();
 
-  useRenderBeforeChildren((renderingContext) => {
-    const mergedProps = {
-      ...context.props,
-      ...props,
-    };
+  if (!renderingContextStateRoot) {
+    throw new Error('Canvas was rendered outside of an application');
+  }
 
-    renderingContext.canvas.width = mergedProps.width * mergedProps.pixelRatio;
-    renderingContext.canvas.height =
-      mergedProps.height * mergedProps.pixelRatio;
-    renderingContext.ctx2d.scale(
-      mergedProps.pixelRatio,
-      mergedProps.pixelRatio
-    );
+  useRenderBeforeChildren((renderingContextState) => {
+    const pixelRatio = props.pixelRatio ?? getRecommendedPixelRatio();
+    const width =
+      props.width ?? renderingContextState.canvas.width / pixelRatio;
+    const height =
+      props.height ?? renderingContextState.canvas.height / pixelRatio;
+
+    renderingContextState.canvas.width = width * pixelRatio;
+    renderingContextState.canvas.height = height * pixelRatio;
+    renderingContextState.ctx2d.scale(pixelRatio, pixelRatio);
   });
 
+  const pixelRatio = props.pixelRatio ?? getRecommendedPixelRatio();
+  const width =
+    props.width ?? renderingContextStateRoot.canvas.width / pixelRatio;
+  const height =
+    props.height ?? renderingContextStateRoot.canvas.height / pixelRatio;
+
   canvasContext.useProvide({
-    ...context,
+    ...renderingContextStateRoot,
     props: {
-      ...context.props,
-      ...props,
+      pixelRatio,
+      width,
+      height,
     },
   });
 
