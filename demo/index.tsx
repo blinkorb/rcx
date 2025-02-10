@@ -4,6 +4,7 @@ import {
   CXComponent,
   Ellipse,
   Line,
+  Path,
   Rectangle,
   render,
   useCanvasContext,
@@ -76,6 +77,16 @@ const Page: CXComponent = () => {
         endY={20}
         stroke="green"
         strokeWidth={5}
+      />
+      <Path
+        points={[
+          [0, 20],
+          [5, 50],
+          [10, 0],
+          [15, 20],
+          [20, 5],
+        ]}
+        stroke="black"
       />
       {reactive.isMounted && <Unmounts />}
     </>

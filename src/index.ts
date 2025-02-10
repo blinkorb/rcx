@@ -12,4 +12,5 @@ export * from './components/rectangle.ts';
 export * from './components/ellipse.ts';
 export * from './components/circle.tsx';
 export * from './components/line.ts';
+export * from './components/path.ts';
 export * from './create-context.ts';
