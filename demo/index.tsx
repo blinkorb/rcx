@@ -5,6 +5,7 @@ import {
   Ellipse,
   Line,
   Path,
+  Point,
   Rectangle,
   render,
   useCanvasContext,
@@ -88,6 +89,13 @@ const Page: CXComponent = () => {
         ]}
         stroke="black"
       />
+      <Path stroke="black">
+        <Point x={0} y={50} />
+        <Point x={5} y={55} />
+        <Point x={10} y={50} />
+        <Point x={15} y={55} />
+        <Point x={20} y={50} />
+      </Path>
       {reactive.isMounted && <Unmounts />}
     </>
   );
