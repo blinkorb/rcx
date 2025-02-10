@@ -1,4 +1,7 @@
-import { useRenderBeforeChildren } from '../hooks/use-render.ts';
+import {
+  useRenderAfterChildren,
+  useRenderBeforeChildren,
+} from '../hooks/use-render.ts';
 import type { CXComponent, PropsWithChildren } from '../types.ts';
 
 export type LineProps = PropsWithChildren<{
@@ -20,7 +23,6 @@ export const Line: CXComponent<LineProps> = (props) => {
       endX,
       endY,
       beginPath = true,
-      closePath = false,
       stroke,
       strokeWidth,
     } = props;
@@ -38,7 +40,17 @@ export const Line: CXComponent<LineProps> = (props) => {
 
       renderingContext.ctx2d.moveTo(startX, startY);
       renderingContext.ctx2d.lineTo(endX, endY);
+    }
+  });
 
+  useRenderAfterChildren((renderingContext) => {
+    const { closePath = false, stroke, strokeWidth } = props;
+
+    if (typeof strokeWidth === 'number') {
+      renderingContext.ctx2d.lineWidth = strokeWidth;
+    }
+
+    if (typeof stroke === 'string') {
       if (closePath) {
         renderingContext.ctx2d.closePath();
       }

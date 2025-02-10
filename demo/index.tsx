@@ -86,7 +86,9 @@ const Page: CXComponent = () => {
         endY={20}
         stroke="green"
         strokeWidth={5}
-      />
+      >
+        <Point x={30} y={10} />
+      </Line>
       <Path
         points={[
           [0, 20],
