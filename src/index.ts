@@ -6,6 +6,7 @@ export * from './hooks/use-render.ts';
 export * from './hooks/use-canvas-context.ts';
 export * from './hooks/use-loop.ts';
 export * from './hooks/use-on.ts';
+export * from './hooks/use-window-size.ts';
 export * from './components/canvas/index.ts';
 export * from './components/rectangle.ts';
 export * from './create-context.ts';

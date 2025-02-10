@@ -7,6 +7,7 @@ import {
   useLoop,
   useOnMount,
   useReactive,
+  useWindowSize,
 } from '@blinkorb/rcx';
 
 const Unmounts: CXComponent = () => {
@@ -58,16 +59,10 @@ const Page: CXComponent = () => {
 Page.displayName = 'Page';
 
 const App = () => {
-  const dimensions = useReactive({ width: 200, height: 100 });
-
-  useOnMount(() => {
-    window.setTimeout(() => {
-      dimensions.width = 100;
-    }, 1000);
-  });
+  const windowSize = useWindowSize();
 
   return (
-    <Canvas width={dimensions.width} height={dimensions.height}>
+    <Canvas width={windowSize.width} height={windowSize.height}>
       <Page />
     </Canvas>
   );
