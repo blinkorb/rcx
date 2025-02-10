@@ -10,4 +10,5 @@ export * from './hooks/use-window-size.ts';
 export * from './components/canvas/index.ts';
 export * from './components/rectangle.ts';
 export * from './components/ellipse.ts';
+export * from './components/circle.tsx';
 export * from './create-context.ts';
