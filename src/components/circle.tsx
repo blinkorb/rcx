@@ -9,6 +9,8 @@ export type CircleProps = PropsWithChildren<{
   startAngle?: number;
   endAngle?: number;
   counterClockwise?: boolean;
+  beginPath?: boolean;
+  closePath?: boolean;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
