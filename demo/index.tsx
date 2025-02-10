@@ -3,6 +3,7 @@ import {
   Circle,
   CXComponent,
   Ellipse,
+  Line,
   Rectangle,
   render,
   useCanvasContext,
@@ -68,6 +69,14 @@ const Page: CXComponent = () => {
           fill="white"
         />
       </Ellipse>
+      <Line
+        startX={10}
+        startY={10}
+        endX={20}
+        endY={20}
+        stroke="green"
+        strokeWidth={5}
+      />
       {reactive.isMounted && <Unmounts />}
     </>
   );
