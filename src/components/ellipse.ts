@@ -35,6 +35,7 @@ export const Ellipse: CXComponent<EllipseProps> = (props) => {
 
     if (typeof fill === 'string') {
       renderingContext.ctx2d.fillStyle = fill;
+      renderingContext.ctx2d.beginPath();
       renderingContext.ctx2d.ellipse(
         x,
         y,
@@ -45,6 +46,7 @@ export const Ellipse: CXComponent<EllipseProps> = (props) => {
         endAngle,
         counterClockwise
       );
+      renderingContext.ctx2d.closePath();
       renderingContext.ctx2d.fill();
     }
 
