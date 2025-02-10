@@ -29,12 +29,12 @@ export const Path: CXComponent<PathProps> = (props) => {
       }
 
       points?.forEach((point, index) => {
-        const [startX, startY] = isArray(point) ? point : [point.x, point.y];
+        const [x, y] = isArray(point) ? point : [point.x, point.y];
 
         if (index === 0) {
-          renderingContext.ctx2d.moveTo(startX, startY);
+          renderingContext.ctx2d.moveTo(x, y);
         } else {
-          renderingContext.ctx2d.lineTo(startX, startY);
+          renderingContext.ctx2d.lineTo(x, y);
         }
       });
     }
