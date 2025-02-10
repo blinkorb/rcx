@@ -150,15 +150,14 @@ const renderElement = (
 ): AnyCXNode => {
   const node = updateNode(element, prevNode);
 
+  node.context = {
+    ...parentContext,
+  };
+
   cxGlobal.currentNode = node;
   cxGlobal.hookIndex = 0;
 
   renderingContext.useProvide(renderingContextState);
-
-  node.context = {
-    ...parentContext,
-    ...node.context,
-  };
 
   node.rendered = element.type(element.props);
 
