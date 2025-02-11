@@ -32,37 +32,31 @@ export const Ellipse: CXComponent<EllipseProps> = (props) => {
       endAngle = Math.PI * 2,
       counterClockwise = false,
       beginPath = true,
-      fill,
-      stroke,
     } = props;
 
     renderingContext.ctx2d.save();
 
-    if (typeof fill === 'string' || typeof stroke === 'string') {
-      if (beginPath) {
-        renderingContext.ctx2d.beginPath();
-      }
-
-      renderingContext.ctx2d.ellipse(
-        x,
-        y,
-        radiusX,
-        radiusY,
-        rotation,
-        startAngle,
-        endAngle,
-        counterClockwise
-      );
+    if (beginPath) {
+      renderingContext.ctx2d.beginPath();
     }
+
+    renderingContext.ctx2d.ellipse(
+      x,
+      y,
+      radiusX,
+      radiusY,
+      rotation,
+      startAngle,
+      endAngle,
+      counterClockwise
+    );
   });
 
   useRenderAfterChildren((renderingContext) => {
     const { closePath = true, fill, stroke, strokeWidth } = props;
 
-    if (typeof fill === 'string' || typeof stroke === 'string') {
-      if (closePath) {
-        renderingContext.ctx2d.closePath();
-      }
+    if (closePath) {
+      renderingContext.ctx2d.closePath();
     }
 
     if (typeof fill === 'string') {

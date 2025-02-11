@@ -16,13 +16,10 @@ export type RectangleProps = PropsWithChildren<{
 
 export const Rectangle: CXComponent<RectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { x, y, width, height, fill } = props;
+    const { x, y, width, height } = props;
 
     renderingContext.ctx2d.save();
-
-    if (typeof fill === 'string') {
-      renderingContext.ctx2d.rect(x, y, width, height);
-    }
+    renderingContext.ctx2d.rect(x, y, width, height);
   });
 
   useRenderAfterChildren((renderingContext) => {
