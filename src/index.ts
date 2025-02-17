@@ -15,4 +15,5 @@ export * from './components/line.ts';
 export * from './components/path.ts';
 export * from './components/point.ts';
 export * from './components/arc-to.ts';
+export * from './components/text.ts';
 export * from './create-context.ts';

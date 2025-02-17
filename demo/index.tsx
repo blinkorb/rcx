@@ -9,12 +9,15 @@ import {
   Point,
   Rectangle,
   render,
+  Text,
   useCanvasContext,
   useLoop,
   useOnMount,
   useReactive,
   useWindowSize,
 } from '@blinkorb/rcx';
+
+const RendersChildren: CXComponent = ({ children }) => children;
 
 const Unmounts: CXComponent = () => {
   // eslint-disable-next-line no-console
@@ -120,6 +123,10 @@ const Page: CXComponent = () => {
         />
         <Point x={300} y={100} />
       </Path>
+      <Text x={305} y={102} fill="red" stroke="black">
+        The offset is {reactive.offset.toFixed(2)} {[1, 2, 3].map((n) => n)}{' '}
+        <RendersChildren>Children</RendersChildren>
+      </Text>
       {reactive.isMounted && <Unmounts />}
     </>
   );
