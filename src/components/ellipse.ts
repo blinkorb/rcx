@@ -4,20 +4,35 @@ import {
 } from '../hooks/use-render.ts';
 import type { CXComponent, PropsWithChildren } from '../types.ts';
 
-export type RectangleProps = PropsWithChildren<{
+export type EllipseProps = PropsWithChildren<{
   x: number;
   y: number;
-  width: number;
-  height: number;
+  radiusX: number;
+  radiusY: number;
+  rotation?: number;
+  startAngle?: number;
+  endAngle?: number;
+  counterClockwise?: boolean;
   beginPath?: boolean;
+  closePath?: boolean;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
 }>;
 
-export const Rectangle: CXComponent<RectangleProps> = (props) => {
+export const Ellipse: CXComponent<EllipseProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { x, y, width, height, beginPath = true } = props;
+    const {
+      x,
+      y,
+      radiusX,
+      radiusY,
+      rotation = 0,
+      startAngle = 0,
+      endAngle = Math.PI * 2,
+      counterClockwise = false,
+      beginPath = true,
+    } = props;
 
     renderingContext.ctx2d.save();
 
@@ -25,11 +40,24 @@ export const Rectangle: CXComponent<RectangleProps> = (props) => {
       renderingContext.ctx2d.beginPath();
     }
 
-    renderingContext.ctx2d.rect(x, y, width, height);
+    renderingContext.ctx2d.ellipse(
+      x,
+      y,
+      radiusX,
+      radiusY,
+      rotation,
+      startAngle,
+      endAngle,
+      counterClockwise
+    );
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { fill, stroke, strokeWidth } = props;
+    const { closePath = true, fill, stroke, strokeWidth } = props;
+
+    if (closePath) {
+      renderingContext.ctx2d.closePath();
+    }
 
     if (typeof fill === 'string') {
       renderingContext.ctx2d.fillStyle = fill;
@@ -51,4 +79,4 @@ export const Rectangle: CXComponent<RectangleProps> = (props) => {
   return props.children;
 };
 
-Rectangle.displayName = 'Rectangle';
+Ellipse.displayName = 'Ellipse';

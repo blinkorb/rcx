@@ -4,28 +4,31 @@ import {
 } from '../hooks/use-render.ts';
 import type { CXComponent, PropsWithChildren } from '../types.ts';
 
-export type RectangleProps = PropsWithChildren<{
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  beginPath?: boolean;
+export type ArcToProps = PropsWithChildren<{
+  startControlX: number;
+  startControlY: number;
+  endControlX: number;
+  endControlY: number;
+  radius: number;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
 }>;
 
-export const Rectangle: CXComponent<RectangleProps> = (props) => {
+export const ArcTo: CXComponent<ArcToProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { x, y, width, height, beginPath = true } = props;
+    const { startControlX, startControlY, endControlX, endControlY, radius } =
+      props;
 
     renderingContext.ctx2d.save();
 
-    if (beginPath) {
-      renderingContext.ctx2d.beginPath();
-    }
-
-    renderingContext.ctx2d.rect(x, y, width, height);
+    renderingContext.ctx2d.arcTo(
+      startControlX,
+      startControlY,
+      endControlX,
+      endControlY,
+      radius
+    );
   });
 
   useRenderAfterChildren((renderingContext) => {
@@ -51,4 +54,4 @@ export const Rectangle: CXComponent<RectangleProps> = (props) => {
   return props.children;
 };
 
-Rectangle.displayName = 'Rectangle';
+ArcTo.displayName = 'ArcTo';

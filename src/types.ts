@@ -96,3 +96,5 @@ export interface CXGlobal {
 export interface FragmentProps {
   children?: CXChildren;
 }
+
+export type CXPoint = [number, number] | { x: number; y: number };
