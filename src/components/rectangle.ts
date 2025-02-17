@@ -9,6 +9,7 @@ export type RectangleProps = PropsWithChildren<{
   y: number;
   width: number;
   height: number;
+  beginPath?: boolean;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
@@ -16,9 +17,14 @@ export type RectangleProps = PropsWithChildren<{
 
 export const Rectangle: CXComponent<RectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { x, y, width, height } = props;
+    const { x, y, width, height, beginPath = true } = props;
 
     renderingContext.ctx2d.save();
+
+    if (beginPath) {
+      renderingContext.ctx2d.beginPath();
+    }
+
     renderingContext.ctx2d.rect(x, y, width, height);
   });
 
