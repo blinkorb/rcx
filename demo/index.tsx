@@ -1,4 +1,5 @@
 import {
+  ArcTo,
   Canvas,
   Circle,
   CXComponent,
@@ -107,6 +108,17 @@ const Page: CXComponent = () => {
         <Point x={20} y={50} />
         <Point x={20} y={75} />
         <Point x={0} y={75} />
+      </Path>
+      <Path strokeWidth={5} stroke="blue">
+        <Point x={200} y={200} />
+        <ArcTo
+          startControlX={200}
+          startControlY={100}
+          endControlX={300}
+          endControlY={100}
+          radius={50}
+        />
+        <Point x={300} y={100} />
       </Path>
       {reactive.isMounted && <Unmounts />}
     </>
