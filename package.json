@@ -31,7 +31,7 @@
     "start": "npm run dev",
     "dev": "tsb serve",
     "dist": "npm run build",
-    "build": "rm -rf dist && tsc -p tsconfig.dist.json",
+    "build": "rm -rf dist && tsc -p tsconfig.dist.json && node scripts/prep-package.js",
     "typecheck": "tsc --noEmit",
     "format-check": "prettier --check *",
     "format": "prettier --write *",
