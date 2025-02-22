@@ -1,4 +1,4 @@
-import type { CXComponent, PropsWithChildren } from '../types.ts';
+import type { CXComponent, PropsWithChildren } from '../../types.ts';
 import { Ellipse } from './ellipse.ts';
 
 export type CircleProps = PropsWithChildren<{

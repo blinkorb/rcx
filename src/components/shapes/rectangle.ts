@@ -1,22 +1,23 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../hooks/use-render.ts';
-import type { CXComponent, CXPoint, PropsWithChildren } from '../types.ts';
-import { isArray } from '../utils.ts';
+} from '../../hooks/use-render.ts';
+import type { CXComponent, PropsWithChildren } from '../../types.ts';
 
-export type PathProps = PropsWithChildren<{
-  points?: readonly CXPoint[];
+export type RectangleProps = PropsWithChildren<{
+  x: number;
+  y: number;
+  width: number;
+  height: number;
   beginPath?: boolean;
-  closePath?: boolean;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
 }>;
 
-export const Path: CXComponent<PathProps> = (props) => {
+export const Rectangle: CXComponent<RectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { points, beginPath = true } = props;
+    const { x, y, width, height, beginPath = true } = props;
 
     renderingContext.ctx2d.save();
 
@@ -24,23 +25,11 @@ export const Path: CXComponent<PathProps> = (props) => {
       renderingContext.ctx2d.beginPath();
     }
 
-    points?.forEach((point, index) => {
-      const [x, y] = isArray(point) ? point : [point.x, point.y];
-
-      if (index === 0) {
-        renderingContext.ctx2d.moveTo(x, y);
-      } else {
-        renderingContext.ctx2d.lineTo(x, y);
-      }
-    });
+    renderingContext.ctx2d.rect(x, y, width, height);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { closePath = false, fill, stroke, strokeWidth } = props;
-
-    if (closePath) {
-      renderingContext.ctx2d.closePath();
-    }
+    const { fill, stroke, strokeWidth } = props;
 
     if (typeof fill === 'string') {
       renderingContext.ctx2d.fillStyle = fill;
@@ -62,4 +51,4 @@ export const Path: CXComponent<PathProps> = (props) => {
   return props.children;
 };
 
-Path.displayName = 'Path';
+Rectangle.displayName = 'Rectangle';

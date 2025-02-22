@@ -1,6 +1,10 @@
-import { useRenderBeforeChildren } from '../hooks/use-render.ts';
-import type { CXChildren, CXComponent, PropsWithChildren } from '../types.ts';
-import { isArray } from '../utils.ts';
+import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
+import type {
+  CXChildren,
+  CXComponent,
+  PropsWithChildren,
+} from '../../types.ts';
+import { isArray } from '../../utils.ts';
 
 export type TextProps = PropsWithChildren<{
   x: number;
