@@ -1,4 +1,4 @@
-import type { AnyFunction, AnyObject } from './types.js';
+import type { AnyFunction, AnyObject } from '../types.js';
 
 type Handler<T extends AnyObject, K extends keyof T> = (
   data: T[K],

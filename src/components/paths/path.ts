@@ -3,7 +3,7 @@ import {
   useRenderBeforeChildren,
 } from '../../hooks/use-render.js';
 import type { CXComponent, CXPoint, PropsWithChildren } from '../../types.js';
-import { isArray } from '../../utils.js';
+import { isArray } from '../../utils/type-guards.js';
 
 export type PathProps = PropsWithChildren<{
   points?: readonly CXPoint[];

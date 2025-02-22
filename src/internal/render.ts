@@ -1,6 +1,4 @@
-import { renderingContext } from './components/canvas/context.js';
-import { emitter } from './emitter.js';
-import { cxGlobal } from './global.js';
+import { renderingContext } from '../components/canvas/context.js';
 import type {
   AnyCXElement,
   AnyCXNode,
@@ -9,8 +7,10 @@ import type {
   CXChildren,
   CXRenderingContext,
   NestedArray,
-} from './types.js';
-import { isArray } from './utils.js';
+} from '../types.js';
+import { isArray } from '../utils/type-guards.js';
+import { emitter } from './emitter.js';
+import { cxGlobal } from './global.js';
 
 const getCanvasElement = (container: HTMLElement) => {
   if (container instanceof HTMLCanvasElement) {

@@ -1,6 +1,6 @@
 export * from './types.js';
-export * from './render.js';
-export * from './get-recommended-pixel-ratio.js';
+export * from './internal/render.js';
+export * from './utils/get-recommended-pixel-ratio.js';
 export * from './hooks/use-state.js';
 export * from './hooks/use-render.js';
 export * from './hooks/use-canvas-context.js';
@@ -16,4 +16,4 @@ export * from './components/paths/path.js';
 export * from './components/paths/point.js';
 export * from './components/paths/arc-to.js';
 export * from './components/text/text.js';
-export * from './create-context.js';
+export * from './context/create-context.js';

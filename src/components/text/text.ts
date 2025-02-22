@@ -4,7 +4,7 @@ import type {
   CXComponent,
   PropsWithChildren,
 } from '../../types.js';
-import { isArray } from '../../utils.js';
+import { isArray } from '../../utils/type-guards.js';
 
 export type TextProps = PropsWithChildren<{
   x: number;

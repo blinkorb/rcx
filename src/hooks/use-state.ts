@@ -1,4 +1,4 @@
-import { reactive } from '../reactive.js';
+import { reactive } from '../internal/reactive.js';
 import type { AnyObject } from '../types.js';
 import { registerHook } from './utils.js';
 
