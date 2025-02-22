@@ -1,18 +1,12 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../hooks/use-render.ts';
-import type { CXComponent, PropsWithChildren } from '../types.ts';
+} from '../../hooks/use-render.js';
+import type { CXComponent, CXPoint, PropsWithChildren } from '../../types.js';
+import { isArray } from '../../utils/type-guards.js';
 
-export type EllipseProps = PropsWithChildren<{
-  x: number;
-  y: number;
-  radiusX: number;
-  radiusY: number;
-  rotation?: number;
-  startAngle?: number;
-  endAngle?: number;
-  counterClockwise?: boolean;
+export type PathProps = PropsWithChildren<{
+  points?: readonly CXPoint[];
   beginPath?: boolean;
   closePath?: boolean;
   fill?: string;
@@ -20,19 +14,9 @@ export type EllipseProps = PropsWithChildren<{
   strokeWidth?: number;
 }>;
 
-export const Ellipse: CXComponent<EllipseProps> = (props) => {
+export const Path: CXComponent<PathProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const {
-      x,
-      y,
-      radiusX,
-      radiusY,
-      rotation = 0,
-      startAngle = 0,
-      endAngle = Math.PI * 2,
-      counterClockwise = false,
-      beginPath = true,
-    } = props;
+    const { points, beginPath = true } = props;
 
     renderingContext.ctx2d.save();
 
@@ -40,20 +24,19 @@ export const Ellipse: CXComponent<EllipseProps> = (props) => {
       renderingContext.ctx2d.beginPath();
     }
 
-    renderingContext.ctx2d.ellipse(
-      x,
-      y,
-      radiusX,
-      radiusY,
-      rotation,
-      startAngle,
-      endAngle,
-      counterClockwise
-    );
+    points?.forEach((point, index) => {
+      const [x, y] = isArray(point) ? point : [point.x, point.y];
+
+      if (index === 0) {
+        renderingContext.ctx2d.moveTo(x, y);
+      } else {
+        renderingContext.ctx2d.lineTo(x, y);
+      }
+    });
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { closePath = true, fill, stroke, strokeWidth } = props;
+    const { closePath = false, fill, stroke, strokeWidth } = props;
 
     if (closePath) {
       renderingContext.ctx2d.closePath();
@@ -79,4 +62,4 @@ export const Ellipse: CXComponent<EllipseProps> = (props) => {
   return props.children;
 };
 
-Ellipse.displayName = 'Ellipse';
+Path.displayName = 'Path';

@@ -1,5 +1,5 @@
-import { useOnMount } from './use-on.ts';
-import { useReactive } from './use-state.ts';
+import { useOnMount } from './use-on.js';
+import { useReactive } from './use-state.js';
 
 export const useWindowSize = () => {
   const size = useReactive({

@@ -1,6 +1,6 @@
-import { reactive } from '../reactive.ts';
-import type { AnyObject } from '../types.ts';
-import { registerHook } from './utils.ts';
+import { registerHook } from '../internal/hooks.js';
+import { reactive } from '../internal/reactive.js';
+import type { AnyObject } from '../types.js';
 
 export const useReactive = <T extends AnyObject>(initialState: T) =>
   registerHook('useReactive', reactive(initialState));

@@ -3,17 +3,35 @@
   "version": "0.0.0",
   "description": "Reactive JSX-based library for creating HTML5 canvas applications",
   "type": "module",
-  "main": "dist/index.mjs",
+  "main": "./src/index.js",
   "exports": {
     ".": {
-      "import": "./src/index.ts"
+      "import": "./src/index.js"
+    },
+    "./canvas": {
+      "import": "./src/components/canvas/index.js"
+    },
+    "./components": {
+      "import": "./src/components/index.js"
+    },
+    "./context": {
+      "import": "./src/context/index.js"
+    },
+    "./hooks": {
+      "import": "./src/hooks/index.js"
+    },
+    "./utils": {
+      "import": "./src/utils/index.js"
     },
     "./jsx-runtime": {
-      "import": "./src/jsx-runtime.ts"
+      "import": "./src/jsx-runtime.js"
     }
   },
   "scripts": {
+    "start": "npm run dev",
     "dev": "tsb serve",
+    "dist": "npm run build",
+    "build": "rm -rf dist && tsc -p tsconfig.dist.json && node scripts/prep-package.js",
     "typecheck": "tsc --noEmit",
     "format-check": "prettier --check *",
     "format": "prettier --write *",
@@ -41,6 +59,7 @@
   },
   "homepage": "https://github.com/blinkorb/rcx#readme",
   "devDependencies": {
+    "@jakesidsmith/tsb": "^3.0.0",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
@@ -53,8 +72,5 @@
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
-  },
-  "dependencies": {
-    "@jakesidsmith/tsb": "^3.0.0"
   }
 }

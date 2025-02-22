@@ -3,7 +3,7 @@ import type {
   CXComponent,
   CXElement,
   FragmentProps,
-} from './types.ts';
+} from './types.js';
 
 export const jsx = <C extends CXComponent<P>, P extends AnyObject>(
   type: C,

@@ -1,4 +1,4 @@
-import type { CanvasProps } from './components/canvas/index.ts';
+import type { CanvasProps } from './components/canvas/index.js';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
