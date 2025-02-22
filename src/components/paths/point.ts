@@ -1,5 +1,5 @@
-import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
-import type { CXComponent, PropsWithChildren } from '../../types.ts';
+import { useRenderBeforeChildren } from '../../hooks/use-render.js';
+import type { CXComponent, PropsWithChildren } from '../../types.js';
 
 export type PointProps = PropsWithChildren<{
   x: number;

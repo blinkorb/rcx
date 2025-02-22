@@ -1,7 +1,7 @@
-import { getRecommendedPixelRatio } from '../../get-recommended-pixel-ratio.ts';
-import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
-import type { CXComponent, PropsWithChildren } from '../../types.ts';
-import { canvasContext, renderingContext } from './context.ts';
+import { getRecommendedPixelRatio } from '../../get-recommended-pixel-ratio.js';
+import { useRenderBeforeChildren } from '../../hooks/use-render.js';
+import type { CXComponent, PropsWithChildren } from '../../types.js';
+import { canvasContext, renderingContext } from './context.js';
 
 export type CanvasProps = PropsWithChildren<{
   width?: number;

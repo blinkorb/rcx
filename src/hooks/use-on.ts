@@ -1,5 +1,5 @@
-import type { OnMountHook } from '../types.ts';
-import { registerHook } from './utils.ts';
+import type { OnMountHook } from '../types.js';
+import { registerHook } from './utils.js';
 
 export const useOnMount = (callback: () => void | (() => void)) => {
   const hook: OnMountHook = {

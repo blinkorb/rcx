@@ -2,6 +2,7 @@ import type { Config } from 'jest';
 
 const config = {
   preset: 'ts-jest/presets/default-esm',
+  testMatch: ['<rootDir>/src/**/*.(spec|test).{js,jsx,ts,tsx}'],
   collectCoverageFrom: ['src/**/*.(js|jsx|ts|tsx)'],
   // coverageThreshold: {
   //   global: {

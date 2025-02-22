@@ -1,5 +1,5 @@
-import { CXRenderingContext } from '../types.ts';
-import { registerHook } from './utils.ts';
+import { CXRenderingContext } from '../types.js';
+import { registerHook } from './utils.js';
 
 export const useRenderBeforeChildren = (
   callback: (renderingContext: CXRenderingContext) => void

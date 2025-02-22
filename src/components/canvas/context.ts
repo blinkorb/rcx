@@ -1,5 +1,5 @@
-import { createContext } from '../../create-context.ts';
-import type { CXCanvasContext, CXRenderingContext } from '../../types.ts';
+import { createContext } from '../../create-context.js';
+import type { CXCanvasContext, CXRenderingContext } from '../../types.js';
 
 export const canvasContext = createContext<CXCanvasContext>();
 
