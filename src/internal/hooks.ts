@@ -1,5 +1,5 @@
-import { cxGlobal } from '../internal/global.js';
 import type { Hook, HookMap } from '../types.js';
+import { cxGlobal } from './global.js';
 
 export const registerHook = <H extends keyof HookMap, T extends HookMap[H]>(
   hookType: H,

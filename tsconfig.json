@@ -20,6 +20,7 @@
     "jsxImportSource": "@blinkorb/rcx",
     "paths": {
       "@blinkorb/rcx": ["./src/index.ts"],
+      "@blinkorb/rcx/canvas": ["./src/components/canvas/index.ts"],
       "@blinkorb/rcx/*": ["./src/*"]
     }
   },

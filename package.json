@@ -3,13 +3,28 @@
   "version": "0.0.0",
   "description": "Reactive JSX-based library for creating HTML5 canvas applications",
   "type": "module",
-  "main": "dist/index.mjs",
+  "main": "./src/index.js",
   "exports": {
     ".": {
-      "import": "./src/index.ts"
+      "import": "./src/index.js"
+    },
+    "./canvas": {
+      "import": "./src/components/canvas/index.js"
+    },
+    "./components": {
+      "import": "./src/components/index.js"
+    },
+    "./context": {
+      "import": "./src/context/index.js"
+    },
+    "./hooks": {
+      "import": "./src/hooks/index.js"
+    },
+    "./utils": {
+      "import": "./src/utils/index.js"
     },
     "./jsx-runtime": {
-      "import": "./src/jsx-runtime.ts"
+      "import": "./src/jsx-runtime.js"
     }
   },
   "scripts": {
