@@ -4,18 +4,17 @@ import {
 } from '../../hooks/use-render.ts';
 import { CXComponent, PropsWithChildren } from '../../types.ts';
 
-export type ScaleProps = PropsWithChildren<
-  | {
+export type ScaleProps =
+  | PropsWithChildren<{
       scale: number;
       scaleX?: never;
       scaleY?: never;
-    }
-  | {
+    }>
+  | PropsWithChildren<{
       scale: never;
       scaleX: number;
       scaleY: number;
-    }
->;
+    }>;
 
 export const Scale: CXComponent<ScaleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
