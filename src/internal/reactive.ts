@@ -1,5 +1,5 @@
-import type { AnyObject } from '../types.js';
-import { emitter } from './emitter.js';
+import type { AnyObject } from '../types.ts';
+import { emitter } from './emitter.ts';
 
 export const reactive = <T extends AnyObject>(initialState: T) =>
   new Proxy(initialState, {

@@ -14,6 +14,7 @@
     "noEmit": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
+    "allowImportingTsExtensions": true,
     "target": "ESNext",
     "module": "NodeNext",
     "jsx": "react-jsx",

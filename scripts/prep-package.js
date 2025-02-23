@@ -8,13 +8,14 @@ const cwd = dirname(fileURLToPath(import.meta.url));
 
 const modifiedJson = {
   ...packageJson,
+  main: packageJson.main.replace('src/', '').replace('.ts', '.js'),
   exports: Object.fromEntries(
     Object.entries(packageJson.exports).map(([key, imports]) => [
       key,
       Object.fromEntries(
         Object.entries(imports).map(([path, actual]) => [
           path,
-          actual.replace('src/', ''),
+          actual.replace('src/', '').replace('.ts', '.js'),
         ])
       ),
     ])

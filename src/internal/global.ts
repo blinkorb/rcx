@@ -1,4 +1,4 @@
-import type { CXGlobal } from '../types.js';
+import type { CXGlobal } from '../types.ts';
 
 export const cxGlobal: CXGlobal = {
   hookIndex: 0,

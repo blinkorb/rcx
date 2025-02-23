@@ -1,4 +1,4 @@
-import { canvasContext } from '../components/canvas/context.js';
+import { canvasContext } from '../components/canvas/context.ts';
 
 export const useCanvasContext = () => {
   const context = canvasContext.useInject();
