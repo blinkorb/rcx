@@ -1,8 +1,8 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.js';
-import { CXComponent, PropsWithChildren } from '../../types.js';
+} from '../../hooks/use-render.ts';
+import { CXComponent, PropsWithChildren } from '../../types.ts';
 
 export type TranslateProps = PropsWithChildren<{
   x?: number;

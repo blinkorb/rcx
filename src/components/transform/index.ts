@@ -1,3 +1,3 @@
-export * from './translate.js';
-export * from './rotate.js';
-export * from './scale.js';
+export * from './translate.ts';
+export * from './rotate.ts';
+export * from './scale.ts';
