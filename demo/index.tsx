@@ -9,7 +9,10 @@ import {
   Point,
   Rectangle,
   render,
+  Rotate,
+  Scale,
   Text,
+  Translate,
   useCanvasContext,
   useLoop,
   useOnMount,
@@ -127,6 +130,13 @@ const Page: CXComponent = () => {
         The offset is {reactive.offset.toFixed(2)} {[1, 2, 3].map((n) => n)}{' '}
         <RendersChildren>Children</RendersChildren>
       </Text>
+      <Translate x={100} y={100}>
+        <Rotate rotation={Math.PI * 0.25}>
+          <Scale scale={0.5}>
+            <Rectangle x={0} y={0} width={100} height={50} fill="cyan" />
+          </Scale>
+        </Rotate>
+      </Translate>
       {reactive.isMounted && <Unmounts />}
     </>
   );
