@@ -1,8 +1,8 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.js';
-import type { CXComponent, PropsWithChildren } from '../../types.js';
+} from '../../hooks/use-render.ts';
+import type { CXComponent, PropsWithChildren } from '../../types.ts';
 
 export type ArcToProps = PropsWithChildren<{
   startControlX: number;

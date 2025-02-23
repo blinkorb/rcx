@@ -1,5 +1,5 @@
-import { cxGlobal } from '../internal/global.js';
-import type { AnyObject, CXComponent, PropsWithChildren } from '../types.js';
+import { cxGlobal } from '../internal/global.ts';
+import type { AnyObject, CXComponent, PropsWithChildren } from '../types.ts';
 
 export type ProviderProps<T> = PropsWithChildren<{
   value: T;

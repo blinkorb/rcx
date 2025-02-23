@@ -3,35 +3,35 @@
   "version": "0.0.0",
   "description": "Reactive JSX-based library for creating HTML5 canvas applications",
   "type": "module",
-  "main": "./src/index.js",
+  "main": "./src/index.ts",
   "exports": {
     ".": {
-      "import": "./src/index.js"
+      "import": "./src/index.ts"
     },
     "./canvas": {
-      "import": "./src/components/canvas/index.js"
+      "import": "./src/components/canvas/index.ts"
     },
     "./components": {
-      "import": "./src/components/index.js"
+      "import": "./src/components/index.ts"
     },
     "./context": {
-      "import": "./src/context/index.js"
+      "import": "./src/context/index.ts"
     },
     "./hooks": {
-      "import": "./src/hooks/index.js"
+      "import": "./src/hooks/index.ts"
     },
     "./utils": {
-      "import": "./src/utils/index.js"
+      "import": "./src/utils/index.ts"
     },
     "./jsx-runtime": {
-      "import": "./src/jsx-runtime.js"
+      "import": "./src/jsx-runtime.ts"
     }
   },
   "scripts": {
     "start": "npm run dev",
     "dev": "tsb serve",
     "dist": "npm run build",
-    "build": "rm -rf dist && tsc -p tsconfig.dist.json && node scripts/prep-package.js",
+    "build": "rm -rf dist && tsc -p tsconfig.dist.json --rewriteRelativeImportExtensions && node scripts/prep-package.js",
     "typecheck": "tsc --noEmit",
     "format-check": "prettier --check *",
     "format": "prettier --write *",
@@ -71,6 +71,6 @@
     "prettier": "^3.3.3",
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.7.3"
   }
 }
