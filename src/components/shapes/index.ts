@@ -1,3 +1,3 @@
-export * from './circle.js';
-export * from './ellipse.js';
-export * from './rectangle.js';
+export * from './circle.tsx';
+export * from './ellipse.ts';
+export * from './rectangle.ts';

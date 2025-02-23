@@ -1,5 +1,5 @@
-import type { CXComponent, PropsWithChildren } from '../../types.js';
-import { Ellipse } from './ellipse.js';
+import type { CXComponent, PropsWithChildren } from '../../types.ts';
+import { Ellipse } from './ellipse.ts';
 
 export type CircleProps = PropsWithChildren<{
   x: number;

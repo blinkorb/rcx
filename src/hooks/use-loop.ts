@@ -1,4 +1,4 @@
-import { useUnreactive } from './use-state.js';
+import { useUnreactive } from './use-state.ts';
 
 export const useLoop = (callback: () => void) => {
   const unreactive = useUnreactive<{ raf: number | null }>({ raf: null });

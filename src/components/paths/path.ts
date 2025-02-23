@@ -1,9 +1,9 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.js';
-import type { CXComponent, CXPoint, PropsWithChildren } from '../../types.js';
-import { isArray } from '../../utils/type-guards.js';
+} from '../../hooks/use-render.ts';
+import type { CXComponent, CXPoint, PropsWithChildren } from '../../types.ts';
+import { isArray } from '../../utils/type-guards.ts';
 
 export type PathProps = PropsWithChildren<{
   points?: readonly CXPoint[];
