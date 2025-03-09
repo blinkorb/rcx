@@ -1,5 +1,3 @@
-import type { CanvasProps } from './components/canvas/index.ts';
-
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace JSX {
@@ -83,7 +81,11 @@ export type PropsWithChildren<P extends AnyObject> = Omit<P, 'children'> & {
 };
 
 export interface CXCanvasContext {
-  readonly props: Required<Omit<CanvasProps, 'children'>>;
+  readonly props: {
+    width: number;
+    height: number;
+    pixelRatio: number;
+  };
   readonly canvas: Omit<HTMLCanvasElement, 'width' | 'height'>;
   readonly ctx2d: CanvasRenderingContext2D;
 }

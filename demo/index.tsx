@@ -17,7 +17,6 @@ import {
   useLoop,
   useOnMount,
   useReactive,
-  useWindowSize,
 } from '@blinkorb/rcx';
 
 const RendersChildren: CXComponent = ({ children }) => children;
@@ -145,10 +144,8 @@ const Page: CXComponent = () => {
 Page.displayName = 'Page';
 
 const App = () => {
-  const windowSize = useWindowSize();
-
   return (
-    <Canvas width={windowSize.width} height={windowSize.height}>
+    <Canvas>
       <Page />
     </Canvas>
   );
