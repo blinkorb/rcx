@@ -84,11 +84,12 @@ export const Canvas: CXComponent<CanvasProps> = (props) => {
 
   canvasContext.useProvide({
     ...renderingContextStateRoot,
-    props: {
-      pixelRatio,
-      width,
-      height,
-    },
+    props,
+    width,
+    height,
+    pixelRatio,
+    actualWidth: width * pixelRatio,
+    actualHeight: height * pixelRatio,
   });
 
   return props.children;
