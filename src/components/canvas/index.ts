@@ -29,8 +29,12 @@ export const Canvas: CXComponent<CanvasProps> = (props) => {
     throw new Error('Canvas was rendered outside of an application');
   }
 
-  // Chrome default canvas size
-  const canvasSize = useReactive({ width: 300, height: 150 });
+  const initialCanvasSize =
+    renderingContextStateRoot.canvas.getBoundingClientRect();
+  const canvasSize = useReactive({
+    width: initialCanvasSize.width,
+    height: initialCanvasSize.height,
+  });
   const resizeObserver = useUnreactive(
     new ResizeObserver((entries) => {
       const canvasEntry = entries[0];
