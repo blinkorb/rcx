@@ -63,8 +63,8 @@ export interface CXNode<C extends CXComponent<P>, P extends AnyObject> {
 export type AnyCXNode = CXNode<AnyCXComponent, AnyObject>;
 
 export interface CXRenderingContext {
-  canvas: HTMLCanvasElement;
-  ctx2d: CanvasRenderingContext2D;
+  readonly canvas: HTMLCanvasElement;
+  readonly ctx2d: CanvasRenderingContext2D;
 }
 
 export interface CXComponentInterface {
