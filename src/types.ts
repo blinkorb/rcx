@@ -63,8 +63,8 @@ export interface CXNode<C extends CXComponent<P>, P extends AnyObject> {
 export type AnyCXNode = CXNode<AnyCXComponent, AnyObject>;
 
 export interface CXRenderingContext {
-  canvas: HTMLCanvasElement;
-  ctx2d: CanvasRenderingContext2D;
+  readonly canvas: HTMLCanvasElement;
+  readonly ctx2d: CanvasRenderingContext2D;
 }
 
 export interface CXComponentInterface {
@@ -83,7 +83,12 @@ export type PropsWithChildren<P extends AnyObject> = Omit<P, 'children'> & {
 };
 
 export interface CXCanvasContext {
-  readonly props: Required<Omit<CanvasProps, 'children'>>;
+  readonly props: CanvasProps;
+  readonly width: number;
+  readonly height: number;
+  readonly pixelRatio: number;
+  readonly actualWidth: number;
+  readonly actualHeight: number;
   readonly canvas: Omit<HTMLCanvasElement, 'width' | 'height'>;
   readonly ctx2d: CanvasRenderingContext2D;
 }

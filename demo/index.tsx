@@ -17,7 +17,6 @@ import {
   useLoop,
   useOnMount,
   useReactive,
-  useWindowSize,
 } from '@blinkorb/rcx';
 
 const RendersChildren: CXComponent = ({ children }) => children;
@@ -57,34 +56,31 @@ const Page: CXComponent = () => {
   return (
     <>
       <Rectangle
-        x={canvasContext.props.width * 0.25}
-        y={canvasContext.props.height * 0.25 + reactive.offset}
-        width={canvasContext.props.width * 0.5}
-        height={canvasContext.props.height * 0.5}
+        x={canvasContext.width * 0.25}
+        y={canvasContext.height * 0.25 + reactive.offset}
+        width={canvasContext.width * 0.5}
+        height={canvasContext.height * 0.5}
         fill="red"
       />
       <Ellipse
-        x={canvasContext.props.width * 0.5}
-        y={canvasContext.props.height * 0.5}
-        radiusX={canvasContext.props.width * 0.2}
-        radiusY={canvasContext.props.width * 0.1}
+        x={canvasContext.width * 0.5}
+        y={canvasContext.height * 0.5}
+        radiusX={canvasContext.width * 0.2}
+        radiusY={canvasContext.width * 0.1}
         fill="black"
         rotation={((Date.now() % 5000) / 5000) * Math.PI * 2}
       />
       <Circle
-        x={canvasContext.props.width * 0.5}
-        y={canvasContext.props.height * 0.5}
-        radius={canvasContext.props.width * 0.05}
+        x={canvasContext.width * 0.5}
+        y={canvasContext.height * 0.5}
+        radius={canvasContext.width * 0.05}
         endAngle={
           Math.PI +
           Math.cos(((Date.now() % 5000) / 5000) * Math.PI * 2) * Math.PI
         }
         fill="white"
       >
-        <Point
-          x={canvasContext.props.width * 0.5}
-          y={canvasContext.props.height * 0.5}
-        />
+        <Point x={canvasContext.width * 0.5} y={canvasContext.height * 0.5} />
       </Circle>
       <Line
         startX={10}
@@ -145,10 +141,8 @@ const Page: CXComponent = () => {
 Page.displayName = 'Page';
 
 const App = () => {
-  const windowSize = useWindowSize();
-
   return (
-    <Canvas width={windowSize.width} height={windowSize.height}>
+    <Canvas>
       <Page />
     </Canvas>
   );

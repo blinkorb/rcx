@@ -5,6 +5,7 @@ const config: Config = {
   main: 'demo/index.tsx',
   outDir: 'build',
   tsconfigPath: 'tsconfig.dev.json',
+  host: 'localhost',
 };
 
 export default config;
