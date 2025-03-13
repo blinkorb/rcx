@@ -111,6 +111,8 @@ export type RCXStyleProp<T extends AnyObject> = NestedArray<
 export interface RCXLineStyle {
   stroke?: string;
   strokeWidth?: number;
+  strokeCap?: CanvasLineCap;
+  strokeJoin?: CanvasLineJoin;
 }
 
 export interface RCXShapeStyle extends RCXLineStyle {
