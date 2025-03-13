@@ -142,3 +142,8 @@ export type RCXCanvasFontWeight =
   | 'lighter'
   | number;
 export type RCXCanvasFontVariant = 'normal' | CanvasFontVariantCaps;
+
+export interface RCXColorStop {
+  offset: number;
+  color: string;
+}
