@@ -104,9 +104,7 @@ export interface FragmentProps {
 
 export type CXPoint = [number, number] | { x: number; y: number };
 
-export type ValueOrRecursiveArray<T> = T | readonly ValueOrRecursiveArray<T>[];
-
-export type StyleProp<T extends AnyObject> = ValueOrRecursiveArray<
+export type StyleProp<T extends AnyObject> = NestedArray<
   false | null | undefined | T
 >;
 
