@@ -1,5 +1,3 @@
-import { resolveStyles } from '@blinkorb/rcx/utils/resolve-styles.ts';
-
 import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
 import type {
   RCXChildren,
@@ -8,6 +6,9 @@ import type {
   RCXShapeStyle,
   RCXStyleProp,
 } from '../../types.ts';
+import { isValidStrokeCap } from '../../utils/is-valid-stroke-cap.ts';
+import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.ts';
+import { resolveStyles } from '../../utils/resolve-styles.ts';
 import { isArray } from '../../utils/type-guards.ts';
 
 export type TextProps = RCXPropsWithChildren<{
@@ -44,7 +45,9 @@ const getTextFromChildren = (children: RCXChildren): string => {
 export const Text: RCXComponent<TextProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x, y, maxWidth, children } = props;
-    const { fill, stroke, strokeWidth } = resolveStyles(props.style);
+    const { fill, stroke, strokeWidth, strokeCap, strokeJoin } = resolveStyles(
+      props.style
+    );
 
     const text = getTextFromChildren(children);
 
@@ -57,6 +60,14 @@ export const Text: RCXComponent<TextProps> = (props) => {
 
     if (typeof strokeWidth === 'number') {
       renderingContext.ctx2d.lineWidth = strokeWidth;
+    }
+
+    if (isValidStrokeCap(strokeCap)) {
+      renderingContext.ctx2d.lineCap = strokeCap;
+    }
+
+    if (isValidStrokeJoin(strokeJoin)) {
+      renderingContext.ctx2d.lineJoin = strokeJoin;
     }
 
     if (typeof stroke === 'string') {
