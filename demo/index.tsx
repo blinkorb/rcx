@@ -89,7 +89,7 @@ const Page: RCXComponent = () => {
         startY={10}
         endX={20}
         endY={20}
-        style={{ stroke: 'green', strokeWidth: 5 }}
+        style={{ stroke: 'green', strokeWidth: 5, strokeJoin: 'bevel' }}
       >
         <Point x={30} y={10} />
       </Line>
@@ -112,7 +112,7 @@ const Page: RCXComponent = () => {
         <Point x={20} y={75} />
         <Point x={0} y={75} />
       </Path>
-      <Path style={{ stroke: 'blue', strokeWidth: 5 }}>
+      <Path style={{ stroke: 'blue', strokeWidth: 5, strokeCap: 'round' }}>
         <Point x={200} y={200} />
         <ArcTo
           startControlX={200}
