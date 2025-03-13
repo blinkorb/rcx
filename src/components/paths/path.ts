@@ -3,23 +3,23 @@ import {
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
 import type {
-  CXComponent,
-  CXPoint,
-  PropsWithChildren,
-  ShapeStyle,
-  StyleProp,
+  RCXComponent,
+  RCXPoint,
+  RCXPropsWithChildren,
+  RCXShapeStyle,
+  RCXStyleProp,
 } from '../../types.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 import { isArray } from '../../utils/type-guards.ts';
 
-export type PathProps = PropsWithChildren<{
-  points?: readonly CXPoint[];
+export type PathProps = RCXPropsWithChildren<{
+  points?: readonly RCXPoint[];
   beginPath?: boolean;
   closePath?: boolean;
-  style?: StyleProp<ShapeStyle>;
+  style?: RCXStyleProp<RCXShapeStyle>;
 }>;
 
-export const Path: CXComponent<PathProps> = (props) => {
+export const Path: RCXComponent<PathProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { points, beginPath = true } = props;
 

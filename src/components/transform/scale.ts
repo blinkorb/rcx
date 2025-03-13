@@ -2,21 +2,21 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
-import { CXComponent, PropsWithChildren } from '../../types.ts';
+import { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
 
 export type ScaleProps =
-  | PropsWithChildren<{
+  | RCXPropsWithChildren<{
       scale: number;
       scaleX?: never;
       scaleY?: never;
     }>
-  | PropsWithChildren<{
+  | RCXPropsWithChildren<{
       scale: never;
       scaleX: number;
       scaleY: number;
     }>;
 
-export const Scale: CXComponent<ScaleProps> = (props) => {
+export const Scale: RCXComponent<ScaleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { scale, scaleX, scaleY } = props;
 

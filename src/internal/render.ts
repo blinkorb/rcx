@@ -1,12 +1,12 @@
 import { renderingContext } from '../components/canvas/context.ts';
 import type {
-  AnyCXElement,
-  AnyCXNode,
   AnyObject,
-  CXChild,
-  CXChildren,
-  CXRenderingContext,
   NestedArray,
+  RCXChild,
+  RCXChildren,
+  RCXElementAny,
+  RCXNodeAny,
+  RCXRenderingContext,
 } from '../types.ts';
 import { isArray } from '../utils/type-guards.ts';
 import { emitter } from './emitter.ts';
@@ -24,7 +24,7 @@ const getCanvasElement = (container: HTMLElement) => {
 };
 
 const unmountNodes = (
-  children: NestedArray<AnyCXNode> | AnyCXNode | undefined
+  children: NestedArray<RCXNodeAny> | RCXNodeAny | undefined
 ) => {
   if (!!children && typeof children === 'object') {
     if (isArray(children)) {
@@ -46,9 +46,9 @@ const unmountNodes = (
 };
 
 const updateNode = (
-  element: AnyCXElement,
-  prevNode: AnyCXNode | undefined
-): AnyCXNode => {
+  element: RCXElementAny,
+  prevNode: RCXNodeAny | undefined
+): RCXNodeAny => {
   if (element.type === prevNode?.element.type) {
     const nextPropsCopy = { ...element.props };
 
@@ -77,9 +77,9 @@ const updateNode = (
 };
 
 const getMatchingChildPrev = (
-  nextChild: CXChildren,
+  nextChild: RCXChildren,
   nextChildIndex: number,
-  stillRendered: NestedArray<AnyCXNode> | undefined
+  stillRendered: NestedArray<RCXNodeAny> | undefined
 ) => {
   if (!!nextChild && typeof nextChild === 'object' && !isArray(nextChild)) {
     if (isArray(stillRendered)) {
@@ -110,9 +110,9 @@ const getMatchingChildPrev = (
 };
 
 const getMatchingChildNext = (
-  prevChild: NestedArray<AnyCXNode>,
+  prevChild: NestedArray<RCXNodeAny>,
   prevChildIndex: number,
-  nextRendered: NestedArray<CXChild>
+  nextRendered: NestedArray<RCXChild>
 ) => {
   if (!!prevChild && typeof prevChild === 'object' && !isArray(prevChild)) {
     if (isArray(nextRendered)) {
@@ -143,11 +143,11 @@ const getMatchingChildNext = (
 };
 
 const renderElement = (
-  element: AnyCXElement,
-  renderingContextState: CXRenderingContext,
-  prevNode: AnyCXNode | undefined,
+  element: RCXElementAny,
+  renderingContextState: RCXRenderingContext,
+  prevNode: RCXNodeAny | undefined,
   parentContext?: AnyObject
-): AnyCXNode => {
+): RCXNodeAny => {
   const node = updateNode(element, prevNode);
 
   node.context = {
@@ -164,12 +164,12 @@ const renderElement = (
   delete cxGlobal.currentNode;
 
   const traverse = (
-    nextRendered: CXChildren,
-    prevRendered: NestedArray<AnyCXNode> | undefined
-  ): NestedArray<AnyCXNode> => {
+    nextRendered: RCXChildren,
+    prevRendered: NestedArray<RCXNodeAny> | undefined
+  ): NestedArray<RCXNodeAny> => {
     if (!!nextRendered && typeof nextRendered === 'object') {
       if (isArray(nextRendered)) {
-        let stillRendered: NestedArray<AnyCXNode> | undefined;
+        let stillRendered: NestedArray<RCXNodeAny> | undefined;
 
         if (!isArray(prevRendered)) {
           unmountNodes(prevRendered);
@@ -245,7 +245,7 @@ const renderElement = (
   return node;
 };
 
-export const render = (element: AnyCXElement, container: HTMLElement) => {
+export const render = (element: RCXElementAny, container: HTMLElement) => {
   const canvas = getCanvasElement(container);
   const ctx2d = canvas.getContext('2d');
 
@@ -265,7 +265,7 @@ export const render = (element: AnyCXElement, container: HTMLElement) => {
   const renderingContextState = { canvas, ctx2d };
 
   let raf: number | undefined;
-  let rootNode: AnyCXNode | undefined;
+  let rootNode: RCXNodeAny | undefined;
 
   const renderRoot = () => {
     if (typeof raf === 'number') {

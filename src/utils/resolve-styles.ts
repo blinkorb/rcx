@@ -1,8 +1,8 @@
-import type { AnyObject, ValueOrRecursiveArray } from '../types.ts';
+import type { AnyObject, NestedArray } from '../types.ts';
 import { isArray } from './type-guards.ts';
 
 export const resolveStyles = <S extends AnyObject>(
-  styles: ValueOrRecursiveArray<false | null | undefined | S>
+  styles: NestedArray<false | null | undefined | S>
 ): Partial<S> => {
   if (typeof styles === 'object' && !!styles) {
     if (isArray(styles)) {

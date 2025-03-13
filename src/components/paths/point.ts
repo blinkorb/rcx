@@ -1,13 +1,13 @@
 import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
-import type { CXComponent, PropsWithChildren } from '../../types.ts';
+import type { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
 
-export type PointProps = PropsWithChildren<{
+export type PointProps = RCXPropsWithChildren<{
   x: number;
   y: number;
   lineTo?: boolean;
 }>;
 
-export const Point: CXComponent<PointProps> = (props) => {
+export const Point: RCXComponent<PointProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x, y, lineTo = true } = props;
 

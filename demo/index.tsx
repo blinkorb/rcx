@@ -2,11 +2,11 @@ import {
   ArcTo,
   Canvas,
   Circle,
-  CXComponent,
   Ellipse,
   Line,
   Path,
   Point,
+  RCXComponent,
   Rectangle,
   render,
   Rotate,
@@ -19,9 +19,9 @@ import {
   useReactive,
 } from '@blinkorb/rcx';
 
-const RendersChildren: CXComponent = ({ children }) => children;
+const RendersChildren: RCXComponent = ({ children }) => children;
 
-const Unmounts: CXComponent = () => {
+const Unmounts: RCXComponent = () => {
   // eslint-disable-next-line no-console
   console.log('rendered');
 
@@ -40,7 +40,7 @@ const Unmounts: CXComponent = () => {
   );
 };
 
-const Page: CXComponent = () => {
+const Page: RCXComponent = () => {
   const canvasContext = useCanvasContext();
   const getOffset = () => Math.cos(Date.now() * 0.001) * 10;
   const reactive = useReactive({ isMounted: true, offset: getOffset() });

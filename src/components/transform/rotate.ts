@@ -2,13 +2,13 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
-import { CXComponent, PropsWithChildren } from '../../types.ts';
+import { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
 
-export type RotateProps = PropsWithChildren<{
+export type RotateProps = RCXPropsWithChildren<{
   rotation: number;
 }>;
 
-export const Rotate: CXComponent<RotateProps> = (props) => {
+export const Rotate: RCXComponent<RotateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { rotation } = props;
 

@@ -1,5 +1,5 @@
-import type { CXGlobal } from '../types.ts';
+import type { RCXGlobal } from '../types.ts';
 
-export const cxGlobal: CXGlobal = {
+export const cxGlobal: RCXGlobal = {
   hookIndex: 0,
 };

@@ -3,23 +3,23 @@ import {
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
 import type {
-  CXComponent,
-  PropsWithChildren,
-  ShapeStyle,
-  StyleProp,
+  RCXComponent,
+  RCXPropsWithChildren,
+  RCXShapeStyle,
+  RCXStyleProp,
 } from '../../types.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
-export type ArcToProps = PropsWithChildren<{
+export type ArcToProps = RCXPropsWithChildren<{
   startControlX: number;
   startControlY: number;
   endControlX: number;
   endControlY: number;
   radius: number;
-  style?: StyleProp<ShapeStyle>;
+  style?: RCXStyleProp<RCXShapeStyle>;
 }>;
 
-export const ArcTo: CXComponent<ArcToProps> = (props) => {
+export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { startControlX, startControlY, endControlX, endControlY, radius } =
       props;

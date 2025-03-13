@@ -2,14 +2,14 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
-import { CXComponent, PropsWithChildren } from '../../types.ts';
+import { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
 
-export type TranslateProps = PropsWithChildren<{
+export type TranslateProps = RCXPropsWithChildren<{
   x?: number;
   y?: number;
 }>;
 
-export const Translate: CXComponent<TranslateProps> = (props) => {
+export const Translate: RCXComponent<TranslateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x = 0, y = 0 } = props;
 

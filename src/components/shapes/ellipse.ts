@@ -3,14 +3,14 @@ import {
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
 import type {
-  CXComponent,
-  PropsWithChildren,
-  ShapeStyle,
-  StyleProp,
+  RCXComponent,
+  RCXPropsWithChildren,
+  RCXShapeStyle,
+  RCXStyleProp,
 } from '../../types.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
-export type EllipseProps = PropsWithChildren<{
+export type EllipseProps = RCXPropsWithChildren<{
   x: number;
   y: number;
   radiusX: number;
@@ -21,10 +21,10 @@ export type EllipseProps = PropsWithChildren<{
   counterClockwise?: boolean;
   beginPath?: boolean;
   closePath?: boolean;
-  style?: StyleProp<ShapeStyle>;
+  style?: RCXStyleProp<RCXShapeStyle>;
 }>;
 
-export const Ellipse: CXComponent<EllipseProps> = (props) => {
+export const Ellipse: RCXComponent<EllipseProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const {
       x,

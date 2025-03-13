@@ -1,20 +1,21 @@
 import type {
   AnyObject,
-  CXComponent,
-  CXElement,
-  FragmentProps,
+  RCXComponent,
+  RCXElement,
+  RCXFragmentProps,
 } from './types.ts';
 
-export const jsx = <C extends CXComponent<P>, P extends AnyObject>(
+export const jsx = <C extends RCXComponent<P>, P extends AnyObject>(
   type: C,
   props: P
-): CXElement<C, P> => ({
+): RCXElement<C, P> => ({
   type,
   props,
 });
 
 export const jsxs = jsx;
 
-export const Fragment: CXComponent<FragmentProps> = ({ children }) => children;
+export const Fragment: RCXComponent<RCXFragmentProps> = ({ children }) =>
+  children;
 
 Fragment.displayName = 'Fragment';
