@@ -2,6 +2,7 @@ import {
   ArcTo,
   Canvas,
   Circle,
+  Clip,
   Ellipse,
   Line,
   Path,
@@ -140,6 +141,14 @@ const Page: RCXComponent = () => {
           </Scale>
         </Rotate>
       </Translate>
+      <Rectangle x={0} y={100} width={50} height={50}>
+        <Clip>
+          <Circle x={25} y={125} radius={30} style={{ fill: '#d5d5d5' }} />
+          <Text x={10} y={125} style={{ fill: 'red' }}>
+            This text is clipped by a rectangle
+          </Text>
+        </Clip>
+      </Rectangle>
       {reactive.isMounted && <Unmounts />}
     </>
   );
