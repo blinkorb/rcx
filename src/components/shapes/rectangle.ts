@@ -8,6 +8,7 @@ import type {
   RCXShapeStyle,
   RCXStyleProp,
 } from '../../types.ts';
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
 export type RectangleProps = RCXPropsWithChildren<{
@@ -33,21 +34,7 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { fill, stroke, strokeWidth } = resolveStyles(props.style);
-
-    if (typeof fill === 'string') {
-      renderingContext.ctx2d.fillStyle = fill;
-      renderingContext.ctx2d.fill();
-    }
-
-    if (typeof strokeWidth === 'number') {
-      renderingContext.ctx2d.lineWidth = strokeWidth;
-    }
-
-    if (typeof stroke === 'string') {
-      renderingContext.ctx2d.strokeStyle = stroke;
-      renderingContext.ctx2d.stroke();
-    }
+    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
     renderingContext.ctx2d.restore();
   });

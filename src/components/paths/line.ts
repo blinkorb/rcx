@@ -8,6 +8,7 @@ import type {
   RCXPropsWithChildren,
   RCXStyleProp,
 } from '../../types.ts';
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
 export type LineProps = RCXPropsWithChildren<{
@@ -36,20 +37,12 @@ export const Line: RCXComponent<LineProps> = (props) => {
 
   useRenderAfterChildren((renderingContext) => {
     const { closePath = false } = props;
-    const { stroke, strokeWidth } = resolveStyles(props.style);
 
     if (closePath) {
       renderingContext.ctx2d.closePath();
     }
 
-    if (typeof strokeWidth === 'number') {
-      renderingContext.ctx2d.lineWidth = strokeWidth;
-    }
-
-    if (typeof stroke === 'string') {
-      renderingContext.ctx2d.strokeStyle = stroke;
-      renderingContext.ctx2d.stroke();
-    }
+    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
     renderingContext.ctx2d.restore();
   });
