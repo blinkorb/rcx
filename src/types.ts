@@ -109,14 +109,14 @@ export type RCXStyleProp<T extends AnyObject> = NestedArray<
 >;
 
 export interface RCXLineStyle {
-  stroke?: string;
+  stroke?: RCXFillOrStrokeStyle;
   strokeWidth?: number;
   strokeCap?: CanvasLineCap;
   strokeJoin?: CanvasLineJoin;
 }
 
 export interface RCXShapeStyle extends RCXLineStyle {
-  fill?: string;
+  fill?: RCXFillOrStrokeStyle;
 }
 
 export interface RCXFontStringStyle {
@@ -147,3 +147,5 @@ export interface RCXColorStop {
   offset: number;
   color: string;
 }
+
+export type RCXFillOrStrokeStyle = string | CanvasGradient;

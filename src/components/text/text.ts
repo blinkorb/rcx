@@ -7,6 +7,7 @@ import type {
   RCXShapeStyle,
   RCXStyleProp,
 } from '../../types.ts';
+import { isValidFillOrStrokeStyle } from '../../utils/is-valid-fill-or-stroke-style.ts';
 import { isValidStrokeCap } from '../../utils/is-valid-stroke-cap.ts';
 import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
@@ -22,7 +23,6 @@ export type TextProps = RCXPropsWithChildren<{
   x: number;
   y: number;
   maxWidth?: number;
-
   children?: RCXChildren;
   style?: RCXStyleProp<TextStyle>;
 }>;
@@ -106,7 +106,7 @@ export const Text: RCXComponent<TextProps> = (props) => {
     renderingContext.ctx2d.fontVariantCaps = fontVariant;
     renderingContext.ctx2d.fontKerning = fontKerning;
 
-    if (typeof fill === 'string') {
+    if (isValidFillOrStrokeStyle(fill)) {
       renderingContext.ctx2d.fillStyle = fill;
       renderingContext.ctx2d.fillText(text, x, y, maxWidth);
     }
@@ -123,7 +123,8 @@ export const Text: RCXComponent<TextProps> = (props) => {
       renderingContext.ctx2d.lineJoin = strokeJoin;
     }
 
-    if (typeof stroke === 'string') {
+    if (isValidFillOrStrokeStyle(stroke)) {
+      renderingContext.ctx2d.strokeStyle = stroke;
       renderingContext.ctx2d.strokeText(text, x, y, maxWidth);
     }
 

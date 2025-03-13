@@ -1,4 +1,5 @@
 import type { AnyObject, RCXRenderingContext } from '../types.ts';
+import { isValidFillOrStrokeStyle } from './is-valid-fill-or-stroke-style.ts';
 import { isValidStrokeCap } from './is-valid-stroke-cap.ts';
 import { isValidStrokeJoin } from './is-valid-stroke-join.ts';
 
@@ -8,7 +9,7 @@ export const applyFillAndStrokeStyles = (
 ) => {
   const { fill, stroke, strokeWidth, strokeCap, strokeJoin } = style;
 
-  if (typeof fill === 'string') {
+  if (isValidFillOrStrokeStyle(fill)) {
     renderingContext.ctx2d.fillStyle = fill;
     renderingContext.ctx2d.fill();
   }
@@ -25,7 +26,7 @@ export const applyFillAndStrokeStyles = (
     renderingContext.ctx2d.lineJoin = strokeJoin;
   }
 
-  if (typeof stroke === 'string') {
+  if (isValidFillOrStrokeStyle(stroke)) {
     renderingContext.ctx2d.strokeStyle = stroke;
     renderingContext.ctx2d.stroke();
   }
