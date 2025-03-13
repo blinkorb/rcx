@@ -5,3 +5,4 @@ export * from './use-render.ts';
 export * from './use-state.ts';
 export * from './use-window-size.ts';
 export * from './use-linear-gradient.ts';
+export * from './use-radial-gradient.ts';

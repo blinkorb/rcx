@@ -18,6 +18,7 @@ import {
   useLinearGradient,
   useLoop,
   useOnMount,
+  useRadialGradient,
   useReactive,
 } from '@blinkorb/rcx';
 
@@ -60,13 +61,32 @@ const Gradients: RCXComponent = () => {
     ],
   });
 
+  const fill = useRadialGradient({
+    startX: 10 + 25,
+    startY: 480 + 25,
+    startRadius: 0,
+    endX: 10 + 25,
+    endY: 480 + 25,
+    endRadius: 25,
+    stops: [
+      {
+        offset: 0,
+        color: '#000',
+      },
+      {
+        offset: 1,
+        color: 'cyan',
+      },
+    ],
+  });
+
   return (
     <Rectangle
       x={10}
       y={480}
       width={50}
       height={50}
-      style={{ stroke, strokeWidth: 5, strokeCap: 'round' }}
+      style={{ fill, stroke, strokeWidth: 5, strokeCap: 'round' }}
     />
   );
 };
