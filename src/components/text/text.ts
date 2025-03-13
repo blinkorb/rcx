@@ -11,12 +11,18 @@ import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 import { isArray } from '../../utils/type-guards.ts';
 
+export interface TextStyle extends RCXShapeStyle {
+  align?: CanvasTextAlign;
+  baseline?: CanvasTextBaseline;
+}
+
 export type TextProps = RCXPropsWithChildren<{
   x: number;
   y: number;
   maxWidth?: number;
+
   children?: RCXChildren;
-  style?: RCXStyleProp<RCXShapeStyle>;
+  style?: RCXStyleProp<TextStyle>;
 }>;
 
 const getTextFromChildren = (children: RCXChildren): string => {
@@ -45,13 +51,27 @@ const getTextFromChildren = (children: RCXChildren): string => {
 export const Text: RCXComponent<TextProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x, y, maxWidth, children } = props;
-    const { fill, stroke, strokeWidth, strokeCap, strokeJoin } = resolveStyles(
-      props.style
-    );
+    const {
+      fill,
+      stroke,
+      strokeWidth,
+      strokeCap,
+      strokeJoin,
+      align,
+      baseline,
+    } = resolveStyles(props.style);
 
     const text = getTextFromChildren(children);
 
     renderingContext.ctx2d.save();
+
+    if (typeof align === 'string') {
+      renderingContext.ctx2d.textAlign = align;
+    }
+
+    if (typeof baseline === 'string') {
+      renderingContext.ctx2d.textBaseline = baseline;
+    }
 
     if (typeof fill === 'string') {
       renderingContext.ctx2d.fillStyle = fill;

@@ -149,6 +149,90 @@ const Page: RCXComponent = () => {
           </Text>
         </Clip>
       </Rectangle>
+
+      <Line
+        startX={100}
+        endX={100}
+        startY={190}
+        endY={290}
+        style={{ stroke: '#d5d5d5' }}
+      />
+      <Text x={100} y={200} style={{ fill: 'black' }}>
+        Default alignment
+      </Text>
+      <Text x={100} y={220} style={{ fill: 'black', align: 'right' }}>
+        Right alignment
+      </Text>
+      <Text x={100} y={240} style={{ fill: 'black', align: 'center' }}>
+        Center alignment
+      </Text>
+      <Text x={100} y={260} style={{ fill: 'black', align: 'start' }}>
+        Start alignment
+      </Text>
+      <Text x={100} y={280} style={{ fill: 'black', align: 'end' }}>
+        End alignment
+      </Text>
+
+      <Line
+        startX={50}
+        endX={150}
+        startY={300}
+        endY={300}
+        style={{ stroke: '#d5d5d5' }}
+      />
+      <Text x={100} y={300} style={{ fill: 'black', baseline: 'alphabetic' }}>
+        Alphabetic
+      </Text>
+      <Line
+        startX={50}
+        endX={150}
+        startY={320}
+        endY={320}
+        style={{ stroke: '#d5d5d5' }}
+      />
+      <Text x={100} y={320} style={{ fill: 'black', baseline: 'bottom' }}>
+        Bottom
+      </Text>
+      <Line
+        startX={50}
+        endX={150}
+        startY={340}
+        endY={340}
+        style={{ stroke: '#d5d5d5' }}
+      />
+      <Text x={100} y={340} style={{ fill: 'black', baseline: 'hanging' }}>
+        Hanging
+      </Text>
+      <Line
+        startX={50}
+        endX={150}
+        startY={360}
+        endY={360}
+        style={{ stroke: '#d5d5d5' }}
+      />
+      <Text x={100} y={360} style={{ fill: 'black', baseline: 'ideographic' }}>
+        Ideographic
+      </Text>
+      <Line
+        startX={50}
+        endX={150}
+        startY={380}
+        endY={380}
+        style={{ stroke: '#d5d5d5' }}
+      />
+      <Text x={100} y={380} style={{ fill: 'black', baseline: 'middle' }}>
+        Middle
+      </Text>
+      <Line
+        startX={50}
+        endX={150}
+        startY={400}
+        endY={400}
+        style={{ stroke: '#d5d5d5' }}
+      />
+      <Text x={100} y={400} style={{ fill: 'black', baseline: 'top' }}>
+        Top
+      </Text>
       {reactive.isMounted && <Unmounts />}
     </>
   );
