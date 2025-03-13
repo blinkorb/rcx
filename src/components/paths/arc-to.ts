@@ -2,7 +2,13 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
-import type { CXComponent, PropsWithChildren } from '../../types.ts';
+import type {
+  CXComponent,
+  PropsWithChildren,
+  ShapeStyle,
+  StyleProp,
+} from '../../types.ts';
+import { resolveStyles } from '../../utils/resolve-styles.ts';
 
 export type ArcToProps = PropsWithChildren<{
   startControlX: number;
@@ -10,9 +16,7 @@ export type ArcToProps = PropsWithChildren<{
   endControlX: number;
   endControlY: number;
   radius: number;
-  fill?: string;
-  stroke?: string;
-  strokeWidth?: number;
+  style?: StyleProp<ShapeStyle>;
 }>;
 
 export const ArcTo: CXComponent<ArcToProps> = (props) => {
@@ -32,7 +36,7 @@ export const ArcTo: CXComponent<ArcToProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { fill, stroke, strokeWidth } = props;
+    const { fill, stroke, strokeWidth } = resolveStyles(props.style);
 
     if (typeof fill === 'string') {
       renderingContext.ctx2d.fillStyle = fill;

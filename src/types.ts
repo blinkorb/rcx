@@ -103,3 +103,18 @@ export interface FragmentProps {
 }
 
 export type CXPoint = [number, number] | { x: number; y: number };
+
+export type ValueOrRecursiveArray<T> = T | readonly ValueOrRecursiveArray<T>[];
+
+export type StyleProp<T extends AnyObject> = ValueOrRecursiveArray<
+  false | null | undefined | T
+>;
+
+export interface LineStyle {
+  stroke?: string;
+  strokeWidth?: number;
+}
+
+export interface ShapeStyle extends LineStyle {
+  fill?: string;
+}

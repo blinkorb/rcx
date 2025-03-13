@@ -35,7 +35,9 @@ const Unmounts: CXComponent = () => {
     };
   });
 
-  return <Rectangle x={0} y={0} width={10} height={10} fill="black" />;
+  return (
+    <Rectangle x={0} y={0} width={10} height={10} style={{ fill: 'black' }} />
+  );
 };
 
 const Page: CXComponent = () => {
@@ -60,14 +62,14 @@ const Page: CXComponent = () => {
         y={canvasContext.height * 0.25 + reactive.offset}
         width={canvasContext.width * 0.5}
         height={canvasContext.height * 0.5}
-        fill="red"
+        style={{ fill: 'red' }}
       />
       <Ellipse
         x={canvasContext.width * 0.5}
         y={canvasContext.height * 0.5}
         radiusX={canvasContext.width * 0.2}
         radiusY={canvasContext.width * 0.1}
-        fill="black"
+        style={{ fill: 'black' }}
         rotation={((Date.now() % 5000) / 5000) * Math.PI * 2}
       />
       <Circle
@@ -78,7 +80,7 @@ const Page: CXComponent = () => {
           Math.PI +
           Math.cos(((Date.now() % 5000) / 5000) * Math.PI * 2) * Math.PI
         }
-        fill="white"
+        style={{ fill: 'white' }}
       >
         <Point x={canvasContext.width * 0.5} y={canvasContext.height * 0.5} />
       </Circle>
@@ -87,8 +89,7 @@ const Page: CXComponent = () => {
         startY={10}
         endX={20}
         endY={20}
-        stroke="green"
-        strokeWidth={5}
+        style={{ stroke: 'green', strokeWidth: 5 }}
       >
         <Point x={30} y={10} />
       </Line>
@@ -100,9 +101,9 @@ const Page: CXComponent = () => {
           [15, 20],
           [20, 5],
         ]}
-        stroke="black"
+        style={{ stroke: 'black' }}
       />
-      <Path stroke="black" closePath>
+      <Path style={{ stroke: 'black' }} closePath>
         <Point x={0} y={50} />
         <Point x={5} y={55} />
         <Point x={10} y={50} />
@@ -111,7 +112,7 @@ const Page: CXComponent = () => {
         <Point x={20} y={75} />
         <Point x={0} y={75} />
       </Path>
-      <Path strokeWidth={5} stroke="blue">
+      <Path style={{ stroke: 'blue', strokeWidth: 5 }}>
         <Point x={200} y={200} />
         <ArcTo
           startControlX={200}
@@ -122,14 +123,20 @@ const Page: CXComponent = () => {
         />
         <Point x={300} y={100} />
       </Path>
-      <Text x={305} y={102} fill="red" stroke="black">
+      <Text x={305} y={102} style={{ fill: 'red', stroke: 'black' }}>
         The offset is {reactive.offset.toFixed(2)} {[1, 2, 3].map((n) => n)}{' '}
         <RendersChildren>Children</RendersChildren>
       </Text>
       <Translate x={100} y={100}>
         <Rotate rotation={Math.PI * 0.25}>
           <Scale scale={0.5}>
-            <Rectangle x={0} y={0} width={100} height={50} fill="cyan" />
+            <Rectangle
+              x={0}
+              y={0}
+              width={100}
+              height={50}
+              style={{ fill: 'cyan' }}
+            />
           </Scale>
         </Rotate>
       </Translate>
