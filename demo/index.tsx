@@ -158,7 +158,7 @@ const Page: RCXComponent = () => {
         style={{ stroke: '#d5d5d5' }}
       />
       <Text x={100} y={200} style={{ fill: 'black' }}>
-        Default alignment
+        Left alignment (default)
       </Text>
       <Text x={100} y={220} style={{ fill: 'black', align: 'right' }}>
         Right alignment
