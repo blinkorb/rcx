@@ -20,69 +20,69 @@ export type AnyFunction = (...args: any[]) => any;
 
 export type NestedArray<T> = T | readonly NestedArray<T>[];
 
-export interface CXElement<C extends CXComponent<P>, P extends AnyObject> {
+export interface RCXElement<C extends RCXComponent<P>, P extends AnyObject> {
   type: C;
   props: P;
 }
 
-export type AnyCXElement = CXElement<AnyCXComponent, AnyObject>;
+export type RCXElementAny = RCXElement<RCXComponentAny, AnyObject>;
 
-export type CXChild = AnyCXElement | Primitive;
+export type RCXChild = RCXElementAny | Primitive;
 
-export type CXChildren = NestedArray<CXChild>;
+export type RCXChildren = NestedArray<RCXChild>;
 
-export interface OnMountHook {
+export interface RCXOnMountHook {
   onMount: () => void;
   onUnmount?: () => void;
 }
 
-export interface HookMap {
+export interface RCXHookMap {
   useReactive: AnyObject;
   useUnreactive: AnyObject;
-  useRenderBeforeChildren: (renderingContext: CXRenderingContext) => void;
-  useRenderAfterChildren: (renderingContext: CXRenderingContext) => void;
-  useOnMount: OnMountHook;
+  useRenderBeforeChildren: (renderingContext: RCXRenderingContext) => void;
+  useRenderAfterChildren: (renderingContext: RCXRenderingContext) => void;
+  useOnMount: RCXOnMountHook;
   useOnUnmount: () => void;
 }
 
-export type Hook = {
-  [K in keyof HookMap]: {
+export type RCXHook = {
+  [K in keyof RCXHookMap]: {
     type: K;
-    value: HookMap[K];
+    value: RCXHookMap[K];
   };
-}[keyof HookMap];
+}[keyof RCXHookMap];
 
-export interface CXNode<C extends CXComponent<P>, P extends AnyObject> {
-  element: CXElement<C, P>;
-  rendered: CXChildren;
-  hooks: Hook[];
-  childNodes: NestedArray<AnyCXNode>;
+export interface RCXNode<C extends RCXComponent<P>, P extends AnyObject> {
+  element: RCXElement<C, P>;
+  rendered: RCXChildren;
+  hooks: RCXHook[];
+  childNodes: NestedArray<RCXNodeAny>;
   context: AnyObject;
 }
 
-export type AnyCXNode = CXNode<AnyCXComponent, AnyObject>;
+export type RCXNodeAny = RCXNode<RCXComponentAny, AnyObject>;
 
-export interface CXRenderingContext {
+export interface RCXRenderingContext {
   readonly canvas: HTMLCanvasElement;
   readonly ctx2d: CanvasRenderingContext2D;
 }
 
-export interface CXComponentInterface {
+export interface RCXComponentInterface {
   displayName?: string;
 }
 
-export type CXComponent<P extends AnyObject = Record<PropertyKey, never>> = ((
+export type RCXComponent<P extends AnyObject = Record<PropertyKey, never>> = ((
   props: Readonly<P>
-) => CXChildren) &
-  CXComponentInterface;
+) => RCXChildren) &
+  RCXComponentInterface;
 
-export type AnyCXComponent = CXComponent<AnyObject>;
+export type RCXComponentAny = RCXComponent<AnyObject>;
 
-export type PropsWithChildren<P extends AnyObject> = Omit<P, 'children'> & {
-  children?: CXChildren;
+export type RCXPropsWithChildren<P extends AnyObject> = Omit<P, 'children'> & {
+  children?: RCXChildren;
 };
 
-export interface CXCanvasContext {
+export interface RCXCanvasContext {
   readonly props: CanvasProps;
   readonly width: number;
   readonly height: number;
@@ -93,26 +93,26 @@ export interface CXCanvasContext {
   readonly ctx2d: CanvasRenderingContext2D;
 }
 
-export interface CXGlobal {
-  currentNode?: AnyCXNode;
+export interface RCXGlobal {
+  currentNode?: RCXNodeAny;
   hookIndex: number;
 }
 
-export interface FragmentProps {
-  children?: CXChildren;
+export interface RCXFragmentProps {
+  children?: RCXChildren;
 }
 
-export type CXPoint = [number, number] | { x: number; y: number };
+export type RCXPoint = [number, number] | { x: number; y: number };
 
-export type StyleProp<T extends AnyObject> = NestedArray<
+export type RCXStyleProp<T extends AnyObject> = NestedArray<
   false | null | undefined | T
 >;
 
-export interface LineStyle {
+export interface RCXLineStyle {
   stroke?: string;
   strokeWidth?: number;
 }
 
-export interface ShapeStyle extends LineStyle {
+export interface RCXShapeStyle extends RCXLineStyle {
   fill?: string;
 }

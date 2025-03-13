@@ -1,11 +1,11 @@
 import { useOnMount } from '../../hooks/use-on.ts';
 import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
 import { useReactive, useUnreactive } from '../../hooks/use-state.ts';
-import type { CXComponent, PropsWithChildren } from '../../types.ts';
+import type { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
 import { getRecommendedPixelRatio } from '../../utils/get-recommended-pixel-ratio.ts';
 import { canvasContext, renderingContext } from './context.ts';
 
-export type CanvasProps = PropsWithChildren<{
+export type CanvasProps = RCXPropsWithChildren<{
   width?: number | 'auto';
   height?: number | 'auto';
   pixelRatio?: number | 'auto';
@@ -22,7 +22,7 @@ const getValueOrAuto = (
   return autoValue;
 };
 
-export const Canvas: CXComponent<CanvasProps> = (props) => {
+export const Canvas: RCXComponent<CanvasProps> = (props) => {
   const renderingContextStateRoot = renderingContext.useInject();
 
   if (!renderingContextStateRoot) {

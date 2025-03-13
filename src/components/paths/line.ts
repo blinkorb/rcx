@@ -3,24 +3,24 @@ import {
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
 import type {
-  CXComponent,
-  LineStyle,
-  PropsWithChildren,
-  StyleProp,
+  RCXComponent,
+  RCXLineStyle,
+  RCXPropsWithChildren,
+  RCXStyleProp,
 } from '../../types.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
-export type LineProps = PropsWithChildren<{
+export type LineProps = RCXPropsWithChildren<{
   startX: number;
   startY: number;
   endX: number;
   endY: number;
   beginPath?: boolean;
   closePath?: boolean;
-  style?: StyleProp<LineStyle>;
+  style?: RCXStyleProp<RCXLineStyle>;
 }>;
 
-export const Line: CXComponent<LineProps> = (props) => {
+export const Line: RCXComponent<LineProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { startX, startY, endX, endY, beginPath = true } = props;
 

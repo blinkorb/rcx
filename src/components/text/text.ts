@@ -2,23 +2,23 @@ import { resolveStyles } from '@blinkorb/rcx/utils/resolve-styles.ts';
 
 import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
 import type {
-  CXChildren,
-  CXComponent,
-  PropsWithChildren,
-  ShapeStyle,
-  StyleProp,
+  RCXChildren,
+  RCXComponent,
+  RCXPropsWithChildren,
+  RCXShapeStyle,
+  RCXStyleProp,
 } from '../../types.ts';
 import { isArray } from '../../utils/type-guards.ts';
 
-export type TextProps = PropsWithChildren<{
+export type TextProps = RCXPropsWithChildren<{
   x: number;
   y: number;
   maxWidth?: number;
-  children?: CXChildren;
-  style?: StyleProp<ShapeStyle>;
+  children?: RCXChildren;
+  style?: RCXStyleProp<RCXShapeStyle>;
 }>;
 
-const getTextFromChildren = (children: CXChildren): string => {
+const getTextFromChildren = (children: RCXChildren): string => {
   if (
     children === null ||
     typeof children === 'boolean' ||
@@ -41,7 +41,7 @@ const getTextFromChildren = (children: CXChildren): string => {
   return children.toString();
 };
 
-export const Text: CXComponent<TextProps> = (props) => {
+export const Text: RCXComponent<TextProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x, y, maxWidth, children } = props;
     const { fill, stroke, strokeWidth } = resolveStyles(props.style);

@@ -3,23 +3,23 @@ import {
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
 import type {
-  CXComponent,
-  PropsWithChildren,
-  ShapeStyle,
-  StyleProp,
+  RCXComponent,
+  RCXPropsWithChildren,
+  RCXShapeStyle,
+  RCXStyleProp,
 } from '../../types.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
-export type RectangleProps = PropsWithChildren<{
+export type RectangleProps = RCXPropsWithChildren<{
   x: number;
   y: number;
   width: number;
   height: number;
   beginPath?: boolean;
-  style?: StyleProp<ShapeStyle>;
+  style?: RCXStyleProp<RCXShapeStyle>;
 }>;
 
-export const Rectangle: CXComponent<RectangleProps> = (props) => {
+export const Rectangle: RCXComponent<RectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x, y, width, height, beginPath = true } = props;
 

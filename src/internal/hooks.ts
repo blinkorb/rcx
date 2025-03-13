@@ -1,7 +1,10 @@
-import type { Hook, HookMap } from '../types.ts';
+import type { RCXHook, RCXHookMap } from '../types.ts';
 import { cxGlobal } from './global.ts';
 
-export const registerHook = <H extends keyof HookMap, T extends HookMap[H]>(
+export const registerHook = <
+  H extends keyof RCXHookMap,
+  T extends RCXHookMap[H],
+>(
   hookType: H,
   value: T
 ) => {
@@ -22,7 +25,7 @@ export const registerHook = <H extends keyof HookMap, T extends HookMap[H]>(
   }
 
   const originalValue = prev ? prev.value : value;
-  const hook = { type: hookType, value: originalValue } as Hook;
+  const hook = { type: hookType, value: originalValue } as RCXHook;
   currentNode.hooks[hookIndex] = hook;
   cxGlobal.hookIndex += 1;
   return hook.value as T;

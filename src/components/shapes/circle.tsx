@@ -1,12 +1,12 @@
 import type {
-  CXComponent,
-  PropsWithChildren,
-  ShapeStyle,
-  StyleProp,
+  RCXComponent,
+  RCXPropsWithChildren,
+  RCXShapeStyle,
+  RCXStyleProp,
 } from '../../types.ts';
 import { Ellipse } from './ellipse.ts';
 
-export type CircleProps = PropsWithChildren<{
+export type CircleProps = RCXPropsWithChildren<{
   x: number;
   y: number;
   radius: number;
@@ -16,10 +16,10 @@ export type CircleProps = PropsWithChildren<{
   counterClockwise?: boolean;
   beginPath?: boolean;
   closePath?: boolean;
-  style?: StyleProp<ShapeStyle>;
+  style?: RCXStyleProp<RCXShapeStyle>;
 }>;
 
-export const Circle: CXComponent<CircleProps> = (props) => {
+export const Circle: RCXComponent<CircleProps> = (props) => {
   const { radius, ...rest } = props;
 
   return (

@@ -1,8 +1,8 @@
 import { registerHook } from '../internal/hooks.ts';
-import type { OnMountHook } from '../types.ts';
+import type { RCXOnMountHook } from '../types.ts';
 
 export const useOnMount = (callback: () => void | (() => void)) => {
-  const hook: OnMountHook = {
+  const hook: RCXOnMountHook = {
     onMount: () => {
       const onUnmount = callback();
       if (onUnmount) {

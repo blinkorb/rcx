@@ -1,7 +1,11 @@
 import { cxGlobal } from '../internal/global.ts';
-import type { AnyObject, CXComponent, PropsWithChildren } from '../types.ts';
+import type {
+  AnyObject,
+  RCXComponent,
+  RCXPropsWithChildren,
+} from '../types.ts';
 
-export type ProviderProps<T> = PropsWithChildren<{
+export type ProviderProps<T> = RCXPropsWithChildren<{
   value: T;
 }>;
 
@@ -30,7 +34,7 @@ export const createContext = <T extends AnyObject>(name?: string) => {
     return currentNode.context[symbol] as Readonly<T> | undefined;
   };
 
-  const Provider: CXComponent<ProviderProps<T>> = ({ children, value }) => {
+  const Provider: RCXComponent<ProviderProps<T>> = ({ children, value }) => {
     useProvide(value);
     return children;
   };
