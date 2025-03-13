@@ -2,16 +2,21 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
-import type { CXComponent, CXPoint, PropsWithChildren } from '../../types.ts';
+import type {
+  CXComponent,
+  CXPoint,
+  PropsWithChildren,
+  ShapeStyle,
+  StyleProp,
+} from '../../types.ts';
+import { resolveStyles } from '../../utils/resolve-styles.ts';
 import { isArray } from '../../utils/type-guards.ts';
 
 export type PathProps = PropsWithChildren<{
   points?: readonly CXPoint[];
   beginPath?: boolean;
   closePath?: boolean;
-  fill?: string;
-  stroke?: string;
-  strokeWidth?: number;
+  style?: StyleProp<ShapeStyle>;
 }>;
 
 export const Path: CXComponent<PathProps> = (props) => {
@@ -36,7 +41,8 @@ export const Path: CXComponent<PathProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { closePath = false, fill, stroke, strokeWidth } = props;
+    const { closePath = false } = props;
+    const { fill, stroke, strokeWidth } = resolveStyles(props.style);
 
     if (closePath) {
       renderingContext.ctx2d.closePath();

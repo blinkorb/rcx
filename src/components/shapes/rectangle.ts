@@ -2,7 +2,13 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '../../hooks/use-render.ts';
-import type { CXComponent, PropsWithChildren } from '../../types.ts';
+import type {
+  CXComponent,
+  PropsWithChildren,
+  ShapeStyle,
+  StyleProp,
+} from '../../types.ts';
+import { resolveStyles } from '../../utils/resolve-styles.ts';
 
 export type RectangleProps = PropsWithChildren<{
   x: number;
@@ -10,9 +16,7 @@ export type RectangleProps = PropsWithChildren<{
   width: number;
   height: number;
   beginPath?: boolean;
-  fill?: string;
-  stroke?: string;
-  strokeWidth?: number;
+  style?: StyleProp<ShapeStyle>;
 }>;
 
 export const Rectangle: CXComponent<RectangleProps> = (props) => {
@@ -29,7 +33,7 @@ export const Rectangle: CXComponent<RectangleProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { fill, stroke, strokeWidth } = props;
+    const { fill, stroke, strokeWidth } = resolveStyles(props.style);
 
     if (typeof fill === 'string') {
       renderingContext.ctx2d.fillStyle = fill;

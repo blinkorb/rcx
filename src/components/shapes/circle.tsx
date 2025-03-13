@@ -1,4 +1,9 @@
-import type { CXComponent, PropsWithChildren } from '../../types.ts';
+import type {
+  CXComponent,
+  PropsWithChildren,
+  ShapeStyle,
+  StyleProp,
+} from '../../types.ts';
 import { Ellipse } from './ellipse.ts';
 
 export type CircleProps = PropsWithChildren<{
@@ -11,9 +16,7 @@ export type CircleProps = PropsWithChildren<{
   counterClockwise?: boolean;
   beginPath?: boolean;
   closePath?: boolean;
-  fill?: string;
-  stroke?: string;
-  strokeWidth?: number;
+  style?: StyleProp<ShapeStyle>;
 }>;
 
 export const Circle: CXComponent<CircleProps> = (props) => {
