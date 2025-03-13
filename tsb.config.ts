@@ -4,7 +4,7 @@ const config: Config = {
   indexHTMLPath: 'demo/index.html',
   main: 'demo/index.tsx',
   outDir: 'build',
-  tsconfigPath: 'tsconfig.dev.json',
+  tsconfigPath: 'demo/tsconfig.json',
   host: 'localhost',
 };
 

@@ -18,12 +18,7 @@
     "target": "ESNext",
     "module": "NodeNext",
     "jsx": "react-jsx",
-    "jsxImportSource": "@blinkorb/rcx",
-    "paths": {
-      "@blinkorb/rcx": ["./src/index.ts"],
-      "@blinkorb/rcx/canvas": ["./src/components/canvas/index.ts"],
-      "@blinkorb/rcx/*": ["./src/*"]
-    }
+    "jsxImportSource": "@blinkorb/rcx"
   },
   "include": ["demo/*", "src/*", "jest.config.ts"]
 }
