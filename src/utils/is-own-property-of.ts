@@ -1,4 +1,4 @@
-import { AnyObject } from '../types';
+import { AnyObject } from '../types.ts';
 
 export const isOwnPropertyOf = <T extends AnyObject>(
   obj: T,
