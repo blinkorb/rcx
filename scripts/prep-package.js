@@ -24,5 +24,6 @@ const modifiedJson = {
 
 writeFileSync(
   resolve(cwd, '../dist/package.json'),
-  JSON.stringify(modifiedJson, null, 2)
+  JSON.stringify(modifiedJson, null, 2),
+  'utf-8'
 );
