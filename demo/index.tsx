@@ -15,6 +15,7 @@ import {
   Text,
   Translate,
   useCanvasContext,
+  useLinearGradient,
   useLoop,
   useOnMount,
   useReactive,
@@ -38,6 +39,35 @@ const Unmounts: RCXComponent = () => {
 
   return (
     <Rectangle x={0} y={0} width={10} height={10} style={{ fill: 'black' }} />
+  );
+};
+
+const Gradients: RCXComponent = () => {
+  const stroke = useLinearGradient({
+    startX: 10,
+    startY: 480,
+    endX: 10 + 50,
+    endY: 480 + 50,
+    stops: [
+      {
+        offset: 0,
+        color: '#f00',
+      },
+      {
+        offset: 1,
+        color: '#000',
+      },
+    ],
+  });
+
+  return (
+    <Rectangle
+      x={10}
+      y={480}
+      width={50}
+      height={50}
+      style={{ stroke, strokeWidth: 5, strokeCap: 'round' }}
+    />
   );
 };
 
@@ -247,6 +277,7 @@ const Page: RCXComponent = () => {
       >
         Styled font
       </Text>
+      <Gradients />
       {reactive.isMounted && <Unmounts />}
     </>
   );
