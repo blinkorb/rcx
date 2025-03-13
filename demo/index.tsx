@@ -158,19 +158,19 @@ const Page: RCXComponent = () => {
         style={{ stroke: '#d5d5d5' }}
       />
       <Text x={100} y={200} style={{ fill: 'black' }}>
-        Left alignment (default)
+        Left (default)
       </Text>
       <Text x={100} y={220} style={{ fill: 'black', align: 'right' }}>
-        Right alignment
+        Right
       </Text>
       <Text x={100} y={240} style={{ fill: 'black', align: 'center' }}>
-        Center alignment
+        Center
       </Text>
       <Text x={100} y={260} style={{ fill: 'black', align: 'start' }}>
-        Start alignment
+        Start
       </Text>
       <Text x={100} y={280} style={{ fill: 'black', align: 'end' }}>
-        End alignment
+        End
       </Text>
 
       <Line
@@ -181,7 +181,7 @@ const Page: RCXComponent = () => {
         style={{ stroke: '#d5d5d5' }}
       />
       <Text x={100} y={300} style={{ fill: 'black', baseline: 'alphabetic' }}>
-        Alphabetic
+        Alphabetic (default)
       </Text>
       <Line
         startX={50}
