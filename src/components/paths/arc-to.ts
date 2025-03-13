@@ -8,6 +8,7 @@ import type {
   RCXShapeStyle,
   RCXStyleProp,
 } from '../../types.ts';
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
 export type ArcToProps = RCXPropsWithChildren<{
@@ -17,14 +18,26 @@ export type ArcToProps = RCXPropsWithChildren<{
   endControlY: number;
   radius: number;
   style?: RCXStyleProp<RCXShapeStyle>;
+  beginPath?: boolean;
+  closePath?: boolean;
 }>;
 
 export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { startControlX, startControlY, endControlX, endControlY, radius } =
-      props;
+    const {
+      startControlX,
+      startControlY,
+      endControlX,
+      endControlY,
+      radius,
+      beginPath = false,
+    } = props;
 
     renderingContext.ctx2d.save();
+
+    if (beginPath) {
+      renderingContext.ctx2d.beginPath();
+    }
 
     renderingContext.ctx2d.arcTo(
       startControlX,
@@ -36,21 +49,13 @@ export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
-    const { fill, stroke, strokeWidth } = resolveStyles(props.style);
+    const { closePath = false } = props;
 
-    if (typeof fill === 'string') {
-      renderingContext.ctx2d.fillStyle = fill;
-      renderingContext.ctx2d.fill();
+    if (closePath) {
+      renderingContext.ctx2d.closePath();
     }
 
-    if (typeof strokeWidth === 'number') {
-      renderingContext.ctx2d.lineWidth = strokeWidth;
-    }
-
-    if (typeof stroke === 'string') {
-      renderingContext.ctx2d.strokeStyle = stroke;
-      renderingContext.ctx2d.stroke();
-    }
+    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
     renderingContext.ctx2d.restore();
   });

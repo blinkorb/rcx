@@ -8,6 +8,7 @@ import type {
   RCXShapeStyle,
   RCXStyleProp,
 } from '../../types.ts';
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
 
 export type EllipseProps = RCXPropsWithChildren<{
@@ -58,25 +59,12 @@ export const Ellipse: RCXComponent<EllipseProps> = (props) => {
 
   useRenderAfterChildren((renderingContext) => {
     const { closePath = true } = props;
-    const { fill, stroke, strokeWidth } = resolveStyles(props.style);
 
     if (closePath) {
       renderingContext.ctx2d.closePath();
     }
 
-    if (typeof fill === 'string') {
-      renderingContext.ctx2d.fillStyle = fill;
-      renderingContext.ctx2d.fill();
-    }
-
-    if (typeof strokeWidth === 'number') {
-      renderingContext.ctx2d.lineWidth = strokeWidth;
-    }
-
-    if (typeof stroke === 'string') {
-      renderingContext.ctx2d.strokeStyle = stroke;
-      renderingContext.ctx2d.stroke();
-    }
+    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
     renderingContext.ctx2d.restore();
   });
