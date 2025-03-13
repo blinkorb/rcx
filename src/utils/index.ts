@@ -5,3 +5,4 @@ export * from './is-valid-stroke-cap.ts';
 export * from './is-valid-stroke-join.ts';
 export * from './resolve-styles.ts';
 export * from './type-guards.ts';
+export * from './is-valid-fill-or-stroke-style.ts';
