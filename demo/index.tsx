@@ -233,6 +233,20 @@ const Page: RCXComponent = () => {
       <Text x={100} y={400} style={{ fill: 'black', baseline: 'top' }}>
         Top
       </Text>
+      <Text
+        x={10}
+        y={450}
+        style={{
+          fill: 'black',
+          fontSize: 20,
+          fontFamily: 'serif',
+          fontWeight: 'bold',
+          fontStyle: 'italic',
+          fontVariant: 'small-caps',
+        }}
+      >
+        Styled font
+      </Text>
       {reactive.isMounted && <Unmounts />}
     </>
   );

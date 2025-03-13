@@ -118,3 +118,27 @@ export interface RCXLineStyle {
 export interface RCXShapeStyle extends RCXLineStyle {
   fill?: string;
 }
+
+export interface RCXFontStringStyle {
+  // font string
+  fontStyle?: RCXCanvasFontStyle;
+  fontWeight?: RCXCanvasFontWeight;
+  fontSize?: number;
+  fontFamily?: string;
+}
+
+export interface RCXFontStyle extends RCXFontStringStyle {
+  // other ctx2d properties
+  fontStretch?: CanvasFontStretch;
+  fontVariant?: RCXCanvasFontVariant;
+  fontKerning?: CanvasFontKerning;
+}
+
+export type RCXCanvasFontStyle = 'normal' | 'italic' | 'oblique';
+export type RCXCanvasFontWeight =
+  | 'normal'
+  | 'bold'
+  | 'bolder'
+  | 'lighter'
+  | number;
+export type RCXCanvasFontVariant = 'normal' | CanvasFontVariantCaps;
