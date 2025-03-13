@@ -1,19 +1,8 @@
 import type { AnyObject, RCXRenderingContext } from '../types.ts';
-import { isOwnPropertyOf } from './is-own-property-of.ts';
+import { isValidStrokeCap } from './is-valid-stroke-cap.ts';
+import { isValidStrokeJoin } from './is-valid-stroke-join.ts';
 
-const STROKE_CAPS = {
-  butt: true,
-  round: true,
-  square: true,
-} satisfies Record<CanvasLineCap, true>;
-
-const STROKE_JOINS = {
-  bevel: true,
-  round: true,
-  miter: true,
-} satisfies Record<CanvasLineJoin, true>;
-
-export const applyStyles = (
+export const applyFillAndStrokeStyles = (
   renderingContext: RCXRenderingContext,
   style: Partial<AnyObject>
 ) => {
@@ -28,17 +17,11 @@ export const applyStyles = (
     renderingContext.ctx2d.lineWidth = strokeWidth;
   }
 
-  if (
-    typeof strokeCap === 'string' &&
-    isOwnPropertyOf(STROKE_CAPS, strokeCap)
-  ) {
+  if (isValidStrokeCap(strokeCap)) {
     renderingContext.ctx2d.lineCap = strokeCap;
   }
 
-  if (
-    typeof strokeJoin === 'string' &&
-    isOwnPropertyOf(STROKE_JOINS, strokeJoin)
-  ) {
+  if (isValidStrokeJoin(strokeJoin)) {
     renderingContext.ctx2d.lineJoin = strokeJoin;
   }
 
