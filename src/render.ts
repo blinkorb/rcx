@@ -1,4 +1,6 @@
-import { renderingContext } from '../components/canvas/context.ts';
+import { renderingContext } from './components/canvas/context.ts';
+import { emitter } from './internal/emitter.ts';
+import { cxGlobal } from './internal/global.ts';
 import type {
   AnyObject,
   NestedArray,
@@ -7,10 +9,8 @@ import type {
   RCXElementAny,
   RCXNodeAny,
   RCXRenderingContext,
-} from '../types.ts';
-import { isArray } from '../utils/type-guards.ts';
-import { emitter } from './emitter.ts';
-import { cxGlobal } from './global.ts';
+} from './types.ts';
+import { isArray } from './utils/type-guards.ts';
 
 const getCanvasElement = (container: HTMLElement) => {
   if (container instanceof HTMLCanvasElement) {
