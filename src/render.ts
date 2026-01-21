@@ -9,6 +9,7 @@ import type {
   RCXElementAny,
   RCXNodeAny,
   RCXRenderingContext,
+  RCXRenderOptions,
 } from './types.ts';
 import { isArray } from './utils/type-guards.ts';
 
@@ -245,11 +246,18 @@ const renderElement = (
   return node;
 };
 
-export const render = (element: RCXElementAny, container: HTMLElement) => {
+export const render = (
+  element: RCXElementAny,
+  container: HTMLElement,
+  { enableContext2D, enableContextWebGL2 }: RCXRenderOptions
+) => {
   const canvas = getCanvasElement(container);
-  const ctx2d = canvas.getContext('2d');
+  const context2D = enableContext2D ? canvas.getContext('2d') : null;
+  const contextWebGL2 = enableContextWebGL2
+    ? canvas.getContext('webgl2')
+    : null;
 
-  if (!ctx2d) {
+  if (enableContext2D && !context2D) {
     const errorMessage = 'CanvasRenderingContext2D not supported';
 
     if (window.console && typeof window.console.error === 'function') {
@@ -262,7 +270,24 @@ export const render = (element: RCXElementAny, container: HTMLElement) => {
     };
   }
 
-  const renderingContextState = { canvas, ctx2d };
+  if (enableContextWebGL2 && !contextWebGL2) {
+    const errorMessage = 'WebGL2RenderingContext not supported';
+
+    if (window.console && typeof window.console.error === 'function') {
+      // eslint-disable-next-line no-console
+      console.error(errorMessage);
+    }
+
+    return {
+      error: errorMessage,
+    };
+  }
+
+  const renderingContextState = {
+    canvas,
+    context2D,
+    contextWebGL2,
+  };
 
   let raf: number | undefined;
   let rootNode: RCXNodeAny | undefined;

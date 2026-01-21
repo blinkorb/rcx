@@ -62,9 +62,15 @@ export interface RCXNode<C extends RCXComponent<P>, P extends AnyObject> {
 
 export type RCXNodeAny = RCXNode<RCXComponentAny, AnyObject>;
 
+export interface RCXRenderOptions {
+  enableContext2D?: boolean;
+  enableContextWebGL2?: boolean;
+}
+
 export interface RCXRenderingContext {
   readonly canvas: HTMLCanvasElement;
-  readonly ctx2d: CanvasRenderingContext2D;
+  readonly context2D: CanvasRenderingContext2D | null;
+  readonly contextWebGL2: WebGL2RenderingContext | null;
 }
 
 export interface RCXComponentInterface {
@@ -90,7 +96,8 @@ export interface RCXCanvasContext {
   readonly actualWidth: number;
   readonly actualHeight: number;
   readonly canvas: Omit<HTMLCanvasElement, 'width' | 'height'>;
-  readonly ctx2d: CanvasRenderingContext2D;
+  readonly context2D: CanvasRenderingContext2D | null;
+  readonly contextWebGL2: WebGL2RenderingContext | null;
 }
 
 export interface RCXGlobal {

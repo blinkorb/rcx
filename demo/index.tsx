@@ -313,4 +313,4 @@ const App = () => {
   );
 };
 
-render(<App />, document.body);
+render(<App />, document.body, { enableContext2D: true });
