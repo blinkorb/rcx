@@ -24,7 +24,7 @@ export const useLinearGradient = ({
     );
   }
 
-  const gradient = renderingContextState.ctx2d.createLinearGradient(
+  const gradient = renderingContextState.context2D.createLinearGradient(
     startX,
     startY,
     endX,

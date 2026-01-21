@@ -24,19 +24,19 @@ export const Path: RCXComponent<PathProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { points, beginPath = true } = props;
 
-    renderingContext.ctx2d.save();
+    renderingContext.context2D.save();
 
     if (beginPath) {
-      renderingContext.ctx2d.beginPath();
+      renderingContext.context2D.beginPath();
     }
 
     points?.forEach((point, index) => {
       const [x, y] = isArray(point) ? point : [point.x, point.y];
 
       if (index === 0) {
-        renderingContext.ctx2d.moveTo(x, y);
+        renderingContext.context2D.moveTo(x, y);
       } else {
-        renderingContext.ctx2d.lineTo(x, y);
+        renderingContext.context2D.lineTo(x, y);
       }
     });
   });
@@ -45,12 +45,12 @@ export const Path: RCXComponent<PathProps> = (props) => {
     const { closePath = false } = props;
 
     if (closePath) {
-      renderingContext.ctx2d.closePath();
+      renderingContext.context2D.closePath();
     }
 
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return props.children;

@@ -12,9 +12,9 @@ export const Point: RCXComponent<PointProps> = (props) => {
     const { x, y, lineTo = true } = props;
 
     if (lineTo) {
-      renderingContext.ctx2d.lineTo(x, y);
+      renderingContext.context2D.lineTo(x, y);
     } else {
-      renderingContext.ctx2d.moveTo(x, y);
+      renderingContext.context2D.moveTo(x, y);
     }
   });
 

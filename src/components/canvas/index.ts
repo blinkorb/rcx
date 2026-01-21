@@ -69,7 +69,7 @@ export const Canvas: RCXComponent<CanvasProps> = (props) => {
 
     renderingContextState.canvas.width = width * pixelRatio;
     renderingContextState.canvas.height = height * pixelRatio;
-    renderingContextState.ctx2d.scale(pixelRatio, pixelRatio);
+    renderingContextState.context2D.scale(pixelRatio, pixelRatio);
   });
 
   const pixelRatio = getValueOrAuto(

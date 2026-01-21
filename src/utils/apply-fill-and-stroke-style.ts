@@ -10,24 +10,24 @@ export const applyFillAndStrokeStyles = (
   const { fill, stroke, strokeWidth, strokeCap, strokeJoin } = style;
 
   if (isValidFillOrStrokeStyle(fill)) {
-    renderingContext.ctx2d.fillStyle = fill;
-    renderingContext.ctx2d.fill();
+    renderingContext.context2D.fillStyle = fill;
+    renderingContext.context2D.fill();
   }
 
   if (typeof strokeWidth === 'number') {
-    renderingContext.ctx2d.lineWidth = strokeWidth;
+    renderingContext.context2D.lineWidth = strokeWidth;
   }
 
   if (isValidStrokeCap(strokeCap)) {
-    renderingContext.ctx2d.lineCap = strokeCap;
+    renderingContext.context2D.lineCap = strokeCap;
   }
 
   if (isValidStrokeJoin(strokeJoin)) {
-    renderingContext.ctx2d.lineJoin = strokeJoin;
+    renderingContext.context2D.lineJoin = strokeJoin;
   }
 
   if (isValidFillOrStrokeStyle(stroke)) {
-    renderingContext.ctx2d.strokeStyle = stroke;
-    renderingContext.ctx2d.stroke();
+    renderingContext.context2D.strokeStyle = stroke;
+    renderingContext.context2D.stroke();
   }
 };

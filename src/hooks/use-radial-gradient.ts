@@ -28,7 +28,7 @@ export const useRadialGradient = ({
     );
   }
 
-  const gradient = renderingContextState.ctx2d.createRadialGradient(
+  const gradient = renderingContextState.context2D.createRadialGradient(
     startX,
     startY,
     startRadius,

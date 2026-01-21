@@ -13,12 +13,12 @@ export const Translate: RCXComponent<TranslateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x = 0, y = 0 } = props;
 
-    renderingContext.ctx2d.save();
-    renderingContext.ctx2d.translate(x, y);
+    renderingContext.context2D.save();
+    renderingContext.context2D.translate(x, y);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return props.children;

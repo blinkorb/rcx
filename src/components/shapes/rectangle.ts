@@ -24,19 +24,19 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { x, y, width, height, beginPath = true } = props;
 
-    renderingContext.ctx2d.save();
+    renderingContext.context2D.save();
 
     if (beginPath) {
-      renderingContext.ctx2d.beginPath();
+      renderingContext.context2D.beginPath();
     }
 
-    renderingContext.ctx2d.rect(x, y, width, height);
+    renderingContext.context2D.rect(x, y, width, height);
   });
 
   useRenderAfterChildren((renderingContext) => {
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return props.children;

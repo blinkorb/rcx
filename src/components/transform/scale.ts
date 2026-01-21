@@ -20,12 +20,12 @@ export const Scale: RCXComponent<ScaleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { scale, scaleX, scaleY } = props;
 
-    renderingContext.ctx2d.save();
-    renderingContext.ctx2d.scale(scaleX ?? scale, scaleY ?? scale);
+    renderingContext.context2D.save();
+    renderingContext.context2D.scale(scaleX ?? scale, scaleY ?? scale);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return props.children;

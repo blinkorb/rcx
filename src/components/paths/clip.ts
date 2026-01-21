@@ -13,17 +13,17 @@ export const Clip: RCXComponent<ClipProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { path, fillRule } = props;
 
-    renderingContext.ctx2d.save();
+    renderingContext.context2D.save();
 
     if (typeof path === 'undefined') {
-      renderingContext.ctx2d.clip(fillRule);
+      renderingContext.context2D.clip(fillRule);
     } else {
-      renderingContext.ctx2d.clip(path, fillRule);
+      renderingContext.context2D.clip(path, fillRule);
     }
   });
 
   useRenderAfterChildren((renderingContext) => {
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return props.children;

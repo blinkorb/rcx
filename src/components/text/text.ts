@@ -85,50 +85,50 @@ export const Text: RCXComponent<TextProps> = (props) => {
 
     const text = getTextFromChildren(children);
 
-    renderingContext.ctx2d.save();
+    renderingContext.context2D.save();
 
     if (typeof align === 'string') {
-      renderingContext.ctx2d.textAlign = align;
+      renderingContext.context2D.textAlign = align;
     }
 
     if (typeof baseline === 'string') {
-      renderingContext.ctx2d.textBaseline = baseline;
+      renderingContext.context2D.textBaseline = baseline;
     }
 
-    renderingContext.ctx2d.font = [
+    renderingContext.context2D.font = [
       fontStyle,
       fontWeight,
       withPx(fontSize),
       fontFamily,
     ].join(' ');
 
-    renderingContext.ctx2d.fontStretch = fontStretch;
-    renderingContext.ctx2d.fontVariantCaps = fontVariant;
-    renderingContext.ctx2d.fontKerning = fontKerning;
+    renderingContext.context2D.fontStretch = fontStretch;
+    renderingContext.context2D.fontVariantCaps = fontVariant;
+    renderingContext.context2D.fontKerning = fontKerning;
 
     if (isValidFillOrStrokeStyle(fill)) {
-      renderingContext.ctx2d.fillStyle = fill;
-      renderingContext.ctx2d.fillText(text, x, y, maxWidth);
+      renderingContext.context2D.fillStyle = fill;
+      renderingContext.context2D.fillText(text, x, y, maxWidth);
     }
 
     if (typeof strokeWidth === 'number') {
-      renderingContext.ctx2d.lineWidth = strokeWidth;
+      renderingContext.context2D.lineWidth = strokeWidth;
     }
 
     if (isValidStrokeCap(strokeCap)) {
-      renderingContext.ctx2d.lineCap = strokeCap;
+      renderingContext.context2D.lineCap = strokeCap;
     }
 
     if (isValidStrokeJoin(strokeJoin)) {
-      renderingContext.ctx2d.lineJoin = strokeJoin;
+      renderingContext.context2D.lineJoin = strokeJoin;
     }
 
     if (isValidFillOrStrokeStyle(stroke)) {
-      renderingContext.ctx2d.strokeStyle = stroke;
-      renderingContext.ctx2d.strokeText(text, x, y, maxWidth);
+      renderingContext.context2D.strokeStyle = stroke;
+      renderingContext.context2D.strokeText(text, x, y, maxWidth);
     }
 
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return null;

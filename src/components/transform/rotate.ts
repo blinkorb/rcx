@@ -12,12 +12,12 @@ export const Rotate: RCXComponent<RotateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
     const { rotation } = props;
 
-    renderingContext.ctx2d.save();
-    renderingContext.ctx2d.rotate(rotation);
+    renderingContext.context2D.save();
+    renderingContext.context2D.rotate(rotation);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return props.children;

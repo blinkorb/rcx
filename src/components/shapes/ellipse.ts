@@ -39,13 +39,13 @@ export const Ellipse: RCXComponent<EllipseProps> = (props) => {
       beginPath = true,
     } = props;
 
-    renderingContext.ctx2d.save();
+    renderingContext.context2D.save();
 
     if (beginPath) {
-      renderingContext.ctx2d.beginPath();
+      renderingContext.context2D.beginPath();
     }
 
-    renderingContext.ctx2d.ellipse(
+    renderingContext.context2D.ellipse(
       x,
       y,
       radiusX,
@@ -61,12 +61,12 @@ export const Ellipse: RCXComponent<EllipseProps> = (props) => {
     const { closePath = true } = props;
 
     if (closePath) {
-      renderingContext.ctx2d.closePath();
+      renderingContext.context2D.closePath();
     }
 
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.ctx2d.restore();
+    renderingContext.context2D.restore();
   });
 
   return props.children;
