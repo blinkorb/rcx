@@ -29,7 +29,7 @@
   },
   "scripts": {
     "start": "npm run dev",
-    "dev": "tsb serve",
+    "dev": "tsb serve -c demo/tsb.config.ts",
     "dist": "npm run build",
     "build": "rm -rf dist && tsc -p tsconfig.dist.json --rewriteRelativeImportExtensions && node scripts/prep-package.js",
     "typecheck": "tsc --noEmit",
