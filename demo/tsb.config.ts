@@ -1,4 +1,4 @@
-import { Config } from '../node_modules/@jakesidsmith/tsb/dist/index';
+import { Config } from '../node_modules/@jakesidsmith/tsb/dist/index.js';
 
 const config: Config = {
   indexHTMLPath: 'index.html',
