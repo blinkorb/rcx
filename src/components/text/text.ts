@@ -11,8 +11,9 @@ import { isValidFillOrStrokeStyle } from '../../utils/is-valid-fill-or-stroke-st
 import { isValidStrokeCap } from '../../utils/is-valid-stroke-cap.ts';
 import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.ts';
 import { resolveStyles } from '../../utils/resolve-styles.ts';
-import { isArray } from '../../utils/type-guards.ts';
 import { withPx } from '../../utils/with-px.ts';
+import { DEFAULT_FONT_STYLE } from './constants.ts';
+import { getTextFromChildren } from './utils.ts';
 
 export interface TextStyle extends RCXShapeStyle, RCXFontStyle {
   align?: CanvasTextAlign;
@@ -26,41 +27,6 @@ export type TextProps = RCXPropsWithChildren<{
   children?: RCXChildren;
   style?: RCXStyleProp<TextStyle>;
 }>;
-
-const DEFAULT_FONT_STYLE = {
-  // font string
-  fontStyle: 'normal',
-  fontWeight: 'normal',
-  fontSize: 10,
-  fontFamily: 'sans-serif',
-  // other ctx2d properties
-  fontStretch: 'normal',
-  fontVariant: 'normal',
-  fontKerning: 'normal',
-} satisfies Required<RCXFontStyle>;
-
-const getTextFromChildren = (children: RCXChildren): string => {
-  if (
-    children === null ||
-    typeof children === 'boolean' ||
-    typeof children === 'undefined'
-  ) {
-    return '';
-  }
-
-  if (typeof children === 'object') {
-    if (isArray(children)) {
-      return children.reduce<string>(
-        (acc, child) => acc + getTextFromChildren(child),
-        ''
-      );
-    }
-
-    return getTextFromChildren(children.props.children);
-  }
-
-  return children.toString();
-};
 
 export const Text: RCXComponent<TextProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {

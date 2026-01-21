@@ -13,6 +13,7 @@ import {
   Rotate,
   Scale,
   Text,
+  TextMultiline,
   Translate,
   useCanvasContext,
   useLinearGradient,
@@ -42,6 +43,108 @@ const Unmounts: RCXComponent = () => {
     <Rectangle x={0} y={0} width={10} height={10} style={{ fill: 'black' }} />
   );
 };
+
+const TextAligns = () => (
+  <>
+    <Line
+      startX={100}
+      endX={100}
+      startY={190}
+      endY={290}
+      style={{ stroke: '#d5d5d5' }}
+    />
+    <Text x={100} y={200} style={{ fill: 'black' }}>
+      Left (default)
+    </Text>
+    <Text x={100} y={220} style={{ fill: 'black', align: 'right' }}>
+      Right
+    </Text>
+    <Text x={100} y={240} style={{ fill: 'black', align: 'center' }}>
+      Center
+    </Text>
+    <Text x={100} y={260} style={{ fill: 'black', align: 'start' }}>
+      Start
+    </Text>
+    <Text x={100} y={280} style={{ fill: 'black', align: 'end' }}>
+      End
+    </Text>
+
+    <Line
+      startX={50}
+      endX={150}
+      startY={300}
+      endY={300}
+      style={{ stroke: '#d5d5d5' }}
+    />
+    <Text x={100} y={300} style={{ fill: 'black', baseline: 'alphabetic' }}>
+      Alphabetic (default)
+    </Text>
+    <Line
+      startX={50}
+      endX={150}
+      startY={320}
+      endY={320}
+      style={{ stroke: '#d5d5d5' }}
+    />
+    <Text x={100} y={320} style={{ fill: 'black', baseline: 'bottom' }}>
+      Bottom
+    </Text>
+    <Line
+      startX={50}
+      endX={150}
+      startY={340}
+      endY={340}
+      style={{ stroke: '#d5d5d5' }}
+    />
+    <Text x={100} y={340} style={{ fill: 'black', baseline: 'hanging' }}>
+      Hanging
+    </Text>
+    <Line
+      startX={50}
+      endX={150}
+      startY={360}
+      endY={360}
+      style={{ stroke: '#d5d5d5' }}
+    />
+    <Text x={100} y={360} style={{ fill: 'black', baseline: 'ideographic' }}>
+      Ideographic
+    </Text>
+    <Line
+      startX={50}
+      endX={150}
+      startY={380}
+      endY={380}
+      style={{ stroke: '#d5d5d5' }}
+    />
+    <Text x={100} y={380} style={{ fill: 'black', baseline: 'middle' }}>
+      Middle
+    </Text>
+    <Line
+      startX={50}
+      endX={150}
+      startY={400}
+      endY={400}
+      style={{ stroke: '#d5d5d5' }}
+    />
+    <Text x={100} y={400} style={{ fill: 'black', baseline: 'top' }}>
+      Top
+    </Text>
+    <Text
+      x={10}
+      y={450}
+      style={{
+        fill: 'black',
+        fontSize: 20,
+        fontFamily: 'serif',
+        fontWeight: 'bold',
+        fontStyle: 'italic',
+        fontVariant: 'small-caps',
+      }}
+    >
+      Styled font
+    </Text>
+  </>
+);
 
 const Gradients: RCXComponent = () => {
   const stroke = useLinearGradient({
@@ -91,13 +194,64 @@ const Gradients: RCXComponent = () => {
   );
 };
 
+const MULTILINE_TEXT =
+  'Lorem ipsum dolor sit amet,      consectetur adipiscing elit.\r\n    Aliquam quis\tpulvinar metus.\r\n\r\nVivamus tempor tellus venenatis dapibus convallis.\rCurabitur tortor nunc, egestas vitae viverra ac, aliquet ut est.\r\rNullam in vehicula ante. Fusce nec rhoncus lorem.\n\nNulla in egestas nisl.\nMorbi tempor massa quis rutrum pulvinar.';
+
+const MultilineTexts = () => (
+  <>
+    <TextMultiline x={400} y={10} style={{ fill: 'black' }}>
+      width: undefined, whiteSpace: collapse (default){'\n'}
+      {MULTILINE_TEXT}
+    </TextMultiline>
+    <TextMultiline
+      x={400}
+      y={140}
+      style={{ fill: 'black', whiteSpace: 'preserve' }}
+    >
+      width: undefined, whiteSpace: preserve{'\n'}
+      {MULTILINE_TEXT}
+    </TextMultiline>
+    <TextMultiline x={700} y={10} width={50} style={{ fill: 'black' }}>
+      width{'\n'}
+      {MULTILINE_TEXT}
+    </TextMultiline>
+    <TextMultiline
+      x={750}
+      y={10}
+      width={50}
+      style={{ fill: 'black', wordBreak: 'break-all' }}
+    >
+      break-all{'\n'}
+      {MULTILINE_TEXT}
+    </TextMultiline>
+    <TextMultiline
+      x={800}
+      y={10}
+      width={50}
+      style={{ fill: 'black', wordBreak: 'break-word' }}
+    >
+      beak-word{'\n'}
+      {MULTILINE_TEXT}
+    </TextMultiline>
+    <TextMultiline
+      x={850}
+      y={10}
+      width={50}
+      style={{ fill: 'black', wordBreak: 'break-word', hyphens: 'auto' }}
+    >
+      break-word hyphens{'\n'}
+      {MULTILINE_TEXT}
+    </TextMultiline>
+  </>
+);
+
 const Page: RCXComponent = () => {
   const canvasContext = useCanvasContext();
   const getOffset = () => Math.cos(Date.now() * 0.001) * 10;
   const reactive = useReactive({ isMounted: true, offset: getOffset() });
 
   useLoop(() => {
-    reactive.offset = getOffset();
+    // reactive.offset = getOffset();
   });
 
   useOnMount(() => {
@@ -200,104 +354,9 @@ const Page: RCXComponent = () => {
         </Clip>
       </Rectangle>
 
-      <Line
-        startX={100}
-        endX={100}
-        startY={190}
-        endY={290}
-        style={{ stroke: '#d5d5d5' }}
-      />
-      <Text x={100} y={200} style={{ fill: 'black' }}>
-        Left (default)
-      </Text>
-      <Text x={100} y={220} style={{ fill: 'black', align: 'right' }}>
-        Right
-      </Text>
-      <Text x={100} y={240} style={{ fill: 'black', align: 'center' }}>
-        Center
-      </Text>
-      <Text x={100} y={260} style={{ fill: 'black', align: 'start' }}>
-        Start
-      </Text>
-      <Text x={100} y={280} style={{ fill: 'black', align: 'end' }}>
-        End
-      </Text>
-
-      <Line
-        startX={50}
-        endX={150}
-        startY={300}
-        endY={300}
-        style={{ stroke: '#d5d5d5' }}
-      />
-      <Text x={100} y={300} style={{ fill: 'black', baseline: 'alphabetic' }}>
-        Alphabetic (default)
-      </Text>
-      <Line
-        startX={50}
-        endX={150}
-        startY={320}
-        endY={320}
-        style={{ stroke: '#d5d5d5' }}
-      />
-      <Text x={100} y={320} style={{ fill: 'black', baseline: 'bottom' }}>
-        Bottom
-      </Text>
-      <Line
-        startX={50}
-        endX={150}
-        startY={340}
-        endY={340}
-        style={{ stroke: '#d5d5d5' }}
-      />
-      <Text x={100} y={340} style={{ fill: 'black', baseline: 'hanging' }}>
-        Hanging
-      </Text>
-      <Line
-        startX={50}
-        endX={150}
-        startY={360}
-        endY={360}
-        style={{ stroke: '#d5d5d5' }}
-      />
-      <Text x={100} y={360} style={{ fill: 'black', baseline: 'ideographic' }}>
-        Ideographic
-      </Text>
-      <Line
-        startX={50}
-        endX={150}
-        startY={380}
-        endY={380}
-        style={{ stroke: '#d5d5d5' }}
-      />
-      <Text x={100} y={380} style={{ fill: 'black', baseline: 'middle' }}>
-        Middle
-      </Text>
-      <Line
-        startX={50}
-        endX={150}
-        startY={400}
-        endY={400}
-        style={{ stroke: '#d5d5d5' }}
-      />
-      <Text x={100} y={400} style={{ fill: 'black', baseline: 'top' }}>
-        Top
-      </Text>
-      <Text
-        x={10}
-        y={450}
-        style={{
-          fill: 'black',
-          fontSize: 20,
-          fontFamily: 'serif',
-          fontWeight: 'bold',
-          fontStyle: 'italic',
-          fontVariant: 'small-caps',
-        }}
-      >
-        Styled font
-      </Text>
+      <TextAligns />
       <Gradients />
+      <MultilineTexts />
       {reactive.isMounted && <Unmounts />}
     </>
   );

@@ -149,3 +149,7 @@ export interface RCXColorStop {
 }
 
 export type RCXFillOrStrokeStyle = string | CanvasGradient;
+
+export type RCXWordBreak = 'normal' | 'break-word' | 'break-all';
+export type RCXHyphens = 'none' | 'auto' /* | 'manual' */;
+export type RCXWhiteSpace = 'preserve' | 'collapse';
