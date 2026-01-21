@@ -7,27 +7,33 @@ export const applyFillAndStrokeStyles = (
   renderingContext: RCXRenderingContext,
   style: Partial<AnyObject>
 ) => {
+  const { context2D } = renderingContext;
+
+  if (!context2D) {
+    return;
+  }
+
   const { fill, stroke, strokeWidth, strokeCap, strokeJoin } = style;
 
   if (isValidFillOrStrokeStyle(fill)) {
-    renderingContext.context2D.fillStyle = fill;
-    renderingContext.context2D.fill();
+    context2D.fillStyle = fill;
+    context2D.fill();
   }
 
   if (typeof strokeWidth === 'number') {
-    renderingContext.context2D.lineWidth = strokeWidth;
+    context2D.lineWidth = strokeWidth;
   }
 
   if (isValidStrokeCap(strokeCap)) {
-    renderingContext.context2D.lineCap = strokeCap;
+    context2D.lineCap = strokeCap;
   }
 
   if (isValidStrokeJoin(strokeJoin)) {
-    renderingContext.context2D.lineJoin = strokeJoin;
+    context2D.lineJoin = strokeJoin;
   }
 
   if (isValidFillOrStrokeStyle(stroke)) {
-    renderingContext.context2D.strokeStyle = stroke;
-    renderingContext.context2D.stroke();
+    context2D.strokeStyle = stroke;
+    context2D.stroke();
   }
 };

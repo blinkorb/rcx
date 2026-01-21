@@ -9,12 +9,18 @@ export type PointProps = RCXPropsWithChildren<{
 
 export const Point: RCXComponent<PointProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { x, y, lineTo = true } = props;
 
     if (lineTo) {
-      renderingContext.context2D.lineTo(x, y);
+      context2D.lineTo(x, y);
     } else {
-      renderingContext.context2D.moveTo(x, y);
+      context2D.moveTo(x, y);
     }
   });
 

@@ -24,6 +24,12 @@ export const useLinearGradient = ({
     );
   }
 
+  if (!renderingContextState.context2D) {
+    throw new Error(
+      'useLinearGradient must be called within a canvas with the 2D context'
+    );
+  }
+
   const gradient = renderingContextState.context2D.createLinearGradient(
     startX,
     startY,

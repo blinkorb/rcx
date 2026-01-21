@@ -22,35 +22,47 @@ export type PathProps = RCXPropsWithChildren<{
 
 export const Path: RCXComponent<PathProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { points, beginPath = true } = props;
 
-    renderingContext.context2D.save();
+    context2D.save();
 
     if (beginPath) {
-      renderingContext.context2D.beginPath();
+      context2D.beginPath();
     }
 
     points?.forEach((point, index) => {
       const [x, y] = isArray(point) ? point : [point.x, point.y];
 
       if (index === 0) {
-        renderingContext.context2D.moveTo(x, y);
+        context2D.moveTo(x, y);
       } else {
-        renderingContext.context2D.lineTo(x, y);
+        context2D.lineTo(x, y);
       }
     });
   });
 
   useRenderAfterChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { closePath = false } = props;
 
     if (closePath) {
-      renderingContext.context2D.closePath();
+      context2D.closePath();
     }
 
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.context2D.restore();
+    context2D.restore();
   });
 
   return props.children;

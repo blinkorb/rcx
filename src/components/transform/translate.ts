@@ -11,14 +11,26 @@ export type TranslateProps = RCXPropsWithChildren<{
 
 export const Translate: RCXComponent<TranslateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { x = 0, y = 0 } = props;
 
-    renderingContext.context2D.save();
-    renderingContext.context2D.translate(x, y);
+    context2D.save();
+    context2D.translate(x, y);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    renderingContext.context2D.restore();
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
+    context2D.restore();
   });
 
   return props.children;

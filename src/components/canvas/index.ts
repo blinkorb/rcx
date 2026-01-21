@@ -57,6 +57,8 @@ export const Canvas: RCXComponent<CanvasProps> = (props) => {
   });
 
   useRenderBeforeChildren((renderingContextState) => {
+    const { context2D } = renderingContextState;
+
     const pixelRatio = getValueOrAuto(
       props.pixelRatio,
       getRecommendedPixelRatio()
@@ -69,7 +71,12 @@ export const Canvas: RCXComponent<CanvasProps> = (props) => {
 
     renderingContextState.canvas.width = width * pixelRatio;
     renderingContextState.canvas.height = height * pixelRatio;
-    renderingContextState.context2D.scale(pixelRatio, pixelRatio);
+
+    if (!context2D) {
+      return;
+    }
+
+    context2D.scale(pixelRatio, pixelRatio);
   });
 
   const pixelRatio = getValueOrAuto(

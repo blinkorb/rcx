@@ -24,6 +24,12 @@ export type ArcToProps = RCXPropsWithChildren<{
 
 export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const {
       startControlX,
       startControlY,
@@ -33,13 +39,13 @@ export const ArcTo: RCXComponent<ArcToProps> = (props) => {
       beginPath = false,
     } = props;
 
-    renderingContext.context2D.save();
+    context2D.save();
 
     if (beginPath) {
-      renderingContext.context2D.beginPath();
+      context2D.beginPath();
     }
 
-    renderingContext.context2D.arcTo(
+    context2D.arcTo(
       startControlX,
       startControlY,
       endControlX,
@@ -49,15 +55,21 @@ export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { closePath = false } = props;
 
     if (closePath) {
-      renderingContext.context2D.closePath();
+      context2D.closePath();
     }
 
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.context2D.restore();
+    context2D.restore();
   });
 
   return props.children;

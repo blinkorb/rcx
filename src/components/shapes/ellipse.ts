@@ -27,6 +27,12 @@ export type EllipseProps = RCXPropsWithChildren<{
 
 export const Ellipse: RCXComponent<EllipseProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const {
       x,
       y,
@@ -39,13 +45,13 @@ export const Ellipse: RCXComponent<EllipseProps> = (props) => {
       beginPath = true,
     } = props;
 
-    renderingContext.context2D.save();
+    context2D.save();
 
     if (beginPath) {
-      renderingContext.context2D.beginPath();
+      context2D.beginPath();
     }
 
-    renderingContext.context2D.ellipse(
+    context2D.ellipse(
       x,
       y,
       radiusX,
@@ -58,15 +64,21 @@ export const Ellipse: RCXComponent<EllipseProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { closePath = true } = props;
 
     if (closePath) {
-      renderingContext.context2D.closePath();
+      context2D.closePath();
     }
 
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.context2D.restore();
+    context2D.restore();
   });
 
   return props.children;

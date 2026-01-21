@@ -23,28 +23,40 @@ export type LineProps = RCXPropsWithChildren<{
 
 export const Line: RCXComponent<LineProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { startX, startY, endX, endY, beginPath = true } = props;
+    const { context2D } = renderingContext;
 
-    renderingContext.context2D.save();
-
-    if (beginPath) {
-      renderingContext.context2D.beginPath();
+    if (!context2D) {
+      return;
     }
 
-    renderingContext.context2D.moveTo(startX, startY);
-    renderingContext.context2D.lineTo(endX, endY);
+    const { startX, startY, endX, endY, beginPath = true } = props;
+
+    context2D.save();
+
+    if (beginPath) {
+      context2D.beginPath();
+    }
+
+    context2D.moveTo(startX, startY);
+    context2D.lineTo(endX, endY);
   });
 
   useRenderAfterChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { closePath = false } = props;
 
     if (closePath) {
-      renderingContext.context2D.closePath();
+      context2D.closePath();
     }
 
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.context2D.restore();
+    context2D.restore();
   });
 
   return props.children;

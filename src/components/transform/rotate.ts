@@ -10,14 +10,26 @@ export type RotateProps = RCXPropsWithChildren<{
 
 export const Rotate: RCXComponent<RotateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { rotation } = props;
 
-    renderingContext.context2D.save();
-    renderingContext.context2D.rotate(rotation);
+    context2D.save();
+    context2D.rotate(rotation);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    renderingContext.context2D.restore();
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
+    context2D.restore();
   });
 
   return props.children;

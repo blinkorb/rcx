@@ -64,6 +64,12 @@ const getTextFromChildren = (children: RCXChildren): string => {
 
 export const Text: RCXComponent<TextProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    const { context2D } = renderingContext;
+
+    if (!context2D) {
+      return;
+    }
+
     const { x, y, maxWidth, children } = props;
     const {
       fill,
@@ -85,50 +91,47 @@ export const Text: RCXComponent<TextProps> = (props) => {
 
     const text = getTextFromChildren(children);
 
-    renderingContext.context2D.save();
+    context2D.save();
 
     if (typeof align === 'string') {
-      renderingContext.context2D.textAlign = align;
+      context2D.textAlign = align;
     }
 
     if (typeof baseline === 'string') {
-      renderingContext.context2D.textBaseline = baseline;
+      context2D.textBaseline = baseline;
     }
 
-    renderingContext.context2D.font = [
-      fontStyle,
-      fontWeight,
-      withPx(fontSize),
-      fontFamily,
-    ].join(' ');
+    context2D.font = [fontStyle, fontWeight, withPx(fontSize), fontFamily].join(
+      ' '
+    );
 
-    renderingContext.context2D.fontStretch = fontStretch;
-    renderingContext.context2D.fontVariantCaps = fontVariant;
-    renderingContext.context2D.fontKerning = fontKerning;
+    context2D.fontStretch = fontStretch;
+    context2D.fontVariantCaps = fontVariant;
+    context2D.fontKerning = fontKerning;
 
     if (isValidFillOrStrokeStyle(fill)) {
-      renderingContext.context2D.fillStyle = fill;
-      renderingContext.context2D.fillText(text, x, y, maxWidth);
+      context2D.fillStyle = fill;
+      context2D.fillText(text, x, y, maxWidth);
     }
 
     if (typeof strokeWidth === 'number') {
-      renderingContext.context2D.lineWidth = strokeWidth;
+      context2D.lineWidth = strokeWidth;
     }
 
     if (isValidStrokeCap(strokeCap)) {
-      renderingContext.context2D.lineCap = strokeCap;
+      context2D.lineCap = strokeCap;
     }
 
     if (isValidStrokeJoin(strokeJoin)) {
-      renderingContext.context2D.lineJoin = strokeJoin;
+      context2D.lineJoin = strokeJoin;
     }
 
     if (isValidFillOrStrokeStyle(stroke)) {
-      renderingContext.context2D.strokeStyle = stroke;
-      renderingContext.context2D.strokeText(text, x, y, maxWidth);
+      context2D.strokeStyle = stroke;
+      context2D.strokeText(text, x, y, maxWidth);
     }
 
-    renderingContext.context2D.restore();
+    context2D.restore();
   });
 
   return null;
