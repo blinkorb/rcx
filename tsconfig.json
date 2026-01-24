@@ -16,7 +16,8 @@
     "skipLibCheck": true,
     "allowImportingTsExtensions": true,
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "Preserve",
+    "moduleResolution": "Bundler",
     "jsx": "react-jsx",
     "jsxImportSource": "@blinkorb/rcx"
   },
