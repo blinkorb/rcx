@@ -2,7 +2,6 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "sourceMap": true,
-    "module": "ESNext",
     "paths": {
       "@blinkorb/rcx": ["../src/index.ts"],
       "@blinkorb/rcx/canvas": ["../src/components/canvas/index.ts"],
