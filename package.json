@@ -59,7 +59,7 @@
   },
   "homepage": "https://github.com/blinkorb/rcx#readme",
   "devDependencies": {
-    "@jakesidsmith/tsb": "^3.0.0",
+    "@jakesidsmith/tsb": "^3.0.2",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
