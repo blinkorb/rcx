@@ -41,7 +41,7 @@
     "lint": "eslint '**/*.{ts,tsx,js,jsx}'",
     "tests": "jest --coverage --runInBand",
     "test": "npm run format-check && npm run typecheck && npm run lint && npm run tests",
-    "prepublishOnly": "npm run test && npm run dist"
+    "prepublishOnly": "npm run test && npm run dist && echo 'Now run publish from the dist directory' && exit 1"
   },
   "repository": {
     "type": "git",
