@@ -1,6 +1,6 @@
 {
   "name": "@blinkorb/rcx",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Reactive JSX-based library for creating HTML5 canvas applications",
   "publishConfig": {
     "access": "public"
@@ -41,7 +41,7 @@
     "lint": "eslint '**/*.{ts,tsx,js,jsx}'",
     "tests": "jest --coverage --runInBand",
     "test": "npm run format-check && npm run typecheck && npm run lint && npm run tests",
-    "prepublishOnly": "npm run test && npm run dist"
+    "prepublishOnly": "npm run test && npm run dist && echo 'Now run publish from the dist directory' && exit 1"
   },
   "repository": {
     "type": "git",
