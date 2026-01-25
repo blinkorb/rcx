@@ -28,6 +28,9 @@
     },
     "./jsx-runtime": {
       "import": "./src/jsx-runtime.ts"
+    },
+    "./jsx-dev-runtime": {
+      "import": "./src/jsx-dev-runtime.ts"
     }
   },
   "scripts": {
