@@ -1,6 +1,6 @@
 {
   "name": "@blinkorb/rcx",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Reactive JSX-based library for creating HTML5 canvas applications",
   "publishConfig": {
     "access": "public"
@@ -28,6 +28,9 @@
     },
     "./jsx-runtime": {
       "import": "./src/jsx-runtime.ts"
+    },
+    "./jsx-dev-runtime": {
+      "import": "./src/jsx-dev-runtime.ts"
     }
   },
   "scripts": {
