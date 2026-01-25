@@ -1,6 +1,6 @@
 {
   "name": "@blinkorb/rcx",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Reactive JSX-based library for creating HTML5 canvas applications",
   "publishConfig": {
     "access": "public"
