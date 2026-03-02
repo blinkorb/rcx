@@ -51,7 +51,44 @@ render(<App />, document.body);
 
 ### Basic Components
 
+#### Transform Components
+
+We provide `Translate`, `Scale`, and `Rotate` components that will transform any of their children.
+
+In the below example the `Example1` component will be offset by 10 pixels in both the `x` and `y` axis. The `Example2` component will not be affected by the transform.
+
+```tsx
+<>
+  <Translate x={10} y={10}>
+    <Example1 />
+  </Translate>
+  <Example2 />
+</>
+```
+
+#### Shape Components
+
+We provide `Circle`, `Ellipse`, and `Rectangle` components for rendering some basic shapes. Each of these can receive a style prop to apply a stroke/border, and fill. You can also define (for some of these components) if the shape should continue from any existing drawings, or begin a new path by setting the `beginPath` prop. You can also choose to close these shapes by setting the `closePath` prop.
+
+```tsx
+<Ellipse
+  x={50}
+  y={50}
+  radiusX={20}
+  radiusY={50}
+  beginPath
+  closePath
+  style={{
+    strokeWidth: 1,
+    stroke: 'black',
+    fill: 'red',
+  }}
+/>
+```
+
 ## Custom Components
+
+## Hooks
 
 ## Integrating With React
 
