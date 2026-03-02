@@ -86,6 +86,22 @@ We provide `Circle`, `Ellipse`, and `Rectangle` components for rendering some ba
 />
 ```
 
+#### Path Components
+
+#### Text Components
+
+We currently only provide a single `Text` component that will render a single line of raw text. We hope to add multi-line and rich text components in the future. You can also render components that contain text or number within a `Text` component.
+
+```tsx
+<Text x={10} y={10} style={{
+  fill: 'black',
+  align: 'center,
+}}>
+  The count is {count}
+  <ContainsSomeText />
+</Text>
+```
+
 ## Custom Components
 
 ## Hooks
