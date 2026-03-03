@@ -39,7 +39,7 @@ The canvas component allows you to control things like the size and pixel ratio 
 
 A `pixelRatio` of 2 and `width` of `100` will actually render a canvas that is `200` in width, but scale your drawings so you don't have to manually scale everything - allows for crisper drawings on high density/retina displays. You can use the `getRecommendedPixelRatio` util to use our recommendation (`2` for any devices with a `devicePixelRatio` greater than or equal to 2, and `1` for every other device).
 
-If you set the `width` and or `height` to `"auto"` then the canvas' pixels will match the actual size of the canvas on the screen. This way you can have your canvas automatically scale to fill its parent (using CSS) for example.
+If you set the `width` and or `height` to `"auto"` then the canvas' pixels will match the actual size of the canvas on the screen (scaled by pixel ratio). This way you can have your canvas automatically scale to fill its parent (using CSS) for example.
 
 ```tsx
 import { Canvas } from '@blinkorb/rcx';
