@@ -1,4 +1,5 @@
 import {
+  applyFillAndStrokeStyles,
   ArcTo,
   Canvas,
   Circle,
@@ -9,7 +10,9 @@ import {
   Point,
   RCXComponent,
   Rectangle,
+  RectangleProps,
   render,
+  resolveStyles,
   Rotate,
   Scale,
   Text,
@@ -20,9 +23,56 @@ import {
   useOnMount,
   useRadialGradient,
   useReactive,
+  useRenderAfterChildren,
+  useRenderBeforeChildren,
 } from '@blinkorb/rcx';
 
 const RendersChildren: RCXComponent = ({ children }) => children;
+
+interface RoundedRectangleProps extends RectangleProps {
+  radius: number;
+  closePath?: boolean;
+}
+
+const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
+  useRenderBeforeChildren((renderingContext) => {
+    const { x, y, width, height, radius, beginPath = true, closePath } = props;
+
+    renderingContext.ctx2d.save();
+
+    if (beginPath) {
+      renderingContext.ctx2d.beginPath();
+    }
+
+    renderingContext.ctx2d.moveTo(x + radius, y);
+    renderingContext.ctx2d.lineTo(x + width - radius, y);
+    renderingContext.ctx2d.arcTo(x + width, y, x + width, y + radius, radius);
+    renderingContext.ctx2d.lineTo(x + width, y + height - radius);
+    renderingContext.ctx2d.arcTo(
+      x + width,
+      y + height,
+      x + width - radius,
+      y + height,
+      radius
+    );
+    renderingContext.ctx2d.lineTo(x + radius, y + height);
+    renderingContext.ctx2d.arcTo(x, y + height, x, y + height - radius, radius);
+    renderingContext.ctx2d.lineTo(x, y + radius);
+    renderingContext.ctx2d.arcTo(x, y, x + radius, y, radius);
+
+    if (closePath) {
+      renderingContext.ctx2d.closePath();
+    }
+  });
+
+  useRenderAfterChildren((renderingContext) => {
+    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
+
+    renderingContext.ctx2d.restore();
+  });
+
+  return props.children;
+};
 
 const Unmounts: RCXComponent = () => {
   // eslint-disable-next-line no-console
@@ -108,6 +158,14 @@ const Page: RCXComponent = () => {
 
   return (
     <>
+      <RoundedRectangle
+        x={50}
+        y={50}
+        width={100}
+        height={50}
+        radius={10}
+        style={{ fill: 'black' }}
+      />
       <Rectangle
         x={canvasContext.width * 0.25}
         y={canvasContext.height * 0.25 + reactive.offset}

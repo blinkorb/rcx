@@ -215,6 +215,61 @@ We currently only provide a single `Text` component that will render a single li
 
 ## Custom Components
 
+You can define your own components with complex drawing logic directly applied via canvas context using the `useRenderBeforeChildren` and `useRenderAfterChildren` hooks.
+
+It is highly recommended to `.save()` the canvas state before beginning drawing in `useRenderBeforeChildren` and to `.restore()` the canvas state after drawing in the `useRenderAfterChildren`.
+
+We also provide some utils for resolving and applying styles as styles can be provided as an array, and all fills and strokes are always applied in the same way.
+
+Here's an example that draws a rectangle with rounded corners.
+
+```tsx
+interface RoundedRectangleProps extends RectangleProps {
+  radius: number;
+  closePath?: boolean;
+}
+
+const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
+  useRenderBeforeChildren((renderingContext) => {
+    const { x, y, width, height, radius, beginPath = true, closePath } = props;
+
+    renderingContext.ctx2d.save();
+
+    if (beginPath) {
+      renderingContext.ctx2d.beginPath();
+    }
+
+    renderingContext.ctx2d.moveTo(x + radius, y);
+    renderingContext.ctx2d.lineTo(x + width - radius, y);
+    renderingContext.ctx2d.arcTo(x + width, y, x + width, y + radius, radius);
+    renderingContext.ctx2d.lineTo(x + width, y + height - radius);
+    renderingContext.ctx2d.arcTo(
+      x + width,
+      y + height,
+      x + width - radius,
+      y + height,
+      radius
+    );
+    renderingContext.ctx2d.lineTo(x + radius, y + height);
+    renderingContext.ctx2d.arcTo(x, y + height, x, y + height - radius, radius);
+    renderingContext.ctx2d.lineTo(x, y + radius);
+    renderingContext.ctx2d.arcTo(x, y, x + radius, y, radius);
+
+    if (closePath) {
+      renderingContext.ctx2d.closePath();
+    }
+  });
+
+  useRenderAfterChildren((renderingContext) => {
+    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
+
+    renderingContext.ctx2d.restore();
+  });
+
+  return props.children;
+};
+```
+
 ## Hooks
 
 ## Integrating With React
