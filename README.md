@@ -378,21 +378,31 @@ useOnUnmount(() => {
 
 Receives an object that will be wrapped in a JavaScript proxy. Any mutations to this object will cause a re-render.
 
+Note: you must use either a `useReactive` or `useUnreactive` for any state values you want to persist. When a component re-renders any state that is defined as basic variables will be recreated.
+
 ```tsx
 const state = useReactive({ count: 0 });
+
+// This will reset to zero every render
+const notState = { count: 0 };
 ```
 
 ### useUnreactive
 
 Receives an object that will be available until the component is unmounted. Unlike `useReactive` any mutations on this object will not cause a re-render.
 
+Note: you must use either a `useReactive` or `useUnreactive` for any state values you want to persist. When a component re-renders any state that is defined as basic variables will be recreated.
+
+```tsx
+const state = useUnreactive({ count: 0 });
+
+// This will reset to zero every render
+const notState = { count: 0 };
+```
+
 ### useWindowSize
 
 Returns the current window size. This will update when the window is resized.
-
-```tsx
-const state = useReactive({ count: 0 });
-```
 
 ## Integrating With React
 
