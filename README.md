@@ -35,7 +35,9 @@ In order to use RCX with TypeScript (if you are not already using another JSX-ba
 
 All components in RCX are function components. To get started you should create an `App` component that renders the `Canvas` component.
 
-The canvas component allows you to control things like the size and pixel density of your canvas, and provides context to other components to inform them of its size, pixel density, etc.
+The canvas component allows you to control things like the size and pixel ratio of your canvas, and provides context to other components to inform them of its size, pixel ratio, etc.
+
+A `pixelRatio` of 2 and `width` of `100` will actually render a canvas that is `200` in width, but scale your drawings so you don't have to manually scale everything - allows for crisper drawings on high density/retina displays. You can use the `getRecommendedPixelRatio` util to use our recommendation (`2` for any devices with a `devicePixelRatio` greater than or equal to 2, and `1` for every other device).
 
 ```tsx
 import { Canvas } from '@blinkorb/rcx';
