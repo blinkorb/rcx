@@ -92,6 +92,92 @@ We provide `Circle`, `Ellipse`, and `Rectangle` components for rendering some ba
 
 #### Path Components
 
+We provide a selection of components for drawing paths. These components can be combined to draw more complex shapes.
+
+All path plotting components can have stroke styles. `Path` and `ArcTo` components can also have fill styles (fills are excluded from `Line` as it is more performant to use `Path`).
+
+```tsx
+<>
+  {/* Plot a single line */}
+  <Line
+    startX={0}
+    startY={0}
+    endX={10}
+    endY={10}
+    beginPath
+    style={{
+      strokeWidth: 2,
+      stroke: 'black',
+    }}
+  />
+  {/* Plot an arc */}
+  <ArcTo
+    startControlX={0}
+    startControlY={0}
+    endControlX={10}
+    endControlY={10}
+    radius={10}
+    style={{
+      strokeWidth: 2,
+      stroke: 'black',
+    }}
+  />
+  {/* Plot a path from an array of points */}
+  <Path
+    points={[
+      {
+        x: 0,
+        y: 0,
+      },
+      {
+        x: 10,
+        y: 10,
+      },
+    ]}
+    beginPath
+    style={{
+      strokeWidth: 2,
+      stroke: 'black',
+    }}
+  />
+  {/* Plot a path from an array of points using the Point component */}
+  <Path
+    beginPath
+    style={{
+      strokeWidth: 2,
+      stroke: 'black',
+    }}
+  >
+    {points.map((point, index) => (
+      <Point $key={index} x={point.x} x={point.y} lineTo={index > 0} />
+    ))}
+  </Path>
+  {/* Plot a path using manually specified Points */}
+  <Path
+    beginPath
+    style={{
+      strokeWidth: 2,
+      stroke: 'black',
+    }}
+  >
+    <Point x={0} x={0} lineTo={false} />
+    <Point x={10} x={10} lineTo={true} />
+  </Path>
+</>
+```
+
+In addition to the path plotting components we provide, we also have a `Clip` component that can be used to apply a clipping mask to future drawings.
+
+```tsx
+<>
+  <Circle x={50} y={50} radius={50}>
+    <Clip>
+      <ComponentWillOnlyDrawInsideCircle />
+    </Clip>
+  </Circle>
+</>
+```
+
 #### Text Components
 
 We currently only provide a single `Text` component that will render a single line of raw text. We hope to add multi-line and rich text components in the future. You can also render components that contain text or number within a `Text` component.
