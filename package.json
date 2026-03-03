@@ -1,6 +1,6 @@
 {
   "name": "@blinkorb/rcx",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Reactive JSX-based library for creating HTML5 canvas applications",
   "publishConfig": {
     "access": "public"
@@ -37,7 +37,7 @@
     "start": "npm run dev",
     "dev": "tsb serve",
     "dist": "npm run build",
-    "build": "rm -rf dist && tsc -p tsconfig.dist.json --rewriteRelativeImportExtensions && node scripts/prep-package.js",
+    "build": "rm -rf dist && tsc -p tsconfig.dist.json --rewriteRelativeImportExtensions && node scripts/prep-package.js && cp README.md dist/README.md",
     "typecheck": "tsc --noEmit",
     "format-check": "prettier --check *",
     "format": "prettier --write *",
