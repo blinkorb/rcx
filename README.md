@@ -274,6 +274,120 @@ const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
 
 ## Hooks
 
+### useCanvasContext
+
+Provides the context from the current canvas including its `pixelRatio`, `width` and `height` (scaled by `pixelRatio`), and actual width/height (e.g. with a `pixelRatio` of `2` and `width` of `100` the `actualWidth` of the canvas will be `200` - you should generally avoid using the actual sizes and rely on the scaled `width` and `height` values).
+
+### useRenderBeforeChildren
+
+Used for creating custom components with complex rendering logic. Takes a callback that receives the current canvas rendering context to allow manually drawing with the canvas context. The callback is called before any children are rendered. See [Custom Components](#custom-components) for a full example.
+
+### useRenderAfterChildren
+
+Used for creating custom components with complex rendering logic. Takes a callback that receives the current canvas rendering context to allow manually drawing with the canvas context. The callback is called after any children are rendered. See [Custom Components](#custom-components) for a full example.
+
+### useLinearGradient
+
+Can be used to create a linear gradient that can then be applied as a fill/stroke style.
+
+```tsx
+const stroke = useLinearGradient({
+  startX: 0,
+  startY: 0,
+  endX: 10,
+  endY: 10,
+  stops: [
+    {
+      offset: 0,
+      color: '#f00',
+    },
+    {
+      offset: 1,
+      color: '#000',
+    },
+  ],
+});
+```
+
+### useRadialGradient
+
+Can be used to create a radial gradient that can then be applied as a fill/stroke style.
+
+```tsx
+const fill = useRadialGradient({
+  startX: 10,
+  startY: 10,
+  startRadius: 0,
+  endX: 0,
+  endY: 0,
+  endRadius: 10,
+  stops: [
+    {
+      offset: 0,
+      color: '#000',
+    },
+    {
+      offset: 1,
+      color: '#00f',
+    },
+  ],
+});
+```
+
+### useLoop
+
+Takes a callback and calls this in an infinite `requestAnimationFrame` loop.
+
+```tsx
+useLoop(() => {
+  // Your logic here
+});
+```
+
+### useOnMount
+
+Takes a callback that is executed when the component mounts. This callback can return another callback that is executed when a component unmounts e.g. to cleanup listeners.
+
+```tsx
+useOnMount(() => {
+  // Logic on mount
+
+  return () => {
+    // Logic on unmount
+  };
+});
+```
+
+### useOnUnmount
+
+Takes a callback that is executed when the component is mounted.
+
+```tsx
+useOnUnmount(() => {
+  // Logic on unmount
+});
+```
+
+### useReactive
+
+Receives an object that will be wrapped in a JavaScript proxy. Any mutations to this object will cause a re-render.
+
+```tsx
+const state = useReactive({ count: 0 });
+```
+
+### useUnreactive
+
+Receives an object that will be available until the component is unmounted. Unlike `useReactive` any mutations on this object will not cause a re-render.
+
+### useWindowSize
+
+Returns the current window size. This will update when the window is resized.
+
+```tsx
+const state = useReactive({ count: 0 });
+```
+
 ## Integrating With React
 
 ### TypeScript Config With React
