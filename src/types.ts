@@ -149,3 +149,14 @@ export interface RCXColorStop {
 }
 
 export type RCXFillOrStrokeStyle = string | CanvasGradient;
+
+export interface CreateRootFailure {
+  error: string;
+}
+
+export interface CreateRootSuccess {
+  render: (element: RCXElementAny) => void;
+  unmount: () => void;
+}
+
+export type CreateRootResult = CreateRootFailure | CreateRootSuccess;
