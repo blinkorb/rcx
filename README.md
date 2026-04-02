@@ -472,7 +472,6 @@ const ReactComponent = () => {
       if ('error' in rootOrError) {
         rootRef.current = null;
         setRoot(null);
-        // eslint-disable-next-line no-console
         console.error(rootOrError.error);
       } else {
         rootRef.current = rootOrError;
