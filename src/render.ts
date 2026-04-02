@@ -286,15 +286,18 @@ export const createRoot = (container: HTMLElement): CreateRootResult => {
   };
 
   const unmount = () => {
+    emitter.off('render', renderRoot);
+    rootElement = undefined;
+
     if (typeof raf === 'number') {
       window.cancelAnimationFrame(raf);
     }
+
     // eslint-disable-next-line no-self-assign
     canvas.width = canvas.width;
 
     if (!(container instanceof HTMLCanvasElement)) {
       container.removeChild(canvas);
-      rootElement = undefined;
     }
   };
 
