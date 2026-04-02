@@ -63,7 +63,7 @@ const root = createRoot(document.body);
 if ('error' in root) {
   console.error(root.error);
 } else {
-  root.render(<App />, document.body);
+  root.render(<App />);
 }
 ```
 
