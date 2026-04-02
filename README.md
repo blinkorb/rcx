@@ -433,36 +433,75 @@ You can tell TypeScript to treat your RCX components differently (using the JSX 
 
 ### Rendering RCX Components Within React
 
-This documentation wil be updated after the latest release has been thoroughly tested.
+In the near future we're going to publish some utilities/hooks to massively reduce the boilerplate for this, but for now you can use the following snippet within a React/Next application.
 
-<!-- You can render an RCX component within a React app by getting a `ref` to a canvas node and rendering/unmounting the RCX tree at this node within a `useEffect`.
+The below example shows how to configure an RCX instance that is rendered within a React component and automatically rerenders when React state that it relies on changes.
 
-Make sure you're importing the correct `jsx` function from RCX.
+Important: make sure you're importing the correct `jsx` function from RCX.
 
 ```tsx
-import { render } from '@blinkorb/rcx';
+import { createRoot, CreateRootSuccess } from '@blinkorb/rcx';
 import { jsx } from '@blinkorb/rcx/jsx-runtime';
+import { useCallback, useEffect, useRef, useState } from 'react';
+
 import App from './your-canvas-app-component';
 
 const ReactComponent = () => {
-  const [canvas, setCanvas] = useState<HTMLCanvasElement | null>(null);
+  const elementRef = useRef<HTMLCanvasElement | null>(null);
+  const rootRef = useRef<CreateRootSuccess | null>(null);
+  const [root, setRoot] = useState<CreateRootSuccess | null>(null);
+  // react state that our component will use
+  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    const unmountOrError = canvas ? render(jsx(App, {}), canvas) : null;
-
-    // Check if we have an error
-    if (unmountOrError && 'error' in unmountOrError) {
-      console.error(unmountOrError.error);
+  const onCanvasChange = useCallback((element: HTMLCanvasElement | null) => {
+    // unmount the RCX instance when we don't have a canvas element
+    if (!element) {
+      elementRef.current = element;
+      rootRef.current?.unmount();
+      rootRef.current = null;
+      setRoot(null);
+      return;
     }
 
-    return () => {
-      // Ensure we have the unmount function (no errors)
-      if (unmountOrError && !('error' in unmountOrError)) {
-        unmountOrError();
-      }
-    };
-  }, [canvas]);
+    // create a new root when we first mount the canvas or we have a new canvas element
+    if (element && element !== elementRef.current) {
+      // unmount existing RCX instance
+      rootRef.current?.unmount();
+      const rootOrError = createRoot(element);
 
-  return <canvas ref={setCanvas} />;
+      if ('error' in rootOrError) {
+        rootRef.current = null;
+        setRoot(null);
+        console.error(rootOrError.error);
+      } else {
+        rootRef.current = rootOrError;
+        setRoot(rootOrError);
+      }
+    }
+
+    // update our element ref for future comparisons
+    elementRef.current = element;
+  }, []);
+
+  useEffect(() => {
+    // render the canvas when our root or any props have changed
+    rootRef.current?.render(jsx(App, { count }));
+  }, [root, count]);
+
+  useEffect(() => {
+    // unmount the RCX instance when this component unmounts
+    return () => {
+      rootRef.current?.unmount();
+    };
+  }, []);
+
+  return (
+    <>
+      <button onClick={() => setCount((prev) => prev + 1)}>
+        Increment count
+      </button>
+      <canvas ref={setCanvas} />
+    </>
+  );
 };
-``` -->
+```
