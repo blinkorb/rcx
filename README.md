@@ -433,7 +433,9 @@ You can tell TypeScript to treat your RCX components differently (using the JSX 
 
 ### Rendering RCX Components Within React
 
-You can render an RCX component within a React app by getting a `ref` to a canvas node and rendering/unmounting the RCX tree at this node within a `useEffect`.
+This documentation wil be updated after the latest release has been thoroughly tested.
+
+<!-- You can render an RCX component within a React app by getting a `ref` to a canvas node and rendering/unmounting the RCX tree at this node within a `useEffect`.
 
 Make sure you're importing the correct `jsx` function from RCX.
 
@@ -463,4 +465,4 @@ const ReactComponent = () => {
 
   return <canvas ref={setCanvas} />;
 };
-```
+``` -->
