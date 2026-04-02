@@ -3,6 +3,7 @@ import { emitter } from './internal/emitter.ts';
 import { cxGlobal } from './internal/global.ts';
 import type {
   AnyObject,
+  CreateRootResult,
   NestedArray,
   RCXChild,
   RCXChildren,
@@ -245,7 +246,7 @@ const renderElement = (
   return node;
 };
 
-export const render = (element: RCXElementAny, container: HTMLElement) => {
+export const createRoot = (container: HTMLElement): CreateRootResult => {
   const canvas = getCanvasElement(container);
   const ctx2d = canvas.getContext('2d');
 
@@ -264,6 +265,7 @@ export const render = (element: RCXElementAny, container: HTMLElement) => {
 
   const renderingContextState = { canvas, ctx2d };
 
+  let rootElement: RCXElementAny | undefined;
   let raf: number | undefined;
   let rootNode: RCXNodeAny | undefined;
 
@@ -275,13 +277,13 @@ export const render = (element: RCXElementAny, container: HTMLElement) => {
     raf = window.requestAnimationFrame(() => {
       // eslint-disable-next-line no-self-assign
       canvas.width = canvas.width;
-      rootNode = renderElement(element, renderingContextState, rootNode);
+      if (rootElement) {
+        rootNode = renderElement(rootElement, renderingContextState, rootNode);
+      } else {
+        rootNode = undefined;
+      }
     });
   };
-
-  renderRoot();
-
-  emitter.on('render', renderRoot);
 
   const unmount = () => {
     if (typeof raf === 'number') {
@@ -292,8 +294,17 @@ export const render = (element: RCXElementAny, container: HTMLElement) => {
 
     if (!(container instanceof HTMLCanvasElement)) {
       container.removeChild(canvas);
+      rootElement = undefined;
     }
   };
 
-  return unmount;
+  return {
+    render: (element: RCXElementAny) => {
+      rootElement = element;
+      renderRoot();
+
+      emitter.on('render', renderRoot);
+    },
+    unmount,
+  };
 };

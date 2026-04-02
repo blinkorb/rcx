@@ -56,9 +56,15 @@ const App = () => {
 You can then render this component using the `render` function. The render function's second argument is the DOM node where you would like the canvas to appear. If the node is already a canvas RCX will render to that canvas, otherwise it will add a canvas within that node.
 
 ```tsx
-import { render } from '@blinkorb/rcx';
+import { createRoot } from '@blinkorb/rcx';
 
-render(<App />, document.body);
+const root = createRoot(document.body);
+
+if ('error' in root) {
+  console.error(root.error);
+} else {
+  root.render(<App />);
+}
 ```
 
 ### Basic Components
@@ -427,7 +433,9 @@ You can tell TypeScript to treat your RCX components differently (using the JSX 
 
 ### Rendering RCX Components Within React
 
-You can render an RCX component within a React app by getting a `ref` to a canvas node and rendering/unmounting the RCX tree at this node within a `useEffect`.
+This documentation wil be updated after the latest release has been thoroughly tested.
+
+<!-- You can render an RCX component within a React app by getting a `ref` to a canvas node and rendering/unmounting the RCX tree at this node within a `useEffect`.
 
 Make sure you're importing the correct `jsx` function from RCX.
 
@@ -457,4 +465,4 @@ const ReactComponent = () => {
 
   return <canvas ref={setCanvas} />;
 };
-```
+``` -->
