@@ -11,8 +11,11 @@ class Emitter<T extends AnyObject> {
   } = {};
 
   public on = <K extends keyof T>(event: K, handler: Handler<T, K>) => {
-    this.handlers[event] = this.handlers[event] || [];
-    this.handlers[event]?.push(handler);
+    this.handlers[event] = this.handlers[event] ?? [];
+
+    if (!this.handlers[event].includes(handler)) {
+      this.handlers[event].push(handler);
+    }
 
     return () => this.off(event, handler);
   };
