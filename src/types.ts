@@ -155,7 +155,9 @@ export interface CreateRootFailure {
 }
 
 export interface CreateRootSuccess {
-  render: (element: RCXElementAny) => void;
+  render: <C extends RCXComponent<P>, P extends AnyObject>(
+    element: RCXElement<C, P>
+  ) => void;
   unmount: () => void;
 }
 
