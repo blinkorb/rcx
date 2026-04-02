@@ -56,9 +56,15 @@ const App = () => {
 You can then render this component using the `render` function. The render function's second argument is the DOM node where you would like the canvas to appear. If the node is already a canvas RCX will render to that canvas, otherwise it will add a canvas within that node.
 
 ```tsx
-import { render } from '@blinkorb/rcx';
+import { createRoot } from '@blinkorb/rcx';
 
-render(<App />, document.body);
+const root = createRoot(document.body);
+
+if ('error' in root) {
+  console.error(root.error);
+} else {
+  root.render(<App />, document.body);
+}
 ```
 
 ### Basic Components
