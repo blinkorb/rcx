@@ -1,0 +1,38 @@
+{
+  "name": "@blinkorb/rcx-root",
+  "version": "0.0.0",
+  "description": "Root package of the RCX monorepo",
+  "scripts": {
+    "type-check": "npm run type-check --workspaces --if-present",
+    "format-check": "npm run format-check --workspaces --if-present",
+    "format-fix": "npm run format-fix --workspaces --if-present",
+    "lint-check": "npm run lint-check --workspaces --if-present",
+    "lint-fix": "npm run lint-fix --workspaces --if-present",
+    "tests": "npm run tests --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkorb/rcx.git"
+  },
+  "keywords": [
+    "rcx",
+    "monorepo",
+    "package"
+  ],
+  "author": "BlinkOrb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blinkorb/rcx/issues"
+  },
+  "homepage": "https://github.com/blinkorb/rcx#readme",
+  "workspaces": [
+    "workspaces/*"
+  ],
+  "dependencies": {
+    "@blinkorb/rcx": "^0.1.2"
+  },
+  "devDependencies": {
+    "@blinkorb/eslint-config-rcx-dev": "^0.0.0"
+  }
+}
