@@ -1,3 +1,3 @@
-import eslintConfigRCXDev from '@blinkorb/eslint-config-rcx-dev';
+import eslintConfigRCXDevWithReact from '@blinkorb/eslint-config-rcx-dev/with-react';
 
-export default eslintConfigRCXDev;
+export default eslintConfigRCXDevWithReact;

@@ -4,6 +4,14 @@
   "description": "ESLint config for working within the RCX monorepo",
   "type": "module",
   "main": "eslint.config.js",
+  "exports": {
+    ".": {
+      "import": "./eslint.config.js"
+    },
+    "./with-react": {
+      "import": "./with-react.js"
+    }
+  },
   "scripts": {
     "format-check": "prettier --check *",
     "format-fix": "prettier --write *",
@@ -27,9 +35,11 @@
   },
   "homepage": "https://github.com/blinkorb/rcx#readme",
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
-    "eslint": "^10.2.1",
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
     "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-simple-import-sort": "^13.0.0",
     "globals": "^17.5.0",
     "prettier": "^3.8.3",
