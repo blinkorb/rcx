@@ -18,8 +18,8 @@ export default defineConfig([
           additionalHooks: '(useRCXInReact)',
         },
       ],
-      'react/prop-types': 0,
-      'react/no-unescaped-entities': 0,
+      'react/prop-types': 'off',
+      'react/no-unescaped-entities': 'off',
     },
   },
 ]);
