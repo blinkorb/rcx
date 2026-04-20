@@ -18,6 +18,7 @@ describe('useRCXInReact', () => {
       const [count, setCount] = useState(0);
 
       const setCanvas = useRCXInReact(() => rerenderSpy({ count }), [count]);
+
       return (
         <>
           <canvas ref={setCanvas} />
