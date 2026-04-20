@@ -3,6 +3,11 @@
 /build/*
 /dist/*
 /.vscode/*
+/workspaces/*/node_modules/*
+/workspaces/*/coverage/*
+/workspaces/*/build/*
+/workspaces/*/dist/*
+/workspaces/*/.vscode/*
 
 .DS_Store
 npm-debug.log*

@@ -9,6 +9,7 @@ import {
   Line,
   Path,
   Point,
+  RCXChildren,
   RCXComponent,
   Rectangle,
   RectangleProps,
@@ -27,7 +28,9 @@ import {
   useRenderBeforeChildren,
 } from '@blinkorb/rcx';
 
-const RendersChildren: RCXComponent = ({ children }) => children;
+const RendersChildren: RCXComponent<{ children: RCXChildren }> = ({
+  children,
+}) => children;
 
 interface RoundedRectangleProps extends RectangleProps {
   radius: number;

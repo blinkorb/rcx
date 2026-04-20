@@ -1,0 +1,38 @@
+{
+  "name": "@blinkorb/eslint-config-rcx-dev",
+  "version": "0.0.0",
+  "description": "ESLint config for working within the RCX monorepo",
+  "type": "module",
+  "main": "eslint.config.js",
+  "scripts": {
+    "format-check": "prettier --check *",
+    "format-fix": "prettier --write *",
+    "lint-check": "eslint '**/*.{ts,tsx,js,jsx}'",
+    "lint-fix": "eslint '**/*.{ts,tsx,js,jsx}' --fix",
+    "test": "npm run format-check && npm run lint-check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkorb/rcx.git"
+  },
+  "keywords": [
+    "rcx",
+    "eslint",
+    "config"
+  ],
+  "author": "BlinkOrb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blinkorb/rcx/issues"
+  },
+  "homepage": "https://github.com/blinkorb/rcx#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.2.1",
+    "eslint-plugin-prettier": "^5.5.5",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
+    "globals": "^17.5.0",
+    "prettier": "^3.8.3",
+    "typescript-eslint": "^8.58.2"
+  }
+}
