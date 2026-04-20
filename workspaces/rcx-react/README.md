@@ -22,3 +22,22 @@ You can tell TypeScript to treat your RCX components differently (using the JSX 
 ```tsx
 /** @jsxImportSource @blinkorb/rcx */
 ```
+
+### Linting
+
+If you're using [ESLint](https://eslint.org/) with [eslint-plugin-react-hooks](https://react.dev/reference/eslint-plugin-react-hooks) you can include our `useRCXInReact` hook in your ESLint config to ensure that all dependencies are correctly provided to the hook.
+
+The `(useRCXInReact)` allows you to add multiple hooks to include in this rule by separating them with a pipe e.g. `(useRCXInReact|useSomeOtherHook)`
+
+```js
+{
+  rules: {
+    'react-hooks/exhaustive-deps': [
+        'error',
+        {
+          additionalHooks: '(useRCXInReact)',
+        },
+      ],
+  }
+}
+```
