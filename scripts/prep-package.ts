@@ -1,10 +1,9 @@
-import { writeFileSync } from 'node:fs';
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { readFileSync, writeFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
-import packageJson from '../package.json' with { type: 'json' };
+const cwd = process.cwd();
 
-const cwd = dirname(fileURLToPath(import.meta.url));
+const packageJson = JSON.parse(readFileSync(resolve(cwd, 'package.json'), 'utf-8'));
 
 const modifiedJson = {
   ...packageJson,
@@ -14,8 +13,8 @@ const modifiedJson = {
     Object.entries(packageJson.exports).map(([key, imports]) => [
       key,
       Object.fromEntries(
-        Object.entries(imports).map(([path, actual]) => [
-          path,
+        Object.entries(imports).map(([importPath, actual]) => [
+          importPath,
           actual.replace('src/', '').replace('.ts', '.js'),
         ])
       ),
@@ -24,7 +23,7 @@ const modifiedJson = {
 };
 
 writeFileSync(
-  resolve(cwd, '../dist/package.json'),
+  resolve(cwd, 'dist/package.json'),
   JSON.stringify(modifiedJson, null, 2),
   'utf-8'
 );

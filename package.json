@@ -30,7 +30,8 @@
     "workspaces/*"
   ],
   "dependencies": {
-    "@blinkorb/rcx": "^0.1.2"
+    "@blinkorb/rcx": "^0.1.2",
+    "@blinkorb/rcx-react": "^0.0.0"
   },
   "devDependencies": {
     "@blinkorb/eslint-config-rcx-dev": "^0.0.0"
