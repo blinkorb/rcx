@@ -15,6 +15,8 @@ const config = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   moduleNameMapper: {
     '(.+)\\.js$': '$1',
+    '^@blinkorb/rcx$': '<rootDir>/../rcx/src/index.ts',
+    '^@blinkorb/rcx/jsx-runtime$': '<rootDir>/../rcx/src/jsx-runtime.ts',
   },
   testEnvironment: 'jsdom',
   setupFiles: ['jest-canvas-mock'],
