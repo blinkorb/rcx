@@ -7,15 +7,14 @@ import typescriptEslint from 'typescript-eslint';
 
 export default defineConfig([
   {
+    name: 'rcx-dev/ignores',
     ignores: ['**/dist/**/*', '**/build/**/*', '**/coverage/**/*'],
   },
   eslintJs.configs.recommended,
   typescriptEslint.configs.recommended,
   eslintPluginPrettierRecommended,
   {
-    plugins: {
-      'simple-import-sort': simpleImportSort,
-    },
+    name: 'rcx-dev/setup',
     languageOptions: {
       sourceType: 'module',
       globals: {
@@ -25,6 +24,7 @@ export default defineConfig([
     },
   },
   {
+    name: 'rcx-dev/base',
     rules: {
       strict: ['error', 'global'],
       eqeqeq: 'error',
@@ -252,11 +252,20 @@ export default defineConfig([
         'addEventListener',
         'removeEventListener',
       ],
+    },
+  },
+  {
+    name: 'rcx-dev/imports',
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+    },
+    rules: {
       'simple-import-sort/imports': 'error',
       'simple-import-sort/exports': 'error',
     },
   },
   {
+    name: 'rcx-dev/typescript',
     files: ['**/*.ts', '**/*.tsx'],
     rules: {
       'no-undef': 'off',

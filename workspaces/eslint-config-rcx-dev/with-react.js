@@ -10,6 +10,7 @@ export default defineConfig([
   react.configs.flat['jsx-runtime'],
   reactHooks.configs.flat.recommended,
   {
+    name: 'rcx-dev/react',
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': [
