@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom';
 
-import { type RCXComponent, Text } from '@blinkorb/rcx';
+import { type RCXComponent } from '@blinkorb/rcx';
 import { jsx } from '@blinkorb/rcx/jsx-runtime';
 import { render, screen } from '@testing-library/react';
 import { act, useState } from 'react';
@@ -9,17 +9,8 @@ import { useRCXInReact } from './useRCXInReact.ts';
 
 describe('useRCXInReact', () => {
   it('provides a way to share state between a React app and an RCX app', async () => {
-    const TestRCXComponent: RCXComponent<{ count: number }> = ({ count }) => {
-      const element = jsx(Text, {
-        x: 0,
-        y: 0,
-        children: count,
-      });
-
-      // @FIXME: figure out why the types are angry
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      return element as any;
-    };
+    const TestRCXComponent: RCXComponent<{ count: number }> = ({ count }) =>
+      count;
 
     const rerenderSpy = jest.fn((props) => jsx(TestRCXComponent, props));
 
