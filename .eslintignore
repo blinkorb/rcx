@@ -1,8 +1,0 @@
-/node_modules/*
-/coverage/*
-/build/*
-/dist/*
-/workspaces/*/node_modules/*
-/workspaces/*/coverage/*
-/workspaces/*/build/*
-/workspaces/*/dist/*
