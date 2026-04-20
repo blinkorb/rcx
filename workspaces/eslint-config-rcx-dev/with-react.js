@@ -11,6 +11,11 @@ export default defineConfig([
   reactHooks.configs.flat.recommended,
   {
     name: 'rcx-dev/react',
+    settings: {
+      react: {
+        version: '19',
+      },
+    },
     rules: {
       'react-hooks/rules-of-hooks': 'error',
       'react-hooks/exhaustive-deps': [
