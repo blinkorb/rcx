@@ -11,9 +11,9 @@ export default defineConfig([
   },
   eslintJs.configs.recommended,
   typescriptEslint.configs.recommended,
+  eslintPluginPrettierRecommended,
   {
     plugins: {
-      prettier: eslintPluginPrettierRecommended,
       'simple-import-sort': simpleImportSort,
     },
     languageOptions: {
@@ -253,6 +253,7 @@ export default defineConfig([
         'removeEventListener',
       ],
       'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
     },
   },
   {
