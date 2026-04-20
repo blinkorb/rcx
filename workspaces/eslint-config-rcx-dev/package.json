@@ -27,10 +27,10 @@
   },
   "homepage": "https://github.com/blinkorb/rcx#readme",
   "devDependencies": {
-    "@eslint/js": "^8.57.1",
+    "@eslint/js": "^10.0.1",
     "eslint": "^10.2.1",
     "eslint-plugin-prettier": "^5.5.5",
-    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "eslint-plugin-simple-import-sort": "^13.0.0",
     "globals": "^17.5.0",
     "prettier": "^3.8.3",
     "typescript-eslint": "^8.58.2"
