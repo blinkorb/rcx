@@ -16,6 +16,8 @@ const config = {
   moduleNameMapper: {
     '(.+)\\.js$': '$1',
   },
+  testEnvironment: 'jsdom',
+  setupFiles: ['jest-canvas-mock'],
 } satisfies Config;
 
 export default config;
