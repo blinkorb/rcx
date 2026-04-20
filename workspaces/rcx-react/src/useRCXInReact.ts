@@ -1,6 +1,6 @@
 import {
-  createRoot,
   type AnyObject,
+  createRoot,
   type CreateRootSuccess,
   type RCXComponent,
   type RCXElement,
