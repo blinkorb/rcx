@@ -34,6 +34,7 @@
     "@blinkorb/rcx-react": "^0.0.0"
   },
   "devDependencies": {
-    "@blinkorb/eslint-config-rcx-dev": "^0.0.0"
+    "@blinkorb/eslint-config-rcx-dev": "^0.0.0",
+    "@blinkorb/rcx-scripts": "^0.0.0"
   }
 }

@@ -16,7 +16,7 @@
     "start": "npm run dev",
     "dev": "tsb serve",
     "dist": "npm run build",
-    "build": "rm -rf dist && tsc -p tsconfig.dist.json --rewriteRelativeImportExtensions && tsx ../../scripts/prep-package.ts && cp README.md ../../LICENSE.txt dist/",
+    "build": "rm -rf dist && tsc -p tsconfig.dist.json --rewriteRelativeImportExtensions && tsx ../scripts/src/prep-package.ts && cp README.md ../../LICENSE.txt dist/",
     "type-check": "tsc --noEmit",
     "format-check": "prettier --check *",
     "format-fix": "prettier --write *",
