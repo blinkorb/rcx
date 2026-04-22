@@ -16,3 +16,4 @@ RCX closely resembles other JSX-based view libraries such as React/Vue, but allo
 - `rcx-react` provides utilities for integrating RCX in React apps - [read the documentation](workspaces/rcx-react/README.md)
 - `rcx-vue` (coming soon) will provide utilities for integrating RCX in Vue apps
 - `rcx-gl` (coming eventually) will allow rendering 3D scenes using WebGL
+- `rcx-2d` (coming-eventually) will contain components and utils that are currently in the core `rcx` package when the `rcx-gl` package is implemented
