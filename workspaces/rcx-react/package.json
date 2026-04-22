@@ -1,7 +1,7 @@
 {
-  "name": "@blinkorb/rcx",
-  "version": "0.1.2",
-  "description": "Reactive JSX-based library for creating HTML5 canvas applications",
+  "name": "@blinkorb/rcx-react",
+  "version": "0.0.0",
+  "description": "Utilities for using RCX within React applications",
   "publishConfig": {
     "access": "public"
   },
@@ -10,30 +10,6 @@
   "exports": {
     ".": {
       "import": "./src/index.ts"
-    },
-    "./root": {
-      "import": "./src/root.ts"
-    },
-    "./canvas": {
-      "import": "./src/components/canvas/index.ts"
-    },
-    "./components": {
-      "import": "./src/components/index.ts"
-    },
-    "./context": {
-      "import": "./src/context/index.ts"
-    },
-    "./hooks": {
-      "import": "./src/hooks/index.ts"
-    },
-    "./utils": {
-      "import": "./src/utils/index.ts"
-    },
-    "./jsx-runtime": {
-      "import": "./src/jsx-runtime.ts"
-    },
-    "./jsx-dev-runtime": {
-      "import": "./src/jsx-dev-runtime.ts"
     }
   },
   "scripts": {
@@ -61,7 +37,8 @@
     "library",
     "reactive",
     "html5",
-    "game"
+    "game",
+    "react"
   ],
   "author": "BlinkOrb",
   "license": "MIT",
@@ -69,11 +46,22 @@
     "url": "https://github.com/blinkorb/rcx/issues"
   },
   "homepage": "https://github.com/blinkorb/rcx#readme",
+  "dependencies": {
+    "@blinkorb/rcx": "^0.1.2",
+    "react": "^19.0.0"
+  },
   "devDependencies": {
     "@blinkorb/eslint-config-rcx-dev": "^0.0.0",
     "@jakesidsmith/tsb": "^3.0.2",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/jest": "^29.5.12",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "jest": "^29.7.0",
+    "jest-canvas-mock": "^2.5.2",
+    "jest-environment-jsdom": "^30.3.0",
     "ts-jest": "^29.2.4",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",

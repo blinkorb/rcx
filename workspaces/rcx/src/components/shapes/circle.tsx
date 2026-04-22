@@ -1,3 +1,4 @@
+/** @jsxImportSource @blinkorb/rcx */
 import type {
   RCXComponent,
   RCXPropsWithChildren,

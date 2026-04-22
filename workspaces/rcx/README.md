@@ -4,7 +4,7 @@
 
 ## Preamble
 
-This library is in early development, and so the interfaces you interact with may change. We'll setup full documentation when the API stabilizes. For now the readme should give you enough info to get started.
+This library is in early development, and so the interfaces you interact with may change. We'll setup full documentation when the API stabilizes. For now the readme(s) should give you enough info to get started.
 
 ## About
 
@@ -412,96 +412,4 @@ Returns the current window size. This will update when the window is resized.
 
 ## Integrating With React
 
-### TypeScript Config With React
-
-If you're already using JSX with another view library, such as React, you'll likely already have your `tsconfig.json` setup to handle JSX for React e.g.
-
-```json
-{
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
-  }
-}
-```
-
-You can tell TypeScript to treat your RCX components differently (using the JSX types from RCX itself) by adding the following to the top of any RCX component files:
-
-```tsx
-/** @jsxImportSource @blinkorb/rcx */
-```
-
-### Rendering RCX Components Within React
-
-In the near future we're going to publish some utilities/hooks to massively reduce the boilerplate for this, but for now you can use the following snippet within a React/Next application.
-
-The below example shows how to configure an RCX instance that is rendered within a React component and automatically rerenders when React state that it relies on changes.
-
-Important: make sure you're importing the correct `jsx` function from RCX.
-
-```tsx
-import { createRoot, CreateRootSuccess } from '@blinkorb/rcx';
-import { jsx } from '@blinkorb/rcx/jsx-runtime';
-import { useCallback, useEffect, useRef, useState } from 'react';
-
-import App from './your-canvas-app-component';
-
-const ReactComponent = () => {
-  const elementRef = useRef<HTMLCanvasElement | null>(null);
-  const rootRef = useRef<CreateRootSuccess | null>(null);
-  const [root, setRoot] = useState<CreateRootSuccess | null>(null);
-  // react state that our component will use
-  const [count, setCount] = useState(0);
-
-  const onCanvasChange = useCallback((element: HTMLCanvasElement | null) => {
-    // unmount the RCX instance when we don't have a canvas element
-    if (!element) {
-      elementRef.current = element;
-      rootRef.current?.unmount();
-      rootRef.current = null;
-      setRoot(null);
-      return;
-    }
-
-    // create a new root when we first mount the canvas or we have a new canvas element
-    if (element && element !== elementRef.current) {
-      // unmount existing RCX instance
-      rootRef.current?.unmount();
-      const rootOrError = createRoot(element);
-
-      if ('error' in rootOrError) {
-        rootRef.current = null;
-        setRoot(null);
-        console.error(rootOrError.error);
-      } else {
-        rootRef.current = rootOrError;
-        setRoot(rootOrError);
-      }
-    }
-
-    // update our element ref for future comparisons
-    elementRef.current = element;
-  }, []);
-
-  useEffect(() => {
-    // render the canvas when our root or any props have changed
-    rootRef.current?.render(jsx(App, { count }));
-  }, [root, count]);
-
-  useEffect(() => {
-    // unmount the RCX instance when this component unmounts
-    return () => {
-      rootRef.current?.unmount();
-    };
-  }, []);
-
-  return (
-    <>
-      <button onClick={() => setCount((prev) => prev + 1)}>
-        Increment count
-      </button>
-      <canvas ref={setCanvas} />
-    </>
-  );
-};
-```
+See [`rcx-react`](../rcx-react/README.md) for documentation about integrating RCX into a React application.

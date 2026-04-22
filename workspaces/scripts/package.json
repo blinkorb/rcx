@@ -1,0 +1,34 @@
+{
+  "name": "@blinkorb/rcx-scripts",
+  "version": "0.0.0",
+  "description": "Scripts for one or more RCX workspaces",
+  "type": "module",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "format-check": "prettier --check *",
+    "format-fix": "prettier --write *",
+    "lint-check": "eslint '**/*.{ts,tsx,js,jsx}'",
+    "lint-fix": "eslint '**/*.{ts,tsx,js,jsx}' --fix",
+    "test": "npm run format-check && npm run type-check && npm run lint-check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkorb/rcx.git"
+  },
+  "keywords": [
+    "rcx",
+    "scripts"
+  ],
+  "author": "BlinkOrb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blinkorb/rcx/issues"
+  },
+  "homepage": "https://github.com/blinkorb/rcx#readme",
+  "devDependencies": {
+    "@blinkorb/eslint-config-rcx-dev": "^0.0.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}
