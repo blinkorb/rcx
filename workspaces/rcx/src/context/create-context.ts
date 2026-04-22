@@ -1,9 +1,9 @@
-import { cxGlobal } from '../internal/global.ts';
+import { cxGlobal } from '../internal/global.js';
 import type {
   AnyObject,
   RCXComponent,
   RCXPropsWithChildren,
-} from '../types.ts';
+} from '../types.js';
 
 export type ProviderProps<T> = RCXPropsWithChildren<{
   value: T;

@@ -1,5 +1,5 @@
-import { renderingContext } from '../components/canvas/context.ts';
-import type { RCXColorStop } from '../types.ts';
+import { renderingContext } from '../components/canvas/context.js';
+import type { RCXColorStop } from '../types.js';
 
 export interface RadialGradientConfig {
   startX: number;

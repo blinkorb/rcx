@@ -1,17 +1,17 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.ts';
+} from '../../hooks/use-render.js';
 import type {
   RCXComponent,
   RCXPoint,
   RCXPropsWithChildren,
   RCXShapeStyle,
   RCXStyleProp,
-} from '../../types.ts';
-import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.ts';
-import { resolveStyles } from '../../utils/resolve-styles.ts';
-import { isArray } from '../../utils/type-guards.ts';
+} from '../../types.js';
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
+import { resolveStyles } from '../../utils/resolve-styles.js';
+import { isArray } from '../../utils/type-guards.js';
 
 export type PathProps = RCXPropsWithChildren<{
   points?: readonly RCXPoint[];

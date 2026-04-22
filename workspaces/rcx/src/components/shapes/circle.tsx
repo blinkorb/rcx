@@ -1,10 +1,11 @@
+/** @jsxImportSource @blinkorb/rcx */
 import type {
   RCXComponent,
   RCXPropsWithChildren,
   RCXShapeStyle,
   RCXStyleProp,
-} from '../../types.ts';
-import { Ellipse } from './ellipse.ts';
+} from '../../types.js';
+import { Ellipse } from './ellipse.js';
 
 export type CircleProps = RCXPropsWithChildren<{
   x: number;

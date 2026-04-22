@@ -1,5 +1,5 @@
-import type { RCXHook, RCXHookMap } from '../types.ts';
-import { cxGlobal } from './global.ts';
+import type { RCXHook, RCXHookMap } from '../types.js';
+import { cxGlobal } from './global.js';
 
 export const registerHook = <
   H extends keyof RCXHookMap,
