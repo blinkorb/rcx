@@ -12,5 +12,7 @@ RCX closely resembles other JSX-based view libraries such as React/Vue, but allo
 
 ## Documentation
 
-- `rcx` is the core library for rendering to canvas with JSX - [read the documentation](workspaces/rcx/README.md)
+- `rcx` is the core library for rendering to canvas with reactive JSX - [read the documentation](workspaces/rcx/README.md)
 - `rcx-react` provides utilities for integrating RCX in React apps - [read the documentation](workspaces/rcx-react/README.md)
+- `rcx-vue` (coming soon) will provide utilities for integrating RCX in Vue apps
+- `rcx-gl` (coming eventually) will allow rendering 3D scenes using WebGL
