@@ -1,15 +1,15 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.ts';
+} from '../../hooks/use-render.js';
 import type {
   RCXComponent,
   RCXPropsWithChildren,
   RCXShapeStyle,
   RCXStyleProp,
-} from '../../types.ts';
-import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.ts';
-import { resolveStyles } from '../../utils/resolve-styles.ts';
+} from '../../types.js';
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
+import { resolveStyles } from '../../utils/resolve-styles.js';
 
 export type RectangleProps = RCXPropsWithChildren<{
   x: number;

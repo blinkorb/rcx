@@ -1,5 +1,5 @@
-import { createContext } from '../../context/create-context.ts';
-import type { RCXCanvasContext, RCXRenderingContext } from '../../types.ts';
+import { createContext } from '../../context/create-context.js';
+import type { RCXCanvasContext, RCXRenderingContext } from '../../types.js';
 
 export const canvasContext = createContext<RCXCanvasContext>();
 

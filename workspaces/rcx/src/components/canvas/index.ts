@@ -1,9 +1,9 @@
-import { useOnMount } from '../../hooks/use-on.ts';
-import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
-import { useReactive, useUnreactive } from '../../hooks/use-state.ts';
-import type { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
-import { getRecommendedPixelRatio } from '../../utils/get-recommended-pixel-ratio.ts';
-import { canvasContext, renderingContext } from './context.ts';
+import { useOnMount } from '../../hooks/use-on.js';
+import { useRenderBeforeChildren } from '../../hooks/use-render.js';
+import { useReactive, useUnreactive } from '../../hooks/use-state.js';
+import type { RCXComponent, RCXPropsWithChildren } from '../../types.js';
+import { getRecommendedPixelRatio } from '../../utils/get-recommended-pixel-ratio.js';
+import { canvasContext, renderingContext } from './context.js';
 
 export type CanvasProps = RCXPropsWithChildren<{
   width?: number | 'auto';

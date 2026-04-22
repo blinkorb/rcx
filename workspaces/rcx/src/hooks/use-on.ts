@@ -1,5 +1,5 @@
-import { registerHook } from '../internal/hooks.ts';
-import type { RCXOnMountHook } from '../types.ts';
+import { registerHook } from '../internal/hooks.js';
+import type { RCXOnMountHook } from '../types.js';
 
 export const useOnMount = (callback: () => void | (() => void)) => {
   const hook: RCXOnMountHook = {

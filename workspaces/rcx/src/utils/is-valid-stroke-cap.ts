@@ -1,4 +1,4 @@
-import { isOwnPropertyOf } from './is-own-property-of.ts';
+import { isOwnPropertyOf } from './is-own-property-of.js';
 
 const STROKE_CAPS = {
   butt: true,

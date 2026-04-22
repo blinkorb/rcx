@@ -1,6 +1,6 @@
-import { emitter } from './internal/emitter.ts';
-import { renderElement } from './render.ts';
-import type { CreateRootResult, RCXElementAny, RCXNodeAny } from './types.ts';
+import { emitter } from './internal/emitter.js';
+import { renderElement } from './render.js';
+import type { CreateRootResult, RCXElementAny, RCXNodeAny } from './types.js';
 
 const getCanvasElement = (container: HTMLElement) => {
   if (container instanceof HTMLCanvasElement) {

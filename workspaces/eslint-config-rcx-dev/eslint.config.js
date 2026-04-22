@@ -5,6 +5,8 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
 
+import relativeExtensions from './custom-rules/relative-extensions.js';
+
 export default defineConfig([
   {
     name: 'rcx-dev/ignores',
@@ -12,7 +14,6 @@ export default defineConfig([
   },
   eslintJs.configs.recommended,
   typescriptEslint.configs.recommended,
-  eslintPluginPrettierRecommended,
   {
     name: 'rcx-dev/setup',
     languageOptions: {
@@ -280,4 +281,18 @@ export default defineConfig([
       '@typescript-eslint/no-shadow': 'error',
     },
   },
+  {
+    name: 'rcx-dev/custom-rules',
+    plugins: {
+      custom: {
+        rules: {
+          'relative-extensions': relativeExtensions,
+        },
+      },
+    },
+    rules: {
+      'custom/relative-extensions': 'error',
+    },
+  },
+  eslintPluginPrettierRecommended,
 ]);

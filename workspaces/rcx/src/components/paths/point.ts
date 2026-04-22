@@ -1,5 +1,5 @@
-import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
-import type { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
+import { useRenderBeforeChildren } from '../../hooks/use-render.js';
+import type { RCXComponent, RCXPropsWithChildren } from '../../types.js';
 
 export type PointProps = RCXPropsWithChildren<{
   x: number;

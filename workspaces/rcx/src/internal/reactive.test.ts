@@ -1,4 +1,4 @@
-import { reactive } from './reactive.ts';
+import { reactive } from './reactive.js';
 
 describe('reactive', () => {
   it('wraps an object in a proxy and allows accessing raw values', () => {

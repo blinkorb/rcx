@@ -1,5 +1,5 @@
-import type { AnyObject, NestedArray } from '../types.ts';
-import { isArray } from './type-guards.ts';
+import type { AnyObject, NestedArray } from '../types.js';
+import { isArray } from './type-guards.js';
 
 export const resolveStyles = <S extends AnyObject>(
   styles: NestedArray<false | null | undefined | S>
