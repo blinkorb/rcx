@@ -71,7 +71,7 @@
   "homepage": "https://github.com/blinkorb/rcx#readme",
   "devDependencies": {
     "@blinkorb/eslint-config-rcx-dev": "^0.0.0",
-    "@jakesidsmith/tsb": "^3.0.2",
+    "@jakesidsmith/tsb": "^4.0.0",
     "@types/jest": "^29.5.12",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.4",
