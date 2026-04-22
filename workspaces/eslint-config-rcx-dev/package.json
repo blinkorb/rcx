@@ -6,10 +6,10 @@
   "main": "eslint.config.js",
   "exports": {
     ".": {
-      "import": "./eslint.config.js"
+      "import": "./src/eslint.config.js"
     },
     "./with-react": {
-      "import": "./with-react.js"
+      "import": "./src/with-react.js"
     }
   },
   "scripts": {
@@ -17,7 +17,7 @@
     "format-fix": "prettier --write *",
     "lint-check": "eslint '**/*.{ts,tsx,js,jsx}'",
     "lint-fix": "eslint '**/*.{ts,tsx,js,jsx}' --fix",
-    "tests": "node ./custom-rules/relative-extensions.test.js",
+    "tests": "node ./src/custom-rules/relative-extensions.test.js",
     "test": "npm run format-check && npm run lint-check && npm run tests"
   },
   "repository": {
