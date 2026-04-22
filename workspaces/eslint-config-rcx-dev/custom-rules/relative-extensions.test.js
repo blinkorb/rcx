@@ -17,27 +17,32 @@ ruleTester.run(
     // 'valid' checks cases that should pass
     valid: [
       {
+        filename: 'example.js',
         code: "import thing from './thing.js';",
       },
     ],
     // 'invalid' checks cases that should not pass
     invalid: [
       {
+        filename: 'example.js',
         code: "import thing from './thing.ts';",
         output: "import thing from './thing.js';",
         errors: 1,
       },
       {
+        filename: 'example.js',
         code: "import thing from './thing.tsx';",
         output: "import thing from './thing.js';",
         errors: 1,
       },
       {
+        filename: 'example.js',
         code: "import thing from './thing.jsx';",
         output: "import thing from './thing.js';",
         errors: 1,
       },
       {
+        filename: 'example.js',
         code: "import thing from './thing';",
         output: "import thing from './thing.js';",
         errors: 1,

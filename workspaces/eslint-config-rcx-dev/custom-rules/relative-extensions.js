@@ -11,9 +11,9 @@ export default {
     fixable: 'code',
     messages: {
       missingExtensionJs:
-        '{{ importPath }} is relative and should include a ".js" extension',
+        'Import/export of "{{ importPath }}" is relative and should include a ".js" extension',
     },
-    schema: [], // no options
+    schema: [],
   },
   create(context) {
     return {

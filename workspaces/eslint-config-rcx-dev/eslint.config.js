@@ -5,7 +5,7 @@ import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import globals from 'globals';
 import typescriptEslint from 'typescript-eslint';
 
-import relativeExtensions from './relative-extensions.js';
+import relativeExtensions from './custom-rules/relative-extensions.js';
 
 export default defineConfig([
   {
