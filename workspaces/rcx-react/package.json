@@ -47,7 +47,7 @@
   },
   "homepage": "https://github.com/blinkorb/rcx#readme",
   "dependencies": {
-    "@blinkorb/rcx": "^0.1.2",
+    "@blinkorb/rcx": "^0.1.3",
     "react": "^19.0.0"
   },
   "devDependencies": {
