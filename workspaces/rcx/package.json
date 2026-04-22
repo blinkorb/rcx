@@ -6,34 +6,34 @@
     "access": "public"
   },
   "type": "module",
-  "main": "./src/index.ts",
+  "main": "./src/index.js",
   "exports": {
     ".": {
-      "import": "./src/index.ts"
+      "import": "./src/index.js"
     },
     "./root": {
-      "import": "./src/root.ts"
+      "import": "./src/root.js"
     },
     "./canvas": {
-      "import": "./src/components/canvas/index.ts"
+      "import": "./src/components/canvas/index.js"
     },
     "./components": {
-      "import": "./src/components/index.ts"
+      "import": "./src/components/index.js"
     },
     "./context": {
-      "import": "./src/context/index.ts"
+      "import": "./src/context/index.js"
     },
     "./hooks": {
-      "import": "./src/hooks/index.ts"
+      "import": "./src/hooks/index.js"
     },
     "./utils": {
-      "import": "./src/utils/index.ts"
+      "import": "./src/utils/index.js"
     },
     "./jsx-runtime": {
-      "import": "./src/jsx-runtime.ts"
+      "import": "./src/jsx-runtime.js"
     },
     "./jsx-dev-runtime": {
-      "import": "./src/jsx-dev-runtime.ts"
+      "import": "./src/jsx-dev-runtime.js"
     }
   },
   "scripts": {
