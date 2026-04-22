@@ -1,10 +1,10 @@
 import {
   type AnyObject,
-  createRoot,
   type CreateRootSuccess,
   type RCXComponent,
   type RCXElement,
 } from '@blinkorb/rcx';
+import { createRoot } from '@blinkorb/rcx/root';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 export const useRCXInReact = <C extends RCXComponent<P>, P extends AnyObject>(

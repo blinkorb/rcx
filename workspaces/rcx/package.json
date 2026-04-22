@@ -11,6 +11,9 @@
     ".": {
       "import": "./src/index.ts"
     },
+    "./root": {
+      "import": "./src/root.ts"
+    },
     "./canvas": {
       "import": "./src/components/canvas/index.ts"
     },
