@@ -16,6 +16,7 @@ const config = {
   moduleNameMapper: {
     '(.+)\\.js$': '$1',
     '^@blinkorb/rcx$': '<rootDir>/../rcx/src/index.ts',
+    '^@blinkorb/rcx/root$': '<rootDir>/../rcx/src/root.ts',
     '^@blinkorb/rcx/jsx-runtime$': '<rootDir>/../rcx/src/jsx-runtime.ts',
   },
   testEnvironment: 'jsdom',
