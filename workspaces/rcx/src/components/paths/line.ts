@@ -1,15 +1,15 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.ts';
+} from '../../hooks/use-render.js';
 import type {
   RCXComponent,
   RCXLineStyle,
   RCXPropsWithChildren,
   RCXStyleProp,
-} from '../../types.ts';
-import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.ts';
-import { resolveStyles } from '../../utils/resolve-styles.ts';
+} from '../../types.js';
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
+import { resolveStyles } from '../../utils/resolve-styles.js';
 
 export type LineProps = RCXPropsWithChildren<{
   startX: number;

@@ -1,8 +1,8 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.ts';
-import type { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
+} from '../../hooks/use-render.js';
+import type { RCXComponent, RCXPropsWithChildren } from '../../types.js';
 
 export type ClipProps = RCXPropsWithChildren<{
   path?: Path2D;

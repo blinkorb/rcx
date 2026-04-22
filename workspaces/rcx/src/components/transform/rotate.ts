@@ -1,8 +1,8 @@
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.ts';
-import { RCXComponent, RCXPropsWithChildren } from '../../types.ts';
+} from '../../hooks/use-render.js';
+import { RCXComponent, RCXPropsWithChildren } from '../../types.js';
 
 export type RotateProps = RCXPropsWithChildren<{
   rotation: number;

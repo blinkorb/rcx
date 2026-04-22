@@ -5,7 +5,7 @@ import { jsx } from '@blinkorb/rcx/jsx-runtime';
 import { render, screen } from '@testing-library/react';
 import { act, useState } from 'react';
 
-import { useRCXInReact } from './useRCXInReact.ts';
+import { useRCXInReact } from './useRCXInReact.js';
 
 describe('useRCXInReact', () => {
   it('provides a way to share state between a React app and an RCX app', async () => {

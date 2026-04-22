@@ -1,5 +1,5 @@
-import { renderingContext } from './components/canvas/context.ts';
-import { cxGlobal } from './internal/global.ts';
+import { renderingContext } from './components/canvas/context.js';
+import { cxGlobal } from './internal/global.js';
 import type {
   AnyObject,
   NestedArray,
@@ -8,8 +8,8 @@ import type {
   RCXElementAny,
   RCXNodeAny,
   RCXRenderingContext,
-} from './types.ts';
-import { isArray } from './utils/type-guards.ts';
+} from './types.js';
+import { isArray } from './utils/type-guards.js';
 
 const unmountNodes = (
   children: NestedArray<RCXNodeAny> | RCXNodeAny | undefined

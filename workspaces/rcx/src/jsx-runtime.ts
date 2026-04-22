@@ -3,7 +3,7 @@ import type {
   RCXComponent,
   RCXElement,
   RCXFragmentProps,
-} from './types.ts';
+} from './types.js';
 
 export const jsx = <C extends RCXComponent<P>, P extends AnyObject>(
   type: C,

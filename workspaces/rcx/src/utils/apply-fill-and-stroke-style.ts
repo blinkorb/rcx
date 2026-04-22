@@ -1,7 +1,7 @@
-import type { AnyObject, RCXRenderingContext } from '../types.ts';
-import { isValidFillOrStrokeStyle } from './is-valid-fill-or-stroke-style.ts';
-import { isValidStrokeCap } from './is-valid-stroke-cap.ts';
-import { isValidStrokeJoin } from './is-valid-stroke-join.ts';
+import type { AnyObject, RCXRenderingContext } from '../types.js';
+import { isValidFillOrStrokeStyle } from './is-valid-fill-or-stroke-style.js';
+import { isValidStrokeCap } from './is-valid-stroke-cap.js';
+import { isValidStrokeJoin } from './is-valid-stroke-join.js';
 
 export const applyFillAndStrokeStyles = (
   renderingContext: RCXRenderingContext,

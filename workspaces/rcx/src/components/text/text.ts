@@ -1,4 +1,4 @@
-import { useRenderBeforeChildren } from '../../hooks/use-render.ts';
+import { useRenderBeforeChildren } from '../../hooks/use-render.js';
 import type {
   RCXChildren,
   RCXComponent,
@@ -6,13 +6,13 @@ import type {
   RCXPropsWithChildren,
   RCXShapeStyle,
   RCXStyleProp,
-} from '../../types.ts';
-import { isValidFillOrStrokeStyle } from '../../utils/is-valid-fill-or-stroke-style.ts';
-import { isValidStrokeCap } from '../../utils/is-valid-stroke-cap.ts';
-import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.ts';
-import { resolveStyles } from '../../utils/resolve-styles.ts';
-import { isArray } from '../../utils/type-guards.ts';
-import { withPx } from '../../utils/with-px.ts';
+} from '../../types.js';
+import { isValidFillOrStrokeStyle } from '../../utils/is-valid-fill-or-stroke-style.js';
+import { isValidStrokeCap } from '../../utils/is-valid-stroke-cap.js';
+import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.js';
+import { resolveStyles } from '../../utils/resolve-styles.js';
+import { isArray } from '../../utils/type-guards.js';
+import { withPx } from '../../utils/with-px.js';
 
 export interface TextStyle extends RCXShapeStyle, RCXFontStyle {
   align?: CanvasTextAlign;
