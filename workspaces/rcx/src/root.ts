@@ -20,7 +20,7 @@ export const createRoot = (container: HTMLElement): CreateRootResult => {
   if (!ctx2d) {
     const errorMessage = 'CanvasRenderingContext2D not supported';
 
-    if (window.console && typeof window.console.error === 'function') {
+    if (globalThis.console && typeof globalThis.console.error === 'function') {
       // eslint-disable-next-line no-console
       console.error(errorMessage);
     }
@@ -38,10 +38,10 @@ export const createRoot = (container: HTMLElement): CreateRootResult => {
 
   const renderRoot = () => {
     if (typeof raf === 'number') {
-      window.cancelAnimationFrame(raf);
+      globalThis.cancelAnimationFrame(raf);
     }
 
-    raf = window.requestAnimationFrame(() => {
+    raf = globalThis.requestAnimationFrame(() => {
       // eslint-disable-next-line no-self-assign
       canvas.width = canvas.width;
       if (rootElement) {
@@ -57,7 +57,7 @@ export const createRoot = (container: HTMLElement): CreateRootResult => {
     rootElement = undefined;
 
     if (typeof raf === 'number') {
-      window.cancelAnimationFrame(raf);
+      globalThis.cancelAnimationFrame(raf);
     }
 
     // eslint-disable-next-line no-self-assign

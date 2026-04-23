@@ -36,7 +36,10 @@ export const useRCXInReact = <C extends RCXComponent<P>, P extends AnyObject>(
         rootRef.current = null;
         setRoot(null);
 
-        if (window.console && typeof window.console.error === 'function') {
+        if (
+          globalThis.console &&
+          typeof globalThis.console.error === 'function'
+        ) {
           // eslint-disable-next-line no-console
           console.error(rootOrError.error);
         }

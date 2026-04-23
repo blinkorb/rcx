@@ -154,7 +154,7 @@ const Page: RCXComponent = () => {
   });
 
   useOnMount(() => {
-    window.setTimeout(() => {
+    globalThis.setTimeout(() => {
       reactive.isMounted = false;
     }, 1000);
   });
@@ -377,7 +377,7 @@ const App = () => {
 const root = createRoot(document.body);
 
 if ('error' in root) {
-  if (window.console && typeof window.console.error === 'function') {
+  if (globalThis.console && typeof globalThis.console.error === 'function') {
     // eslint-disable-next-line no-console
     console.error(root.error);
   }

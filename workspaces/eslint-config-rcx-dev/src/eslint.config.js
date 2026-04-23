@@ -69,6 +69,8 @@ export default defineConfig([
       ],
       'no-restricted-globals': [
         'error',
+        'error',
+        'window',
         'URL',
         'history',
         'dispatchEvent',
