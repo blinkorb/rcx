@@ -7,6 +7,7 @@ import type {
   RCXShapeStyle,
   RCXStyleProp,
 } from '../../types.js';
+import { isFiniteNumber } from '../../utils/is-finite-number.js';
 import { isValidFillOrStrokeStyle } from '../../utils/is-valid-fill-or-stroke-style.js';
 import { isValidStrokeCap } from '../../utils/is-valid-stroke-cap.js';
 import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.js';
@@ -111,7 +112,7 @@ export const Text: RCXComponent<TextProps> = (props) => {
       renderingContext.ctx2d.fillText(text, x, y, maxWidth);
     }
 
-    if (typeof strokeWidth === 'number') {
+    if (isFiniteNumber(strokeWidth)) {
       renderingContext.ctx2d.lineWidth = strokeWidth;
     }
 
