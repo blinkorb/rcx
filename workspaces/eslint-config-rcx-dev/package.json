@@ -10,6 +10,9 @@
     },
     "./with-react": {
       "import": "./src/with-react.ts"
+    },
+    "./with-vue": {
+      "import": "./src/with-vue.ts"
     }
   },
   "scripts": {
