@@ -7,4 +7,4 @@ const STROKE_JOINS = {
 } satisfies Record<CanvasLineJoin, true>;
 
 export const isValidStrokeJoin = (value: unknown): value is CanvasLineJoin =>
-  typeof value === 'string' && isOwnPropertyOf(STROKE_JOINS, value as string);
+  typeof value === 'string' && isOwnPropertyOf(STROKE_JOINS, value);

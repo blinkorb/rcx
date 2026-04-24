@@ -7,4 +7,4 @@ const STROKE_CAPS = {
 } satisfies Record<CanvasLineCap, true>;
 
 export const isValidStrokeCap = (value: unknown): value is CanvasLineCap =>
-  typeof value === 'string' && isOwnPropertyOf(STROKE_CAPS, value as string);
+  typeof value === 'string' && isOwnPropertyOf(STROKE_CAPS, value);
