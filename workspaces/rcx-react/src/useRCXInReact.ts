@@ -1,8 +1,8 @@
-import {
-  type AnyObject,
-  type CreateRootSuccess,
-  type RCXComponent,
-  type RCXElement,
+import type {
+  AnyObject,
+  CreateRootSuccess,
+  RCXComponent,
+  RCXElement,
 } from '@blinkorb/rcx';
 import { createRoot } from '@blinkorb/rcx/root';
 import { useCallback, useEffect, useRef, useState } from 'react';
