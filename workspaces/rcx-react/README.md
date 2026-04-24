@@ -38,7 +38,12 @@ Note the `@jsxImportSource` comment at the top of the RCX component file because
 ```tsx
 /** @jsxImportSource @blinkorb/rcx */
 
-import { Canvas, RCXComponent, Text, useCanvasContext } from '@blinkorb/rcx';
+import {
+  Canvas,
+  type RCXComponent,
+  Text,
+  useCanvasContext,
+} from '@blinkorb/rcx';
 
 const Content: RCXComponent<{ count: number }> = ({ count }) => {
   const { width, height } = useCanvasContext();
@@ -48,7 +53,7 @@ const Content: RCXComponent<{ count: number }> = ({ count }) => {
       x={width * 0.5}
       y={height * 0.5}
       style={{
-        fill: 'white',
+        fill: 'black',
         align: 'center',
         baseline: 'middle',
         fontSize: 100,
