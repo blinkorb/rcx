@@ -3,20 +3,20 @@ import { useReactive } from './use-state.js';
 
 export const useWindowSize = () => {
   const size = useReactive({
-    width: window.innerWidth,
-    height: window.innerHeight,
+    width: globalThis.innerWidth,
+    height: globalThis.innerHeight,
   });
 
   useOnMount(() => {
     const onResize = () => {
-      size.width = window.innerWidth;
-      size.height = window.innerHeight;
+      size.width = globalThis.innerWidth;
+      size.height = globalThis.innerHeight;
     };
 
-    window.addEventListener('resize', onResize);
+    globalThis.addEventListener('resize', onResize);
 
     return () => {
-      window.removeEventListener('resize', onResize);
+      globalThis.removeEventListener('resize', onResize);
     };
   });
 

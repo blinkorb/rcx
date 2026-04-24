@@ -4,8 +4,8 @@ export const useLoop = (callback: () => void) => {
   const unreactive = useUnreactive<{ raf: number | null }>({ raf: null });
 
   if (typeof unreactive.raf === 'number') {
-    window.cancelAnimationFrame(unreactive.raf);
+    globalThis.cancelAnimationFrame(unreactive.raf);
   }
 
-  unreactive.raf = window.requestAnimationFrame(callback);
+  unreactive.raf = globalThis.requestAnimationFrame(callback);
 };

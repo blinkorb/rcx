@@ -1,4 +1,5 @@
 import type { AnyObject, RCXRenderingContext } from '../types.js';
+import { isFiniteNumber } from './is-finite-number.js';
 import { isValidFillOrStrokeStyle } from './is-valid-fill-or-stroke-style.js';
 import { isValidStrokeCap } from './is-valid-stroke-cap.js';
 import { isValidStrokeJoin } from './is-valid-stroke-join.js';
@@ -14,7 +15,7 @@ export const applyFillAndStrokeStyles = (
     renderingContext.ctx2d.fill();
   }
 
-  if (typeof strokeWidth === 'number') {
+  if (isFiniteNumber(strokeWidth)) {
     renderingContext.ctx2d.lineWidth = strokeWidth;
   }
 

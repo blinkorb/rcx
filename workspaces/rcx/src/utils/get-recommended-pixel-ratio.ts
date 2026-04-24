@@ -1,2 +1,2 @@
 export const getRecommendedPixelRatio = () =>
-  window.devicePixelRatio >= 2 ? 2 : 1;
+  globalThis.devicePixelRatio >= 2 ? 2 : 1;
