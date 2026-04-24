@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "description": "ESLint config for working within the RCX monorepo",
   "type": "module",
-  "main": "eslint.config.js",
+  "main": "eslint.config.ts",
   "exports": {
     ".": {
-      "import": "./src/eslint.config.js"
+      "import": "./src/eslint.config.ts"
     },
     "./with-react": {
-      "import": "./src/with-react.js"
+      "import": "./src/with-react.ts"
     }
   },
   "scripts": {
@@ -17,7 +17,7 @@
     "format-fix": "prettier --write *",
     "lint-check": "eslint '**/*.{ts,tsx,js,jsx}'",
     "lint-fix": "eslint '**/*.{ts,tsx,js,jsx}' --fix",
-    "tests": "node ./src/custom-rules/relative-extensions.test.js",
+    "tests": "tsx ./src/custom-rules/relative-extensions.test.ts",
     "test": "npm run format-check && npm run lint-check && npm run tests"
   },
   "repository": {
@@ -43,7 +43,10 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-simple-import-sort": "^13.0.0",
     "globals": "^17.5.0",
+    "jiti": "^2.6.1",
     "prettier": "^3.8.3",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.58.2"
   }
 }
