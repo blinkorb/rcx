@@ -105,7 +105,7 @@ const ReactApp = () => {
   return (
     <>
       <button onClick={() => setCount((prev) => prev + 1)}>Increment</button>
-      <canvas ref={onCanvasChanged} />
+      <canvas ref={onCanvasChanged} style={{ width: '100%', height: 100 }} />
     </>
   );
 };
