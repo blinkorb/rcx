@@ -3,6 +3,7 @@ import { useRenderBeforeChildren } from '../../hooks/use-render.js';
 import { useReactive, useUnreactive } from '../../hooks/use-state.js';
 import type { RCXComponent, RCXPropsWithChildren } from '../../types.js';
 import { getRecommendedPixelRatio } from '../../utils/get-recommended-pixel-ratio.js';
+import { isFiniteNumber } from '../../utils/is-finite-number.js';
 import { canvasContext, renderingContext } from './context.js';
 
 export type CanvasProps = RCXPropsWithChildren<{
@@ -15,7 +16,7 @@ const getValueOrAuto = (
   value: undefined | number | 'auto',
   autoValue: number
 ) => {
-  if (typeof value === 'number') {
+  if (isFiniteNumber(value)) {
     return value;
   }
 
