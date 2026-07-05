@@ -1,5 +1,7 @@
-import { renderingContext } from '../canvas/context.js';
-import type { RCXColorStop } from '../types.js';
+import type { RCXColorStop } from '@blinkorb/rcx';
+import { renderingContext } from '@blinkorb/rcx/canvas/context';
+
+import { assertCtx2d } from '../utils/assert-ctx-2d.js';
 
 export interface RadialGradientConfig {
   startX: number;
@@ -27,6 +29,8 @@ export const useRadialGradient = ({
       'useRadialGradient must be called inside the body of a component'
     );
   }
+
+  assertCtx2d(renderingContextState);
 
   const gradient = renderingContextState.ctx2d.createRadialGradient(
     startX,

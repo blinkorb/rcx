@@ -17,6 +17,9 @@
     "./canvas": {
       "import": "./src/canvas/index.ts"
     },
+    "./canvas/context": {
+      "import": "./src/canvas/context.ts"
+    },
     "./context": {
       "import": "./src/context/index.ts"
     },

@@ -1,24 +1,19 @@
 import { emitter } from './internal/emitter.js';
 import { renderElement } from './render.js';
-import type { CreateRootResult, RCXElementAny, RCXNodeAny } from './types.js';
+import type {
+  CreateRootOptions,
+  CreateRootResult,
+  RCXElementAny,
+  RCXNodeAny,
+  RCXRenderingContext,
+} from './types.js';
 
-const getCanvasElement = (container: HTMLElement) => {
-  if (container instanceof HTMLCanvasElement) {
-    return container;
-  }
-
-  const canvasElement = document.createElement('canvas');
-  container.appendChild(canvasElement);
-
-  return canvasElement;
-};
-
-export const createRoot = (container: HTMLElement): CreateRootResult => {
-  const canvas = getCanvasElement(container);
-  const ctx2d = canvas.getContext('2d');
-
-  if (!ctx2d) {
-    const errorMessage = 'CanvasRenderingContext2D not supported';
+export const createRoot = ({
+  ctx2d,
+  ctxGl,
+}: CreateRootOptions): CreateRootResult => {
+  if (!ctx2d && !ctxGl) {
+    const errorMessage = 'No canvas context supplied to RCX';
 
     if (globalThis.console && typeof globalThis.console.error === 'function') {
       // eslint-disable-next-line no-console
@@ -30,7 +25,7 @@ export const createRoot = (container: HTMLElement): CreateRootResult => {
     };
   }
 
-  const renderingContextState = { canvas, ctx2d };
+  const renderingContextState: RCXRenderingContext = { ctx2d, ctxGl };
 
   let rootElement: RCXElementAny | undefined;
   let raf: number | undefined;
@@ -42,8 +37,6 @@ export const createRoot = (container: HTMLElement): CreateRootResult => {
     }
 
     raf = globalThis.requestAnimationFrame(() => {
-      // eslint-disable-next-line no-self-assign
-      canvas.width = canvas.width;
       if (rootElement) {
         rootNode = renderElement(rootElement, renderingContextState, rootNode);
       } else {
@@ -58,13 +51,6 @@ export const createRoot = (container: HTMLElement): CreateRootResult => {
 
     if (typeof raf === 'number') {
       globalThis.cancelAnimationFrame(raf);
-    }
-
-    // eslint-disable-next-line no-self-assign
-    canvas.width = canvas.width;
-
-    if (!(container instanceof HTMLCanvasElement)) {
-      container.removeChild(canvas);
     }
   };
 

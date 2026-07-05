@@ -1,13 +1,19 @@
-import type { AnyObject, RCXRenderingContext } from '../types.js';
-import { isFiniteNumber } from './is-finite-number.js';
-import { isValidFillOrStrokeStyle } from './is-valid-fill-or-stroke-style.js';
-import { isValidStrokeCap } from './is-valid-stroke-cap.js';
-import { isValidStrokeJoin } from './is-valid-stroke-join.js';
+import type { AnyObject, RCXRenderingContext } from '@blinkorb/rcx';
+import {
+  isFiniteNumber,
+  isValidFillOrStrokeStyle,
+  isValidStrokeCap,
+  isValidStrokeJoin,
+} from '@blinkorb/rcx/utils';
+
+import { assertCtx2d } from './assert-ctx-2d.js';
 
 export const applyFillAndStrokeStyles = (
   renderingContext: RCXRenderingContext,
   style: Partial<AnyObject>
 ) => {
+  assertCtx2d(renderingContext);
+
   const { fill, stroke, strokeWidth, strokeCap, strokeJoin } = style;
 
   if (isValidFillOrStrokeStyle(fill)) {

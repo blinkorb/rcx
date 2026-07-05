@@ -2,6 +2,8 @@ import { useOnMount } from '../hooks/use-on.js';
 import { useRenderBeforeChildren } from '../hooks/use-render.js';
 import { useReactive, useUnreactive } from '../hooks/use-state.js';
 import type { RCXComponent, RCXPropsWithChildren } from '../types.js';
+import { getCanvasDimensions } from '../utils/get-canvas-dimensions.js';
+import { getCanvasElement } from '../utils/get-canvas-element.js';
 import { getRecommendedPixelRatio } from '../utils/get-recommended-pixel-ratio.js';
 import { isFiniteNumber } from '../utils/is-finite-number.js';
 import { canvasContext, renderingContext } from './context.js';
@@ -27,11 +29,12 @@ export const Canvas: RCXComponent<CanvasProps> = (props) => {
   const renderingContextStateRoot = renderingContext.useInject();
 
   if (!renderingContextStateRoot) {
-    throw new Error('Canvas was rendered outside of an application');
+    throw new Error('Canvas was rendered outside of an RCX application');
   }
 
-  const initialCanvasSize =
-    renderingContextStateRoot.canvas.getBoundingClientRect();
+  const initialCanvasSize = getCanvasDimensions(
+    getCanvasElement(renderingContextStateRoot)
+  );
   const canvasSize = useReactive({
     width: initialCanvasSize.width,
     height: initialCanvasSize.height,
@@ -43,14 +46,18 @@ export const Canvas: RCXComponent<CanvasProps> = (props) => {
         return;
       }
 
-      const rect = canvasEntry.target.getBoundingClientRect();
+      const rect = getCanvasDimensions(canvasEntry.target);
       canvasSize.width = rect.width;
       canvasSize.height = rect.height;
     })
   );
 
   useOnMount(() => {
-    resizeObserver.observe(renderingContextStateRoot.canvas);
+    const element = getCanvasElement(renderingContextStateRoot);
+
+    if (element instanceof HTMLCanvasElement) {
+      resizeObserver.observe(element);
+    }
 
     return () => {
       resizeObserver.disconnect();
@@ -62,22 +69,23 @@ export const Canvas: RCXComponent<CanvasProps> = (props) => {
       props.pixelRatio,
       getRecommendedPixelRatio()
     );
-    const rect = renderingContextState.canvas.getBoundingClientRect();
+    const element = getCanvasElement(renderingContextState);
+    const rect = getCanvasDimensions(element);
     const width =
       getValueOrAuto(props.width, rect.width * pixelRatio) / pixelRatio;
     const height =
       getValueOrAuto(props.height, rect.height * pixelRatio) / pixelRatio;
 
-    renderingContextState.canvas.width = width * pixelRatio;
-    renderingContextState.canvas.height = height * pixelRatio;
-    renderingContextState.ctx2d.scale(pixelRatio, pixelRatio);
+    element.width = width * pixelRatio;
+    element.height = height * pixelRatio;
+    renderingContextState.ctx2d?.scale(pixelRatio, pixelRatio);
   });
 
   const pixelRatio = getValueOrAuto(
     props.pixelRatio,
     getRecommendedPixelRatio()
   );
-  const rect = renderingContextStateRoot.canvas.getBoundingClientRect();
+  const rect = getCanvasDimensions(getCanvasElement(renderingContextStateRoot));
   const width =
     getValueOrAuto(props.width, rect.width * pixelRatio) / pixelRatio;
   const height =
