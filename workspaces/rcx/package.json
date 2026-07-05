@@ -15,7 +15,7 @@
       "import": "./src/root.ts"
     },
     "./canvas": {
-      "import": "./src/components/canvas/index.ts"
+      "import": "./src/canvas/index.ts"
     },
     "./components": {
       "import": "./src/components/index.ts"

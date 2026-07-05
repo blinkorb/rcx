@@ -1,9 +1,9 @@
-import { useOnMount } from '../../hooks/use-on.js';
-import { useRenderBeforeChildren } from '../../hooks/use-render.js';
-import { useReactive, useUnreactive } from '../../hooks/use-state.js';
-import type { RCXComponent, RCXPropsWithChildren } from '../../types.js';
-import { getRecommendedPixelRatio } from '../../utils/get-recommended-pixel-ratio.js';
-import { isFiniteNumber } from '../../utils/is-finite-number.js';
+import { useOnMount } from '../hooks/use-on.js';
+import { useRenderBeforeChildren } from '../hooks/use-render.js';
+import { useReactive, useUnreactive } from '../hooks/use-state.js';
+import type { RCXComponent, RCXPropsWithChildren } from '../types.js';
+import { getRecommendedPixelRatio } from '../utils/get-recommended-pixel-ratio.js';
+import { isFiniteNumber } from '../utils/is-finite-number.js';
 import { canvasContext, renderingContext } from './context.js';
 
 export type CanvasProps = RCXPropsWithChildren<{

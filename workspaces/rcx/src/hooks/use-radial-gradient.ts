@@ -1,4 +1,4 @@
-import { renderingContext } from '../components/canvas/context.js';
+import { renderingContext } from '../canvas/context.js';
 import type { RCXColorStop } from '../types.js';
 
 export interface RadialGradientConfig {
