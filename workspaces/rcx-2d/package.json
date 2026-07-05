@@ -10,6 +10,9 @@
   "exports": {
     ".": {
       "import": "./src/index.ts"
+    },
+    "./components": {
+      "import": "./src/components/index.ts"
     }
   },
   "scripts": {

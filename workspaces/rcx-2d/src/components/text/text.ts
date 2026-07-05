@@ -1,4 +1,3 @@
-import { useRenderBeforeChildren } from '../../hooks/use-render.js';
 import type {
   RCXChildren,
   RCXComponent,
@@ -6,14 +5,17 @@ import type {
   RCXPropsWithChildren,
   RCXShapeStyle,
   RCXStyleProp,
-} from '../../types.js';
-import { isFiniteNumber } from '../../utils/is-finite-number.js';
-import { isValidFillOrStrokeStyle } from '../../utils/is-valid-fill-or-stroke-style.js';
-import { isValidStrokeCap } from '../../utils/is-valid-stroke-cap.js';
-import { isValidStrokeJoin } from '../../utils/is-valid-stroke-join.js';
-import { resolveStyles } from '../../utils/resolve-styles.js';
-import { isArray } from '../../utils/type-guards.js';
-import { withPx } from '../../utils/with-px.js';
+} from '@blinkorb/rcx';
+import { useRenderBeforeChildren } from '@blinkorb/rcx/hooks';
+import {
+  isArray,
+  isFiniteNumber,
+  isValidFillOrStrokeStyle,
+  isValidStrokeCap,
+  isValidStrokeJoin,
+  resolveStyles,
+  withPx,
+} from '@blinkorb/rcx/utils';
 
 export interface TextStyle extends RCXShapeStyle, RCXFontStyle {
   align?: CanvasTextAlign;

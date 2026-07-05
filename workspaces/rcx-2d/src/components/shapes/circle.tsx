@@ -4,7 +4,8 @@ import type {
   RCXPropsWithChildren,
   RCXShapeStyle,
   RCXStyleProp,
-} from '../../types.js';
+} from '@blinkorb/rcx';
+
 import { Ellipse } from './ellipse.js';
 
 export type CircleProps = RCXPropsWithChildren<{

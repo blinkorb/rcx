@@ -7,3 +7,4 @@ export * from './is-valid-stroke-cap.js';
 export * from './is-valid-stroke-join.js';
 export * from './resolve-styles.js';
 export * from './type-guards.js';
+export * from './with-px.js';

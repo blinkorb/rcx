@@ -1,8 +1,8 @@
+import type { RCXComponent, RCXPropsWithChildren } from '@blinkorb/rcx';
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.js';
-import { RCXComponent, RCXPropsWithChildren } from '../../types.js';
+} from '@blinkorb/rcx/hooks';
 
 export type TranslateProps = RCXPropsWithChildren<{
   x?: number;

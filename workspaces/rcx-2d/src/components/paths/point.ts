@@ -1,5 +1,5 @@
-import { useRenderBeforeChildren } from '../../hooks/use-render.js';
-import type { RCXComponent, RCXPropsWithChildren } from '../../types.js';
+import type { RCXComponent, RCXPropsWithChildren } from '@blinkorb/rcx';
+import { useRenderBeforeChildren } from '@blinkorb/rcx/hooks';
 
 export type PointProps = RCXPropsWithChildren<{
   x: number;

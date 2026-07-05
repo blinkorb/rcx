@@ -1,8 +1,8 @@
+import type { RCXComponent, RCXPropsWithChildren } from '@blinkorb/rcx';
 import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
-} from '../../hooks/use-render.js';
-import type { RCXComponent, RCXPropsWithChildren } from '../../types.js';
+} from '@blinkorb/rcx/hooks';
 
 export type ClipProps = RCXPropsWithChildren<{
   path?: Path2D;

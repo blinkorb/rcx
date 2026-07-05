@@ -1,15 +1,14 @@
-import {
-  useRenderAfterChildren,
-  useRenderBeforeChildren,
-} from '../../hooks/use-render.js';
 import type {
   RCXComponent,
   RCXPropsWithChildren,
   RCXShapeStyle,
   RCXStyleProp,
-} from '../../types.js';
-import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
-import { resolveStyles } from '../../utils/resolve-styles.js';
+} from '@blinkorb/rcx';
+import {
+  useRenderAfterChildren,
+  useRenderBeforeChildren,
+} from '@blinkorb/rcx/hooks';
+import { applyFillAndStrokeStyles, resolveStyles } from '@blinkorb/rcx/utils';
 
 export type RectangleProps = RCXPropsWithChildren<{
   x: number;
