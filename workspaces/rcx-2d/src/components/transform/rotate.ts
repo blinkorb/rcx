@@ -4,12 +4,16 @@ import {
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
 
+import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+
 export type RotateProps = RCXPropsWithChildren<{
   rotation: number;
 }>;
 
 export const Rotate: RCXComponent<RotateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { rotation } = props;
 
     renderingContext.ctx2d.save();
@@ -17,6 +21,8 @@ export const Rotate: RCXComponent<RotateProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     renderingContext.ctx2d.restore();
   });
 

@@ -9,11 +9,10 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
-import {
-  applyFillAndStrokeStyles,
-  isArray,
-  resolveStyles,
-} from '@blinkorb/rcx/utils';
+import { isArray, resolveStyles } from '@blinkorb/rcx/utils';
+
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
+import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
 
 export type PathProps = RCXPropsWithChildren<{
   points?: readonly RCXPoint[];
@@ -24,6 +23,8 @@ export type PathProps = RCXPropsWithChildren<{
 
 export const Path: RCXComponent<PathProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { points, beginPath = true } = props;
 
     renderingContext.ctx2d.save();
@@ -44,6 +45,8 @@ export const Path: RCXComponent<PathProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { closePath = false } = props;
 
     if (closePath) {

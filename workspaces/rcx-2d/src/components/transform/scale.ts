@@ -4,6 +4,8 @@ import {
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
 
+import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+
 export type ScaleProps =
   | RCXPropsWithChildren<{
       scale: number;
@@ -18,6 +20,8 @@ export type ScaleProps =
 
 export const Scale: RCXComponent<ScaleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { scale, scaleX, scaleY } = props;
 
     renderingContext.ctx2d.save();
@@ -25,6 +29,8 @@ export const Scale: RCXComponent<ScaleProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     renderingContext.ctx2d.restore();
   });
 

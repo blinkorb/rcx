@@ -8,7 +8,10 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
-import { applyFillAndStrokeStyles, resolveStyles } from '@blinkorb/rcx/utils';
+import { resolveStyles } from '@blinkorb/rcx/utils';
+
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
+import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
 
 export type LineProps = RCXPropsWithChildren<{
   startX: number;
@@ -22,6 +25,8 @@ export type LineProps = RCXPropsWithChildren<{
 
 export const Line: RCXComponent<LineProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { startX, startY, endX, endY, beginPath = true } = props;
 
     renderingContext.ctx2d.save();
@@ -35,6 +40,8 @@ export const Line: RCXComponent<LineProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { closePath = false } = props;
 
     if (closePath) {

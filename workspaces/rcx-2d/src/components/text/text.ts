@@ -17,6 +17,8 @@ import {
   withPx,
 } from '@blinkorb/rcx/utils';
 
+import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+
 export interface TextStyle extends RCXShapeStyle, RCXFontStyle {
   align?: CanvasTextAlign;
   baseline?: CanvasTextBaseline;
@@ -67,6 +69,8 @@ const getTextFromChildren = (children: RCXChildren): string => {
 
 export const Text: RCXComponent<TextProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { x, y, maxWidth, children } = props;
     const {
       fill,

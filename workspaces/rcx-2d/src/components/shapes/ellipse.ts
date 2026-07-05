@@ -8,7 +8,10 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
-import { applyFillAndStrokeStyles, resolveStyles } from '@blinkorb/rcx/utils';
+import { resolveStyles } from '@blinkorb/rcx/utils';
+
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
+import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
 
 export type EllipseProps = RCXPropsWithChildren<{
   x: number;
@@ -26,6 +29,8 @@ export type EllipseProps = RCXPropsWithChildren<{
 
 export const Ellipse: RCXComponent<EllipseProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const {
       x,
       y,
@@ -57,6 +62,8 @@ export const Ellipse: RCXComponent<EllipseProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { closePath = true } = props;
 
     if (closePath) {

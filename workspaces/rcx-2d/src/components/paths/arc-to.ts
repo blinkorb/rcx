@@ -8,7 +8,10 @@ import {
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
-import { applyFillAndStrokeStyles, resolveStyles } from '@blinkorb/rcx/utils';
+import { resolveStyles } from '@blinkorb/rcx/utils';
+
+import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
+import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
 
 export type ArcToProps = RCXPropsWithChildren<{
   startControlX: number;
@@ -23,6 +26,8 @@ export type ArcToProps = RCXPropsWithChildren<{
 
 export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const {
       startControlX,
       startControlY,
@@ -48,6 +53,8 @@ export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { closePath = false } = props;
 
     if (closePath) {
