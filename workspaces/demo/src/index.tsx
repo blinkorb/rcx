@@ -1,32 +1,35 @@
 import {
-  applyFillAndStrokeStyles,
-  ArcTo,
   Canvas,
-  Circle,
-  Clip,
   createRoot,
-  Ellipse,
-  Line,
-  Path,
-  Point,
   RCXChildren,
   RCXComponent,
-  Rectangle,
-  RectangleProps,
   resolveStyles,
-  Rotate,
-  Scale,
-  Text,
-  Translate,
   useCanvasContext,
-  useLinearGradient,
   useLoop,
   useOnMount,
-  useRadialGradient,
   useReactive,
   useRenderAfterChildren,
   useRenderBeforeChildren,
 } from '@blinkorb/rcx';
+import {
+  applyFillAndStrokeStyles,
+  ArcTo,
+  assertCtx2d,
+  Circle,
+  Clip,
+  Ellipse,
+  Line,
+  Path,
+  Point,
+  Rectangle,
+  RectangleProps,
+  Rotate,
+  Scale,
+  Text,
+  Translate,
+  useLinearGradient,
+  useRadialGradient,
+} from '@blinkorb/rcx-2d';
 
 const RendersChildren: RCXComponent<{ children: RCXChildren }> = ({
   children,
@@ -39,6 +42,8 @@ interface RoundedRectangleProps extends RectangleProps {
 
 const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     const { x, y, width, height, radius, beginPath = true, closePath } = props;
 
     renderingContext.ctx2d.save();
@@ -69,6 +74,8 @@ const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
   });
 
   useRenderAfterChildren((renderingContext) => {
+    assertCtx2d(renderingContext);
+
     applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
     renderingContext.ctx2d.restore();
@@ -374,13 +381,28 @@ const App = () => {
   );
 };
 
-const root = createRoot(document.body);
+const init = () => {
+  const canvas = document.createElement('canvas');
 
-if ('error' in root) {
-  if (globalThis.console && typeof globalThis.console.error === 'function') {
-    // eslint-disable-next-line no-console
-    console.error(root.error);
+  document.body.appendChild(canvas);
+
+  const ctx2d = canvas.getContext('2d');
+
+  if (!ctx2d) {
+    alert('Could not get canvas 2D context');
+    return;
   }
-} else {
-  root.render(<App />);
-}
+
+  const root = createRoot({ ctx2d });
+
+  if ('error' in root) {
+    if (globalThis.console && typeof globalThis.console.error === 'function') {
+      // eslint-disable-next-line no-console
+      console.error(root.error);
+    }
+  } else {
+    root.render(<App />);
+  }
+};
+
+init();

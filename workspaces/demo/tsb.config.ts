@@ -1,10 +1,10 @@
 import { Config } from '@jakesidsmith/tsb';
 
 const config: Config = {
-  indexHTMLPath: 'demo/index.html',
-  main: 'demo/index.tsx',
+  indexHTMLPath: 'index.html',
+  main: 'src/index.tsx',
   outDir: 'build',
-  tsconfigPath: 'demo/tsconfig.json',
+  tsconfigPath: 'tsconfig.json',
   host: 'localhost',
 };
 

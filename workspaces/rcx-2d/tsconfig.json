@@ -21,5 +21,5 @@
     "jsx": "react-jsx",
     "jsxImportSource": "@blinkorb/rcx"
   },
-  "include": ["src/*", "jest.config.ts"]
+  "include": ["src/", "jest.config.ts"]
 }

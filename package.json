@@ -33,6 +33,7 @@
     "@blinkorb/eslint-config-rcx-dev": "^0.0.0",
     "@blinkorb/rcx": "^0.1.3",
     "@blinkorb/rcx-2d": "^0.0.0",
+    "@blinkorb/rcx-demo": "^0.0.0",
     "@blinkorb/rcx-react": "^0.0.0",
     "@blinkorb/rcx-scripts": "^0.0.0"
   }

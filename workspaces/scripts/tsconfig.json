@@ -19,5 +19,5 @@
     "module": "Preserve",
     "moduleResolution": "Bundler"
   },
-  "include": ["src/*"]
+  "include": ["src/"]
 }
