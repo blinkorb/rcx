@@ -19,8 +19,6 @@ const config = {
     '^@blinkorb/rcx/root$': '<rootDir>/../rcx/src/root.ts',
     '^@blinkorb/rcx/jsx-runtime$': '<rootDir>/../rcx/src/jsx-runtime.ts',
   },
-  testEnvironment: 'jsdom',
-  setupFiles: ['jest-canvas-mock'],
 } satisfies Config;
 
 export default config;
