@@ -94,11 +94,11 @@ init();
 
 ## 2D Context Components
 
-You can find some documentation on the 2D context components that we supply in the [rcx-2d readme](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md).
+You can find some documentation on the 2D context components/utils that we supply in the [rcx-2d readme](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md).
 
 ## WebGL Components
 
-You can find some documentation on the WebGL components that we supply in the [rcx-gl readme](https://github.com/blinkorb/rcx-gl/blob/master/workspaces/rcx/README.md).
+You can find some documentation on the WebGL components/utils that we supply in the [rcx-gl readme](https://github.com/blinkorb/rcx-gl/blob/master/workspaces/rcx/README.md).
 
 ## Custom Components
 
