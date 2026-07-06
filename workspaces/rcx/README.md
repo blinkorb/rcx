@@ -8,7 +8,7 @@ This library is in early development, and so the interfaces you interact with ma
 
 ## About
 
-RCX closely resembles other JSX-based view libraries such as React/Vue, but allows you to render to canvas. It can even be used in conjunction with other view libraries (see [rcx-react readme](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md)).
+RCX closely resembles other JSX-based view libraries such as React/Vue, but allows you to render to canvas. It can even be used in conjunction with other view libraries (see [rcx-react readme](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md)). It allows you to render using either 2D canvas context or WebGL (or both).
 
 ## Installation
 
@@ -96,6 +96,10 @@ init();
 
 You can find some documentation on the 2D context components that we supply in the [rcx-2d readme](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md).
 
+## WebGL Components
+
+You can find some documentation on the WebGL components that we supply in the [rcx-gl readme](https://github.com/blinkorb/rcx-gl/blob/master/workspaces/rcx/README.md).
+
 ## Custom Components
 
 You can define your own components with complex drawing logic directly applied via canvas context using the `useRenderBeforeChildren` and `useRenderAfterChildren` hooks.
@@ -104,7 +108,7 @@ It is highly recommended to `.save()` the canvas state before beginning drawing 
 
 We also provide some utils for ensuring the context you want to use was provided before drawing, resolving and applying styles (as styles can be provided as an array, and all fills and strokes are always applied in the same way for 2D contexts).
 
-Here's an example that draws a rectangle with rounded corners.
+Here's an example that draws a rectangle with rounded corners (using 2D context).
 
 ```tsx
 import { assertCtx2d, applyFillAndStrokeStyles } from '@blinkorb/rcx-2d';
