@@ -106,7 +106,7 @@ You can define your own components with complex drawing logic directly applied v
 
 It is highly recommended to `.save()` the canvas state before beginning drawing in `useRenderBeforeChildren` and to `.restore()` the canvas state after drawing in the `useRenderAfterChildren`.
 
-We also provide some utils for ensuring the context you want to use was provided before drawing, resolving and applying styles (as styles can be provided as an array, and all fills and strokes are always applied in the same way for 2D contexts).
+We also provide some utils for ensuring the context you want to use was provided before drawing, and for resolving and applying styles (as styles can be provided as an array, and all fills and strokes are always applied in the same way for 2D contexts).
 
 Here's an example that draws a rectangle with rounded corners (using 2D context).
 
