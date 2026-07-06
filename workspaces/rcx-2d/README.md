@@ -1,6 +1,20 @@
 # RCX 2D
 
-**Canvas 2D rendering context components**
+**Canvas 2D rendering context components and hooks**
+
+## About
+
+A collection of components, utils, and hooks for drawing to a 2D canvas context using RCX.
+
+## Installation
+
+```bash
+npm i @blinkorb/rcx-2d -P
+```
+
+## The Basics
+
+See [rcx readme](https://github.com/blinkorb/rcx/blob/master/workspaces/rcx/README.md) for information about getting started with RCX.
 
 ### Basic Components
 
@@ -8,7 +22,7 @@
 
 We provide `Translate`, `Scale`, and `Rotate` components that will transform any of their children.
 
-In the below example the `Offset` component will be offset by 10 pixels in both the `x` and `y` axis. The `NoOffset` component will not be affected by the transform.
+In the below example the `Offset` component will be offset by 10 pixels in both the `x` and `y` axis. In this example `NoOffset` component will not be affected by the transform.
 
 ```tsx
 <>
