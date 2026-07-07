@@ -163,11 +163,65 @@ const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
 };
 ```
 
+## Context/Provide/Inject
+
+Similarly to React and Vue we provide a context/provide/inject API that allows you to pass state down to child components without prop drilling (every component has to define and forward on props to their children).
+
+First you create your context by calling the `createContext` function.
+
+It's recommended that you destructure and name the provider/hooks that this returns so that these can be easily imported and used elsewhere.
+
+```ts
+export const {
+  Provider: MyContextProvider,
+  useProvide: useProvideMyContext,
+  useInject: useInjectMyContext,
+} = createContext<TypeForTheValueOfTheContext>(
+  'Optional name to help with debugging'
+);
+```
+
+And then you can use this in one of two ways (or both) depending on whether you're more familiar with React or Vue.
+
+The React-like way:
+
+```tsx
+const Example = () => {
+  return (
+    <MyContextProvider value={theThingToProvide}>
+      {/* Your component(s) go here */}
+    </MyContextProvider>
+  );
+};
+```
+
+Or the Vue-like way:
+
+```tsx
+const Example = () => {
+  useProvideMyContext(theThingToProvide);
+
+  return {
+    /* Your component(s) go here */
+  };
+};
+```
+
+In both cases to access your context within a child component you use the following:
+
+```tsx
+const Child = () => {
+  const providedThing = useInjectMyContext();
+};
+```
+
+This is because under the hook the React-like provider is actually just a component that calls `useProvide`.
+
 ## Hooks
 
 ### useCanvasContext
 
-Provides the context from the current canvas including its `pixelRatio`, `width` and `height` (scaled by `pixelRatio`), and actual width/height (e.g. with a `pixelRatio` of `2` and `width` of `100` the `actualWidth` of the canvas will be `200` - you should generally avoid using the actual sizes and rely on the scaled `width` and `height` values).
+Provides the context from the current canvas (not the drawing context, but information about the canvas itself using our context/provide/inject API) including its `pixelRatio`, `width` and `height` (scaled by `pixelRatio`), and actual width/height (e.g. with a `pixelRatio` of `2` and `width` of `100` the `actualWidth` of the canvas will be `200` - you should generally avoid using the actual sizes and rely on the scaled `width` and `height` values).
 
 ### useRenderBeforeChildren
 
