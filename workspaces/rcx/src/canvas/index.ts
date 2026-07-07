@@ -6,7 +6,10 @@ import { getCanvasDimensions } from '../utils/get-canvas-dimensions.js';
 import { getCanvasElement } from '../utils/get-canvas-element.js';
 import { getRecommendedPixelRatio } from '../utils/get-recommended-pixel-ratio.js';
 import { isFiniteNumber } from '../utils/is-finite-number.js';
-import { canvasContext, renderingContext } from './context.js';
+import {
+  useInjectRenderingContext,
+  useProvideCanvasContext,
+} from './context.js';
 
 export type CanvasProps = RCXPropsWithChildren<{
   width?: number | 'auto';
@@ -26,7 +29,7 @@ const getValueOrAuto = (
 };
 
 export const Canvas: RCXComponent<CanvasProps> = (props) => {
-  const renderingContextStateRoot = renderingContext.useInject();
+  const renderingContextStateRoot = useInjectRenderingContext();
 
   if (!renderingContextStateRoot) {
     throw new Error('Canvas was rendered outside of an RCX application');
@@ -91,7 +94,7 @@ export const Canvas: RCXComponent<CanvasProps> = (props) => {
   const height =
     getValueOrAuto(props.height, rect.height * pixelRatio) / pixelRatio;
 
-  canvasContext.useProvide({
+  useProvideCanvasContext({
     ...renderingContextStateRoot,
     props,
     width,
