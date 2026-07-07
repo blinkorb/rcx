@@ -11,7 +11,7 @@ import {
 import { resolveStyles } from '@blinkorb/rcx/utils';
 
 import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
-import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../../utils/get-has-ctx-2d.js';
 
 export type LineProps = RCXPropsWithChildren<{
   startX: number;
@@ -25,32 +25,32 @@ export type LineProps = RCXPropsWithChildren<{
 
 export const Line: RCXComponent<LineProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { startX, startY, endX, endY, beginPath = true } = props;
 
-    const { startX, startY, endX, endY, beginPath = true } = props;
+      renderingContext.ctx2d.save();
 
-    renderingContext.ctx2d.save();
+      if (beginPath) {
+        renderingContext.ctx2d.beginPath();
+      }
 
-    if (beginPath) {
-      renderingContext.ctx2d.beginPath();
+      renderingContext.ctx2d.moveTo(startX, startY);
+      renderingContext.ctx2d.lineTo(endX, endY);
     }
-
-    renderingContext.ctx2d.moveTo(startX, startY);
-    renderingContext.ctx2d.lineTo(endX, endY);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { closePath = false } = props;
 
-    const { closePath = false } = props;
+      if (closePath) {
+        renderingContext.ctx2d.closePath();
+      }
 
-    if (closePath) {
-      renderingContext.ctx2d.closePath();
+      applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
+
+      renderingContext.ctx2d.restore();
     }
-
-    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
-
-    renderingContext.ctx2d.restore();
   });
 
   return props.children;

@@ -111,7 +111,7 @@ We also provide some utils for ensuring the context you want to use was provided
 Here's an example that draws a rectangle with rounded corners (using 2D context).
 
 ```tsx
-import { assertCtx2d, applyFillAndStrokeStyles } from '@blinkorb/rcx-2d';
+import { getHasCtx2d, applyFillAndStrokeStyles } from '@blinkorb/rcx-2d';
 
 interface RoundedRectangleProps extends RectangleProps {
   radius: number;
@@ -120,43 +120,57 @@ interface RoundedRectangleProps extends RectangleProps {
 
 const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const {
+        x,
+        y,
+        width,
+        height,
+        radius,
+        beginPath = true,
+        closePath,
+      } = props;
 
-    const { x, y, width, height, radius, beginPath = true, closePath } = props;
+      renderingContext.ctx2d.save();
 
-    renderingContext.ctx2d.save();
+      if (beginPath) {
+        renderingContext.ctx2d.beginPath();
+      }
 
-    if (beginPath) {
-      renderingContext.ctx2d.beginPath();
-    }
+      renderingContext.ctx2d.moveTo(x + radius, y);
+      renderingContext.ctx2d.lineTo(x + width - radius, y);
+      renderingContext.ctx2d.arcTo(x + width, y, x + width, y + radius, radius);
+      renderingContext.ctx2d.lineTo(x + width, y + height - radius);
+      renderingContext.ctx2d.arcTo(
+        x + width,
+        y + height,
+        x + width - radius,
+        y + height,
+        radius
+      );
+      renderingContext.ctx2d.lineTo(x + radius, y + height);
+      renderingContext.ctx2d.arcTo(
+        x,
+        y + height,
+        x,
+        y + height - radius,
+        radius
+      );
+      renderingContext.ctx2d.lineTo(x, y + radius);
+      renderingContext.ctx2d.arcTo(x, y, x + radius, y, radius);
 
-    renderingContext.ctx2d.moveTo(x + radius, y);
-    renderingContext.ctx2d.lineTo(x + width - radius, y);
-    renderingContext.ctx2d.arcTo(x + width, y, x + width, y + radius, radius);
-    renderingContext.ctx2d.lineTo(x + width, y + height - radius);
-    renderingContext.ctx2d.arcTo(
-      x + width,
-      y + height,
-      x + width - radius,
-      y + height,
-      radius
-    );
-    renderingContext.ctx2d.lineTo(x + radius, y + height);
-    renderingContext.ctx2d.arcTo(x, y + height, x, y + height - radius, radius);
-    renderingContext.ctx2d.lineTo(x, y + radius);
-    renderingContext.ctx2d.arcTo(x, y, x + radius, y, radius);
-
-    if (closePath) {
-      renderingContext.ctx2d.closePath();
+      if (closePath) {
+        renderingContext.ctx2d.closePath();
+      }
     }
   });
 
   useRenderAfterChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
-
-    renderingContext.ctx2d.restore();
+      renderingContext.ctx2d.restore();
+    }
   });
 
   return props.children;

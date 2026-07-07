@@ -17,7 +17,7 @@ import {
   withPx,
 } from '@blinkorb/rcx/utils';
 
-import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../../utils/get-has-ctx-2d.js';
 
 export interface TextStyle extends RCXShapeStyle, RCXFontStyle {
   align?: CanvasTextAlign;
@@ -69,73 +69,73 @@ const getTextFromChildren = (children: RCXChildren): string => {
 
 export const Text: RCXComponent<TextProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { x, y, maxWidth, children } = props;
+      const {
+        fill,
+        stroke,
+        strokeWidth,
+        strokeCap,
+        strokeJoin,
+        align,
+        baseline,
+        fontStyle = DEFAULT_FONT_STYLE.fontStyle,
+        fontWeight = DEFAULT_FONT_STYLE.fontWeight,
+        fontSize = DEFAULT_FONT_STYLE.fontSize,
+        fontFamily = DEFAULT_FONT_STYLE.fontFamily,
+        // other ctx2d properties
+        fontStretch = DEFAULT_FONT_STYLE.fontStretch,
+        fontVariant = DEFAULT_FONT_STYLE.fontVariant,
+        fontKerning = DEFAULT_FONT_STYLE.fontKerning,
+      } = resolveStyles(props.style);
 
-    const { x, y, maxWidth, children } = props;
-    const {
-      fill,
-      stroke,
-      strokeWidth,
-      strokeCap,
-      strokeJoin,
-      align,
-      baseline,
-      fontStyle = DEFAULT_FONT_STYLE.fontStyle,
-      fontWeight = DEFAULT_FONT_STYLE.fontWeight,
-      fontSize = DEFAULT_FONT_STYLE.fontSize,
-      fontFamily = DEFAULT_FONT_STYLE.fontFamily,
-      // other ctx2d properties
-      fontStretch = DEFAULT_FONT_STYLE.fontStretch,
-      fontVariant = DEFAULT_FONT_STYLE.fontVariant,
-      fontKerning = DEFAULT_FONT_STYLE.fontKerning,
-    } = resolveStyles(props.style);
+      const text = getTextFromChildren(children);
 
-    const text = getTextFromChildren(children);
+      renderingContext.ctx2d.save();
 
-    renderingContext.ctx2d.save();
+      if (typeof align === 'string') {
+        renderingContext.ctx2d.textAlign = align;
+      }
 
-    if (typeof align === 'string') {
-      renderingContext.ctx2d.textAlign = align;
+      if (typeof baseline === 'string') {
+        renderingContext.ctx2d.textBaseline = baseline;
+      }
+
+      renderingContext.ctx2d.font = [
+        fontStyle,
+        fontWeight,
+        withPx(fontSize),
+        fontFamily,
+      ].join(' ');
+
+      renderingContext.ctx2d.fontStretch = fontStretch;
+      renderingContext.ctx2d.fontVariantCaps = fontVariant;
+      renderingContext.ctx2d.fontKerning = fontKerning;
+
+      if (isValidFillOrStrokeStyle(fill)) {
+        renderingContext.ctx2d.fillStyle = fill;
+        renderingContext.ctx2d.fillText(text, x, y, maxWidth);
+      }
+
+      if (isFiniteNumber(strokeWidth)) {
+        renderingContext.ctx2d.lineWidth = strokeWidth;
+      }
+
+      if (isValidStrokeCap(strokeCap)) {
+        renderingContext.ctx2d.lineCap = strokeCap;
+      }
+
+      if (isValidStrokeJoin(strokeJoin)) {
+        renderingContext.ctx2d.lineJoin = strokeJoin;
+      }
+
+      if (isValidFillOrStrokeStyle(stroke)) {
+        renderingContext.ctx2d.strokeStyle = stroke;
+        renderingContext.ctx2d.strokeText(text, x, y, maxWidth);
+      }
+
+      renderingContext.ctx2d.restore();
     }
-
-    if (typeof baseline === 'string') {
-      renderingContext.ctx2d.textBaseline = baseline;
-    }
-
-    renderingContext.ctx2d.font = [
-      fontStyle,
-      fontWeight,
-      withPx(fontSize),
-      fontFamily,
-    ].join(' ');
-
-    renderingContext.ctx2d.fontStretch = fontStretch;
-    renderingContext.ctx2d.fontVariantCaps = fontVariant;
-    renderingContext.ctx2d.fontKerning = fontKerning;
-
-    if (isValidFillOrStrokeStyle(fill)) {
-      renderingContext.ctx2d.fillStyle = fill;
-      renderingContext.ctx2d.fillText(text, x, y, maxWidth);
-    }
-
-    if (isFiniteNumber(strokeWidth)) {
-      renderingContext.ctx2d.lineWidth = strokeWidth;
-    }
-
-    if (isValidStrokeCap(strokeCap)) {
-      renderingContext.ctx2d.lineCap = strokeCap;
-    }
-
-    if (isValidStrokeJoin(strokeJoin)) {
-      renderingContext.ctx2d.lineJoin = strokeJoin;
-    }
-
-    if (isValidFillOrStrokeStyle(stroke)) {
-      renderingContext.ctx2d.strokeStyle = stroke;
-      renderingContext.ctx2d.strokeText(text, x, y, maxWidth);
-    }
-
-    renderingContext.ctx2d.restore();
   });
 
   return null;

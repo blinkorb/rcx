@@ -11,7 +11,7 @@ import {
 import { resolveStyles } from '@blinkorb/rcx/utils';
 
 import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
-import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../../utils/get-has-ctx-2d.js';
 
 export type RectangleProps = RCXPropsWithChildren<{
   x: number;
@@ -24,25 +24,25 @@ export type RectangleProps = RCXPropsWithChildren<{
 
 export const Rectangle: RCXComponent<RectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { x, y, width, height, beginPath = true } = props;
 
-    const { x, y, width, height, beginPath = true } = props;
+      renderingContext.ctx2d.save();
 
-    renderingContext.ctx2d.save();
+      if (beginPath) {
+        renderingContext.ctx2d.beginPath();
+      }
 
-    if (beginPath) {
-      renderingContext.ctx2d.beginPath();
+      renderingContext.ctx2d.rect(x, y, width, height);
     }
-
-    renderingContext.ctx2d.rect(x, y, width, height);
   });
 
   useRenderAfterChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
-
-    renderingContext.ctx2d.restore();
+      renderingContext.ctx2d.restore();
+    }
   });
 
   return props.children;

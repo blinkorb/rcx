@@ -1,2 +1,2 @@
 export * from './apply-fill-and-stroke-style.js';
-export * from './assert-ctx-2d.js';
+export * from './get-has-ctx-2d.js';

@@ -12,7 +12,7 @@ import {
 import { isArray, resolveStyles } from '@blinkorb/rcx/utils';
 
 import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
-import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../../utils/get-has-ctx-2d.js';
 
 export type PathProps = RCXPropsWithChildren<{
   points?: readonly RCXPoint[];
@@ -23,39 +23,39 @@ export type PathProps = RCXPropsWithChildren<{
 
 export const Path: RCXComponent<PathProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { points, beginPath = true } = props;
 
-    const { points, beginPath = true } = props;
+      renderingContext.ctx2d.save();
 
-    renderingContext.ctx2d.save();
-
-    if (beginPath) {
-      renderingContext.ctx2d.beginPath();
-    }
-
-    points?.forEach((point, index) => {
-      const [x, y] = isArray(point) ? point : [point.x, point.y];
-
-      if (index === 0) {
-        renderingContext.ctx2d.moveTo(x, y);
-      } else {
-        renderingContext.ctx2d.lineTo(x, y);
+      if (beginPath) {
+        renderingContext.ctx2d.beginPath();
       }
-    });
+
+      points?.forEach((point, index) => {
+        const [x, y] = isArray(point) ? point : [point.x, point.y];
+
+        if (index === 0) {
+          renderingContext.ctx2d.moveTo(x, y);
+        } else {
+          renderingContext.ctx2d.lineTo(x, y);
+        }
+      });
+    }
   });
 
   useRenderAfterChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { closePath = false } = props;
 
-    const { closePath = false } = props;
+      if (closePath) {
+        renderingContext.ctx2d.closePath();
+      }
 
-    if (closePath) {
-      renderingContext.ctx2d.closePath();
+      applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
+
+      renderingContext.ctx2d.restore();
     }
-
-    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
-
-    renderingContext.ctx2d.restore();
   });
 
   return props.children;

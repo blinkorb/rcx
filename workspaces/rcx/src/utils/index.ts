@@ -1,6 +1,6 @@
-export * from './assert-ctx-gl.js';
 export * from './get-canvas-dimensions.js';
 export * from './get-canvas-element.js';
+export * from './get-has-ctx-gl.js';
 export * from './get-recommended-pixel-ratio.js';
 export * from './is-finite-number.js';
 export * from './is-own-property-of.js';

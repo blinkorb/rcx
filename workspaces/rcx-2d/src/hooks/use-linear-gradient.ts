@@ -1,7 +1,7 @@
 import type { RCXColorStop } from '@blinkorb/rcx';
 import { useInjectRenderingContext } from '@blinkorb/rcx/canvas/context';
 
-import { assertCtx2d } from '../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../utils/get-has-ctx-2d.js';
 
 export interface LinearGradientConfig {
   startX: number;
@@ -26,7 +26,9 @@ export const useLinearGradient = ({
     );
   }
 
-  assertCtx2d(renderingContextState);
+  if (!getHasCtx2d(renderingContextState)) {
+    throw new Error('Canvas 2D rendering context is unavailable');
+  }
 
   const gradient = renderingContextState.ctx2d.createLinearGradient(
     startX,

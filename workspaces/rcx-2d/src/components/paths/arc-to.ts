@@ -11,7 +11,7 @@ import {
 import { resolveStyles } from '@blinkorb/rcx/utils';
 
 import { applyFillAndStrokeStyles } from '../../utils/apply-fill-and-stroke-style.js';
-import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../../utils/get-has-ctx-2d.js';
 
 export type ArcToProps = RCXPropsWithChildren<{
   startControlX: number;
@@ -26,44 +26,44 @@ export type ArcToProps = RCXPropsWithChildren<{
 
 export const ArcTo: RCXComponent<ArcToProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const {
+        startControlX,
+        startControlY,
+        endControlX,
+        endControlY,
+        radius,
+        beginPath = false,
+      } = props;
 
-    const {
-      startControlX,
-      startControlY,
-      endControlX,
-      endControlY,
-      radius,
-      beginPath = false,
-    } = props;
+      renderingContext.ctx2d.save();
 
-    renderingContext.ctx2d.save();
+      if (beginPath) {
+        renderingContext.ctx2d.beginPath();
+      }
 
-    if (beginPath) {
-      renderingContext.ctx2d.beginPath();
+      renderingContext.ctx2d.arcTo(
+        startControlX,
+        startControlY,
+        endControlX,
+        endControlY,
+        radius
+      );
     }
-
-    renderingContext.ctx2d.arcTo(
-      startControlX,
-      startControlY,
-      endControlX,
-      endControlY,
-      radius
-    );
   });
 
   useRenderAfterChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { closePath = false } = props;
 
-    const { closePath = false } = props;
+      if (closePath) {
+        renderingContext.ctx2d.closePath();
+      }
 
-    if (closePath) {
-      renderingContext.ctx2d.closePath();
+      applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
+
+      renderingContext.ctx2d.restore();
     }
-
-    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
-
-    renderingContext.ctx2d.restore();
   });
 
   return props.children;

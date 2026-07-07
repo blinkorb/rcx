@@ -4,7 +4,7 @@ import {
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
 
-import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../../utils/get-has-ctx-2d.js';
 
 export type TranslateProps = RCXPropsWithChildren<{
   x?: number;
@@ -13,18 +13,18 @@ export type TranslateProps = RCXPropsWithChildren<{
 
 export const Translate: RCXComponent<TranslateProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { x = 0, y = 0 } = props;
 
-    const { x = 0, y = 0 } = props;
-
-    renderingContext.ctx2d.save();
-    renderingContext.ctx2d.translate(x, y);
+      renderingContext.ctx2d.save();
+      renderingContext.ctx2d.translate(x, y);
+    }
   });
 
   useRenderAfterChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
-
-    renderingContext.ctx2d.restore();
+    if (getHasCtx2d(renderingContext)) {
+      renderingContext.ctx2d.restore();
+    }
   });
 
   return props.children;

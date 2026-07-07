@@ -4,7 +4,7 @@ import {
   useRenderBeforeChildren,
 } from '@blinkorb/rcx/hooks';
 
-import { assertCtx2d } from '../../utils/assert-ctx-2d.js';
+import { getHasCtx2d } from '../../utils/get-has-ctx-2d.js';
 
 export type ClipProps = RCXPropsWithChildren<{
   path?: Path2D;
@@ -13,23 +13,23 @@ export type ClipProps = RCXPropsWithChildren<{
 
 export const Clip: RCXComponent<ClipProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
+    if (getHasCtx2d(renderingContext)) {
+      const { path, fillRule } = props;
 
-    const { path, fillRule } = props;
+      renderingContext.ctx2d.save();
 
-    renderingContext.ctx2d.save();
-
-    if (typeof path === 'undefined') {
-      renderingContext.ctx2d.clip(fillRule);
-    } else {
-      renderingContext.ctx2d.clip(path, fillRule);
+      if (typeof path === 'undefined') {
+        renderingContext.ctx2d.clip(fillRule);
+      } else {
+        renderingContext.ctx2d.clip(path, fillRule);
+      }
     }
   });
 
   useRenderAfterChildren((renderingContext) => {
-    assertCtx2d(renderingContext);
-
-    renderingContext.ctx2d.restore();
+    if (getHasCtx2d(renderingContext)) {
+      renderingContext.ctx2d.restore();
+    }
   });
 
   return props.children;
