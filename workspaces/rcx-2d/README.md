@@ -1,10 +1,10 @@
 # RCX 2D
 
-**Canvas 2D rendering context components and hooks**
+**Canvas 2D rendering context components and utils**
 
 ## About
 
-A collection of components, utils, and hooks for drawing to a 2D canvas context using RCX.
+A collection of components and utils for drawing to a 2D canvas context using RCX.
 
 ## Installation
 
