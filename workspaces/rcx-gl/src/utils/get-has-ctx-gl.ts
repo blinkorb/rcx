@@ -1,4 +1,7 @@
-import type { CreateRootOptionsCtxGl, RCXRenderingContext } from '../types.js';
+import type {
+  CreateRootOptionsCtxGl,
+  RCXRenderingContext,
+} from '@blinkorb/rcx';
 
 export const getHasCtxGl = (
   renderingContext: RCXRenderingContext
