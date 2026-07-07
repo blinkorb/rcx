@@ -3,6 +3,9 @@
   "version": "0.0.0",
   "description": "Root package of the RCX monorepo",
   "scripts": {
+    "link": "(cd workspaces/rcx/dist && npm link) && (cd workspaces/rcx-2d/dist && npm link) && (cd workspaces/rcx-react && npm link)",
+    "dist": "npm run build",
+    "build": "npm run build --workspaces --if-present",
     "type-check": "npm run type-check --workspaces --if-present",
     "format-check": "npm run format-check --workspaces --if-present",
     "format-fix": "npm run format-fix --workspaces --if-present",
