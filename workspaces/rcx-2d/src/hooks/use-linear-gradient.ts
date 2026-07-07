@@ -1,5 +1,5 @@
 import type { RCXColorStop } from '@blinkorb/rcx';
-import { renderingContext } from '@blinkorb/rcx/canvas/context';
+import { useInjectRenderingContext } from '@blinkorb/rcx/canvas/context';
 
 import { assertCtx2d } from '../utils/assert-ctx-2d.js';
 
@@ -18,7 +18,7 @@ export const useLinearGradient = ({
   endY,
   stops,
 }: LinearGradientConfig) => {
-  const renderingContextState = renderingContext.useInject();
+  const renderingContextState = useInjectRenderingContext();
 
   if (!renderingContextState) {
     throw new Error(
