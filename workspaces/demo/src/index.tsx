@@ -30,6 +30,7 @@ import {
   useLinearGradient,
   useRadialGradient,
 } from '@blinkorb/rcx-2d';
+import { Rectangle as GLRectangle } from '@blinkorb/rcx-gl';
 
 const RendersChildren: RCXComponent<{ children: RCXChildren }> = ({
   children,
@@ -391,6 +392,13 @@ const App = () => {
   return (
     <Canvas>
       <Page />
+      <GLRectangle
+        x={100}
+        y={100}
+        width={100}
+        height={100}
+        style={{ fill: 'cyan' }}
+      />
     </Canvas>
   );
 };
@@ -401,13 +409,19 @@ const init = () => {
   document.body.appendChild(canvas);
 
   const ctx2d = canvas.getContext('2d');
+  const ctxGl = canvas.getContext('webgl');
 
   if (!ctx2d) {
     alert('Could not get canvas 2D context');
     return;
   }
 
-  const root = createRoot({ ctx2d });
+  if (!ctxGl) {
+    alert('Could not get canvas GL context');
+    return;
+  }
+
+  const root = createRoot({ ctx2d, ctxGl });
 
   if ('error' in root) {
     if (globalThis.console && typeof globalThis.console.error === 'function') {
