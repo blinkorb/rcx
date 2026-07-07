@@ -176,6 +176,10 @@ We currently only provide a single `Text` component that will render a single li
 </Text>
 ```
 
+### Custom Components
+
+See [rcx readme](https://github.com/blinkorb/rcx/blob/master/workspaces/rcx/README.md) for information about custom components.
+
 ## Hooks
 
 ### useLinearGradient
