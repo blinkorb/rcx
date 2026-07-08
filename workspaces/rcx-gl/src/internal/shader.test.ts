@@ -2,22 +2,25 @@ import { colorToValidShaderVariableName } from './shader.js';
 
 describe('colorToValidShaderVariableName', () => {
   it('converts colors (of various formats) to valid shader variable names', () => {
-    expect(colorToValidShaderVariableName('#f00')).toBe('rgb_255_0_0_1');
-    expect(colorToValidShaderVariableName('#ff0000')).toBe('rgb_255_0_0_1');
-    expect(colorToValidShaderVariableName('red')).toBe('rgb_255_0_0_1');
+    const expectedOutput = 'rgb_255_0_0_1';
+
+    expect(colorToValidShaderVariableName('#f00')).toBe(expectedOutput);
+    expect(colorToValidShaderVariableName('#ff0000')).toBe(expectedOutput);
+    expect(colorToValidShaderVariableName('#ff0000ff')).toBe(expectedOutput);
+    expect(colorToValidShaderVariableName('red')).toBe(expectedOutput);
     expect(colorToValidShaderVariableName('rgb(255, 0, 0)')).toBe(
-      'rgb_255_0_0_1'
+      expectedOutput
     );
     expect(colorToValidShaderVariableName('rgb(100% 0% 0%)')).toBe(
-      'rgb_255_0_0_1'
+      expectedOutput
     );
     expect(colorToValidShaderVariableName('rgba(255, 0, 0, 1)')).toBe(
-      'rgb_255_0_0_1'
+      expectedOutput
     );
     expect(colorToValidShaderVariableName('hsl(0, 100%, 50%)')).toBe(
-      'rgb_255_0_0_1'
+      expectedOutput
     );
-    expect(colorToValidShaderVariableName([1, 0, 0])).toBe('rgb_255_0_0_1');
-    expect(colorToValidShaderVariableName([1, 0, 0, 1])).toBe('rgb_255_0_0_1');
+    expect(colorToValidShaderVariableName([1, 0, 0])).toBe(expectedOutput);
+    expect(colorToValidShaderVariableName([1, 0, 0, 1])).toBe(expectedOutput);
   });
 });
