@@ -8,6 +8,9 @@ describe('colorToValidShaderVariableName', () => {
     expect(colorToValidShaderVariableName('rgb(255, 0, 0)')).toBe(
       'rgb_255_0_0_1'
     );
+    expect(colorToValidShaderVariableName('rgb(100% 0% 0%)')).toBe(
+      'rgb_255_0_0_1'
+    );
     expect(colorToValidShaderVariableName('rgba(255, 0, 0, 1)')).toBe(
       'rgb_255_0_0_1'
     );
