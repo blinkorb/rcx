@@ -1,7 +1,17 @@
 import type { Config } from 'jest';
 
+const MODULES_TO_TRANSFORM = [
+  'color',
+  'color-string',
+  'color-name',
+  'color-convert',
+];
+
 const config = {
-  preset: 'ts-jest/presets/default-esm',
+  transformIgnorePatterns: [
+    `node_modules/(?!(${MODULES_TO_TRANSFORM.join('|')})/)`,
+  ],
+  preset: 'ts-jest/presets/js-with-ts-esm',
   testMatch: ['<rootDir>/src/**/*.(spec|test).{js,jsx,ts,tsx}'],
   collectCoverageFrom: ['src/**/*.(js|jsx|ts|tsx)'],
   // coverageThreshold: {
