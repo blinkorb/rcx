@@ -57,7 +57,8 @@
   },
   "homepage": "https://github.com/blinkorb/rcx#readme",
   "dependencies": {
-    "@blinkorb/rcx": "^0.1.3"
+    "@blinkorb/rcx": "^0.1.3",
+    "color": "^5.0.3"
   },
   "devDependencies": {
     "@blinkorb/eslint-config-rcx-dev": "^0.0.0",
