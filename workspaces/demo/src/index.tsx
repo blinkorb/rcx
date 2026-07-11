@@ -433,16 +433,14 @@ const App = () => {
   );
 };
 
-const MODE: 'gl' | '2d' = '2d';
-
-const init = () => {
+const init = (mode: 'gl' | '2d') => {
   const canvas = document.createElement('canvas');
 
   document.body.appendChild(canvas);
 
   let root: CreateRootResult;
 
-  if (MODE === '2d') {
+  if (mode === '2d') {
     const ctx2d = canvas.getContext('2d');
 
     if (!ctx2d) {
@@ -472,4 +470,4 @@ const init = () => {
   }
 };
 
-init();
+init('gl');
