@@ -77,9 +77,9 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       );
       gl.linkProgram(program);
 
-      const buffer = gl.createBuffer();
+      const verticesBuffer = gl.createBuffer();
 
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
       gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
       const aVertex = gl.getAttribLocation(program, 'aVertex');
@@ -91,7 +91,7 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
 
       return {
         program,
-        buffer,
+        verticesBuffer,
         aVertex,
         uOffset,
         uSize,
@@ -104,7 +104,7 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       gl,
       {
         program,
-        buffer,
+        verticesBuffer,
         aVertex,
         uOffset,
         uSize,
@@ -117,7 +117,7 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       const styles = resolveStyles(props.style);
 
       gl.useProgram(program);
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.bindBuffer(gl.ARRAY_BUFFER, verticesBuffer);
       gl.vertexAttribPointer(aVertex, 2, gl.FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(aVertex);
 
