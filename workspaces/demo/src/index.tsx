@@ -391,7 +391,7 @@ Page.displayName = 'Page';
 const App = () => {
   return (
     <Canvas>
-      <Page />
+      {/* <Page /> */}
       <GLRectangle
         x={100}
         y={100}
@@ -408,20 +408,20 @@ const init = () => {
 
   document.body.appendChild(canvas);
 
-  const ctx2d = canvas.getContext('2d');
+  // const ctx2d = canvas.getContext('2d');
   const ctxGl = canvas.getContext('webgl');
 
-  if (!ctx2d) {
-    alert('Could not get canvas 2D context');
-    return;
-  }
+  // if (!ctx2d) {
+  //   alert('Could not get canvas 2D context');
+  //   return;
+  // }
 
   if (!ctxGl) {
     alert('Could not get canvas GL context');
     return;
   }
 
-  const root = createRoot({ ctx2d, ctxGl });
+  const root = createRoot({ ctxGl });
 
   if ('error' in root) {
     if (globalThis.console && typeof globalThis.console.error === 'function') {
