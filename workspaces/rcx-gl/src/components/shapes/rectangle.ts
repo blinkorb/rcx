@@ -8,7 +8,7 @@ import { useCanvasContext } from '@blinkorb/rcx/hooks';
 import { resolveStyles } from '@blinkorb/rcx/utils';
 import Color from 'color';
 
-import { useRenderGl } from '../../hooks/use-render-gl.js';
+import { useRenderGl } from '../../hooks/use-render.js';
 import { compileShader } from '../../utils/compile-shader.js';
 
 export type RectangleProps = RCXPropsWithChildren<{

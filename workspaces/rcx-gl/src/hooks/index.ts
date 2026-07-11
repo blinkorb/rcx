@@ -1,1 +1,1 @@
-export * from './use-render-gl.js';
+export * from './use-render.js';

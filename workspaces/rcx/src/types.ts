@@ -18,6 +18,8 @@ export type AnyArray = readonly any[];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyFunction = (...args: any[]) => any;
 
+export type EmptyObject = Record<PropertyKey, never>;
+
 export type NestedArray<T> = T | readonly NestedArray<T>[];
 
 export interface RCXElement<C extends RCXComponent<P>, P extends AnyObject> {
