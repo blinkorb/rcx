@@ -1,4 +1,5 @@
 export * from './use-canvas-context.js';
+export * from './use-current-reference.js';
 export * from './use-loop.js';
 export * from './use-on.js';
 export * from './use-render.js';
