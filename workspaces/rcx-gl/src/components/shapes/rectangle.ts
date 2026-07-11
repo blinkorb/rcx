@@ -76,7 +76,6 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
         compileShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSourceSolid)
       );
       gl.linkProgram(program);
-      gl.useProgram(program);
 
       const buffer = gl.createBuffer();
 
@@ -90,11 +89,10 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       const uPixelRatio = gl.getUniformLocation(program, 'uPixelRatio');
       const uColor = gl.getUniformLocation(program, 'uColor');
 
-      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-      gl.enableVertexAttribArray(aVertex);
-      gl.vertexAttribPointer(aVertex, 2, gl.FLOAT, false, 0, 0);
-
       return {
+        program,
+        buffer,
+        aVertex,
         uOffset,
         uSize,
         uCanvasSize,
@@ -104,10 +102,24 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
     },
     renderBeforeChildren: (
       gl,
-      { uOffset, uSize, uCanvasSize, uPixelRatio, uColor }
+      {
+        program,
+        buffer,
+        aVertex,
+        uOffset,
+        uSize,
+        uCanvasSize,
+        uPixelRatio,
+        uColor,
+      }
     ) => {
       const { x, y, width, height } = props;
       const styles = resolveStyles(props.style);
+
+      gl.useProgram(program);
+      gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+      gl.vertexAttribPointer(aVertex, 2, gl.FLOAT, false, 0, 0);
+      gl.enableVertexAttribArray(aVertex);
 
       gl.uniform2f(uOffset, x, y);
       gl.uniform2f(uSize, width, height);
