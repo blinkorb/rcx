@@ -1,5 +1,6 @@
 import {
   AnyObject,
+  useRenderAfterChildren,
   useRenderBeforeChildren,
   useUnreactive,
 } from '@blinkorb/rcx';
@@ -8,10 +9,12 @@ import { getHasCtxGl } from '../utils/get-has-ctx-gl.js';
 
 export const useRenderGl = <T extends AnyObject>({
   setup,
-  render,
+  renderBeforeChildren,
+  renderAfterChildren,
 }: {
   setup: (ctx: WebGLRenderingContext) => T;
-  render: (ctx: WebGLRenderingContext, info: T) => void;
+  renderBeforeChildren?: (ctx: WebGLRenderingContext, info: T) => void;
+  renderAfterChildren?: (ctx: WebGLRenderingContext, info: T) => void;
 }) => {
   const unreactive = useUnreactive<{ hasRendered: boolean; info: T | null }>({
     hasRendered: false,
@@ -25,10 +28,16 @@ export const useRenderGl = <T extends AnyObject>({
       }
 
       if (unreactive.info) {
-        render(renderingContext.ctxGl, unreactive.info);
+        renderBeforeChildren?.(renderingContext.ctxGl, unreactive.info);
       }
 
       unreactive.hasRendered = true;
+    }
+  });
+
+  useRenderAfterChildren((renderingContext) => {
+    if (getHasCtxGl(renderingContext) && unreactive.info) {
+      renderAfterChildren?.(renderingContext.ctxGl, unreactive.info);
     }
   });
 };

@@ -102,7 +102,10 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
         uColor,
       };
     },
-    render: (gl, { uOffset, uSize, uCanvasSize, uPixelRatio, uColor }) => {
+    renderBeforeChildren: (
+      gl,
+      { uOffset, uSize, uCanvasSize, uPixelRatio, uColor }
+    ) => {
       const { x, y, width, height } = props;
       const styles = resolveStyles(props.style);
 
