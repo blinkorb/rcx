@@ -15,6 +15,7 @@ import {
   applyFillAndStrokeStyles,
   ArcTo,
   Circle,
+  ClearCanvas,
   Clip,
   Ellipse,
   getHasCtx2d,
@@ -182,7 +183,7 @@ const Page: RCXComponent = () => {
   });
 
   return (
-    <>
+    <ClearCanvas>
       <RoundedRectangle
         x={50}
         y={50}
@@ -382,7 +383,7 @@ const Page: RCXComponent = () => {
       </Text>
       <Gradients />
       {reactive.isMounted && <Unmounts />}
-    </>
+    </ClearCanvas>
   );
 };
 
