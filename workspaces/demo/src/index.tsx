@@ -399,6 +399,13 @@ const App = () => {
         height={100}
         style={{ fill: 'cyan', strokeWidth: 1, stroke: 'black' }}
       />
+      <GLRectangle
+        x={125}
+        y={125}
+        width={50}
+        height={50}
+        style={{ fill: 'red', strokeWidth: 1, stroke: 'black' }}
+      />
     </Canvas>
   );
 };
