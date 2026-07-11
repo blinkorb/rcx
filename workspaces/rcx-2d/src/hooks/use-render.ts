@@ -1,6 +1,7 @@
 import {
   AnyObject,
   EmptyObject,
+  useCurrentReference,
   useRenderAfterChildren,
   useRenderBeforeChildren,
   useUnreactive,
@@ -26,6 +27,7 @@ export function useRender2d<T extends AnyObject>(
 export function useRender2d<T extends AnyObject>(
   options: UseRender2dOptionsWithSetup<T> | UseRender2dOptionsWithoutSetup
 ) {
+  const optionsRef = useCurrentReference(options);
   const unreactive = useUnreactive<{
     hasRendered: boolean;
     info: T | EmptyObject | null;
@@ -37,15 +39,18 @@ export function useRender2d<T extends AnyObject>(
   useRenderBeforeChildren((renderingContext) => {
     if (getHasCtx2d(renderingContext)) {
       if (!unreactive.hasRendered) {
-        if ('setup' in options) {
-          unreactive.info = options.setup?.(renderingContext.ctx2d);
+        if ('setup' in optionsRef.current) {
+          unreactive.info = optionsRef.current.setup?.(renderingContext.ctx2d);
         } else {
           unreactive.info = {};
         }
       }
 
       if (unreactive.info) {
-        options.renderBeforeChildren?.(renderingContext.ctx2d, unreactive.info);
+        optionsRef.current.renderBeforeChildren?.(
+          renderingContext.ctx2d,
+          unreactive.info
+        );
       }
 
       unreactive.hasRendered = true;
@@ -54,7 +59,10 @@ export function useRender2d<T extends AnyObject>(
 
   useRenderAfterChildren((renderingContext) => {
     if (getHasCtx2d(renderingContext) && unreactive.info) {
-      options.renderAfterChildren?.(renderingContext.ctx2d, unreactive.info);
+      optionsRef.current.renderAfterChildren?.(
+        renderingContext.ctx2d,
+        unreactive.info
+      );
     }
   });
 }

@@ -1,6 +1,7 @@
 import {
   AnyObject,
   EmptyObject,
+  useCurrentReference,
   useRenderAfterChildren,
   useRenderBeforeChildren,
   useUnreactive,
@@ -26,6 +27,7 @@ export function useRenderGl(options: UseRenderGlOptionsWithoutSetup): void;
 export function useRenderGl<T extends AnyObject>(
   options: UseRenderGlOptionsWithSetup<T> | UseRenderGlOptionsWithoutSetup
 ) {
+  const optionsRef = useCurrentReference(options);
   const unreactive = useUnreactive<{
     hasRendered: boolean;
     info: T | EmptyObject | null;
@@ -37,15 +39,18 @@ export function useRenderGl<T extends AnyObject>(
   useRenderBeforeChildren((renderingContext) => {
     if (getHasCtxGl(renderingContext)) {
       if (!unreactive.hasRendered) {
-        if ('setup' in options) {
-          unreactive.info = options.setup?.(renderingContext.ctxGl);
+        if ('setup' in optionsRef.current) {
+          unreactive.info = optionsRef.current.setup?.(renderingContext.ctxGl);
         } else {
           unreactive.info = {};
         }
       }
 
       if (unreactive.info) {
-        options.renderBeforeChildren?.(renderingContext.ctxGl, unreactive.info);
+        optionsRef.current.renderBeforeChildren?.(
+          renderingContext.ctxGl,
+          unreactive.info
+        );
       }
 
       unreactive.hasRendered = true;
@@ -54,7 +59,10 @@ export function useRenderGl<T extends AnyObject>(
 
   useRenderAfterChildren((renderingContext) => {
     if (getHasCtxGl(renderingContext) && unreactive.info) {
-      options.renderAfterChildren?.(renderingContext.ctxGl, unreactive.info);
+      optionsRef.current.renderAfterChildren?.(
+        renderingContext.ctxGl,
+        unreactive.info
+      );
     }
   });
 }
