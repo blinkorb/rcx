@@ -1,3 +1,4 @@
+export * from './clear-canvas.js';
 export * from './paths/index.js';
 export * from './shapes/index.js';
 export * from './text/index.js';
