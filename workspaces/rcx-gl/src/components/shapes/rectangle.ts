@@ -109,8 +109,8 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       const { x, y, width, height } = props;
       const styles = resolveStyles(props.style);
 
-      gl.uniform2f(uOffset, width, height);
-      gl.uniform2f(uSize, x, y);
+      gl.uniform2f(uOffset, x, y);
+      gl.uniform2f(uSize, width, height);
       gl.uniform2f(uCanvasSize, canvasContext.width, canvasContext.height);
       gl.uniform1f(uPixelRatio, canvasContext.pixelRatio);
 
