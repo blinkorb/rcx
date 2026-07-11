@@ -1,6 +1,7 @@
 import {
   Canvas,
   createRoot,
+  CreateRootResult,
   RCXChildren,
   RCXComponent,
   resolveStyles,
@@ -32,8 +33,8 @@ import {
   useRadialGradient,
 } from '@blinkorb/rcx-2d';
 import {
-  ClearCanvas as GLClearCanvas,
-  Rectangle as GLRectangle,
+  ClearCanvas as ClearCanvasGl,
+  Rectangle as RectangleGl,
 } from '@blinkorb/rcx-gl';
 
 const RendersChildren: RCXComponent<{ children: RCXChildren }> = ({
@@ -396,45 +397,70 @@ const App = () => {
   return (
     <Canvas>
       {/* <Page /> */}
-      <GLClearCanvas fill="yellow">
-        <GLRectangle
+      <ClearCanvas fill="yellow">
+        <Rectangle
           x={100}
           y={100}
           width={100}
           height={100}
           style={{ fill: 'cyan', strokeWidth: 1, stroke: 'black' }}
         />
-        <GLRectangle
+        <Rectangle
           x={125}
           y={125}
           width={50}
           height={50}
           style={{ fill: 'red', strokeWidth: 1, stroke: 'black' }}
         />
-      </GLClearCanvas>
+      </ClearCanvas>
+      <ClearCanvasGl fill="yellow">
+        <RectangleGl
+          x={100}
+          y={100}
+          width={100}
+          height={100}
+          style={{ fill: 'cyan', strokeWidth: 1, stroke: 'black' }}
+        />
+        <RectangleGl
+          x={125}
+          y={125}
+          width={50}
+          height={50}
+          style={{ fill: 'red', strokeWidth: 1, stroke: 'black' }}
+        />
+      </ClearCanvasGl>
     </Canvas>
   );
 };
+
+const MODE: 'gl' | '2d' = '2d';
 
 const init = () => {
   const canvas = document.createElement('canvas');
 
   document.body.appendChild(canvas);
 
-  // const ctx2d = canvas.getContext('2d');
-  const ctxGl = canvas.getContext('webgl');
+  let root: CreateRootResult;
 
-  // if (!ctx2d) {
-  //   alert('Could not get canvas 2D context');
-  //   return;
-  // }
+  if (MODE === '2d') {
+    const ctx2d = canvas.getContext('2d');
 
-  if (!ctxGl) {
-    alert('Could not get canvas GL context');
-    return;
+    if (!ctx2d) {
+      alert('Could not get canvas 2D context');
+      return;
+    }
+
+    root = createRoot({ ctx2d });
+  } else {
+    const ctxGl = canvas.getContext('webgl');
+
+    if (!ctxGl) {
+      alert('Could not get canvas GL context');
+      return;
+    }
+
+    root = createRoot({ ctxGl });
   }
-
-  const root = createRoot({ ctxGl });
 
   if ('error' in root) {
     if (globalThis.console && typeof globalThis.console.error === 'function') {
