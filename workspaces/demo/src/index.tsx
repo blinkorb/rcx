@@ -397,7 +397,7 @@ const App = () => {
         y={100}
         width={100}
         height={100}
-        style={{ fill: 'cyan' }}
+        style={{ fill: 'cyan', strokeWidth: 1, stroke: 'black' }}
       />
     </Canvas>
   );
