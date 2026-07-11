@@ -186,7 +186,7 @@ const Page: RCXComponent = () => {
   });
 
   return (
-    <ClearCanvas>
+    <ClearCanvas fill="yellow">
       <RoundedRectangle
         x={50}
         y={50}
@@ -396,7 +396,7 @@ const App = () => {
   return (
     <Canvas>
       {/* <Page /> */}
-      <GLClearCanvas>
+      <GLClearCanvas fill="yellow">
         <GLRectangle
           x={100}
           y={100}
