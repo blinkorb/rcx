@@ -394,6 +394,10 @@ Page.displayName = 'Page';
 
 const PIXEL_RATIO = 1;
 const STROKE_WIDTH = 1;
+const RECT_OFFSET_X = 100;
+const RECT_OFFSET_Y = 100;
+const RECT_WIDTH = 100;
+const RECT_HEIGHT = 100;
 
 const App2d = () => {
   return (
@@ -413,10 +417,10 @@ const App2d = () => {
           2D
         </Text>
         <Rectangle
-          x={100}
-          y={100}
-          width={100}
-          height={100}
+          x={RECT_OFFSET_X}
+          y={RECT_OFFSET_Y}
+          width={RECT_WIDTH}
+          height={RECT_HEIGHT}
           style={{
             fill: 'rgba(0, 255, 255, 0.5)',
             strokeWidth: STROKE_WIDTH,
@@ -424,10 +428,10 @@ const App2d = () => {
           }}
         />
         <Rectangle
-          x={125}
-          y={125}
-          width={50}
-          height={50}
+          x={RECT_OFFSET_X + RECT_WIDTH * 0.25}
+          y={RECT_OFFSET_Y + RECT_HEIGHT * 0.25}
+          width={RECT_WIDTH * 0.5}
+          height={RECT_HEIGHT * 0.5}
           style={{
             fill: 'rgba(255, 0, 0, 0.5)',
             strokeWidth: STROKE_WIDTH,
@@ -444,10 +448,10 @@ const AppGl = () => {
     <Canvas pixelRatio={PIXEL_RATIO}>
       <ClearCanvasGl fill="yellow">
         <RectangleGl
-          x={100}
-          y={100}
-          width={100}
-          height={100}
+          x={RECT_OFFSET_X}
+          y={RECT_OFFSET_Y}
+          width={RECT_WIDTH}
+          height={RECT_HEIGHT}
           style={{
             fill: 'rgba(0, 255, 255, 0.5)',
             strokeWidth: STROKE_WIDTH,
@@ -455,10 +459,10 @@ const AppGl = () => {
           }}
         />
         <RectangleGl
-          x={125}
-          y={125}
-          width={50}
-          height={50}
+          x={RECT_OFFSET_X + RECT_WIDTH * 0.25}
+          y={RECT_OFFSET_Y + RECT_HEIGHT * 0.25}
+          width={RECT_WIDTH * 0.5}
+          height={RECT_HEIGHT * 0.5}
           style={{
             fill: 'rgba(255, 0, 0, 0.5)',
             strokeWidth: STROKE_WIDTH,
@@ -502,7 +506,7 @@ const initGl = () => {
   const ctxGl = canvas.getContext('webgl', {
     premultipliedAlpha: true,
     alpha: true,
-    antialias: true,
+    antialias: false,
   });
 
   if (!ctxGl) {
