@@ -392,7 +392,8 @@ const Page: RCXComponent = () => {
 
 Page.displayName = 'Page';
 
-const PIXEL_RATIO = 2;
+const PIXEL_RATIO = 1;
+const STROKE_WIDTH = 1;
 
 const App2d = () => {
   return (
@@ -418,7 +419,7 @@ const App2d = () => {
           height={100}
           style={{
             fill: 'rgba(0, 255, 255, 0.5)',
-            strokeWidth: 1,
+            strokeWidth: STROKE_WIDTH,
             stroke: 'black',
           }}
         />
@@ -429,7 +430,7 @@ const App2d = () => {
           height={50}
           style={{
             fill: 'rgba(255, 0, 0, 0.5)',
-            strokeWidth: 1,
+            strokeWidth: STROKE_WIDTH,
             stroke: 'black',
           }}
         />
@@ -449,7 +450,7 @@ const AppGl = () => {
           height={100}
           style={{
             fill: 'rgba(0, 255, 255, 0.5)',
-            strokeWidth: 1,
+            strokeWidth: STROKE_WIDTH,
             stroke: 'black',
           }}
         />
@@ -460,7 +461,7 @@ const AppGl = () => {
           height={50}
           style={{
             fill: 'rgba(255, 0, 0, 0.5)',
-            strokeWidth: 1,
+            strokeWidth: STROKE_WIDTH,
             stroke: 'black',
           }}
         />
