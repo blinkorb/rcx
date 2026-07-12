@@ -26,10 +26,17 @@ const vertexShaderSource2d = `
   uniform vec2 uCanvasSize;
   uniform float uStrokeWidth;
 
+  varying vec2 vOffsetFromCenter;
+
   void main() {
     vec2 scale = 2.0 / uCanvasSize;
     vec2 effOffset = uOffset - uStrokeWidth * 0.5;
     vec2 effSize = uSize + uStrokeWidth;
+
+    vOffsetFromCenter = vec2(
+      (aVertex.x - 0.5) * effSize.x,
+      (aVertex.y + 0.5) * effSize.y
+    );
 
     gl_Position = vec4(
       -1.0 + effOffset.x * scale.x + aVertex.x * effSize.x * scale.x,
@@ -41,11 +48,25 @@ const vertexShaderSource2d = `
 `;
 
 const fragmentShaderSourceSolid = `
-  precision mediump float;
+  // highp must match the vertex shader's default float precision
+  precision highp float;
+
   uniform vec4 uColor;
+  uniform vec4 uStrokeColor;
+  uniform vec2 uSize;
+  uniform float uStrokeWidth;
+
+  varying vec2 vOffsetFromCenter;
 
   void main() {
-    gl_FragColor = uColor;
+    vec2 distanceFromEdge = abs(vOffsetFromCenter) - uSize * 0.5;
+    float farthestEdgeDistance = max(distanceFromEdge.x, distanceFromEdge.y);
+
+    if (farthestEdgeDistance >= -uStrokeWidth * 0.5) {
+      gl_FragColor = uStrokeColor;
+    } else {
+      gl_FragColor = uColor;
+    }
   }
 `;
 
