@@ -26,15 +26,14 @@ const vertexShaderSource2d = `
   uniform vec2 uCanvasSize;
   uniform float uStrokeWidth;
 
-  float scaleX = (2.0 / uCanvasSize.x);
-  float scaleY = (2.0 / uCanvasSize.y);
-  vec2 effOffset = uOffset - uStrokeWidth * 0.5;
-  vec2 effSize = uSize + uStrokeWidth;
-
   void main() {
+    vec2 scale = 2.0 / uCanvasSize;
+    vec2 effOffset = uOffset - uStrokeWidth * 0.5;
+    vec2 effSize = uSize + uStrokeWidth;
+
     gl_Position = vec4(
-      -1.0 + effOffset.x * scaleX + aVertex.x * effSize.x * scaleX,
-      +1.0 + effOffset.y * -scaleY + aVertex.y * effSize.y * scaleY,
+      -1.0 + effOffset.x * scale.x + aVertex.x * effSize.x * scale.x,
+      +1.0 - effOffset.y * scale.y + aVertex.y * effSize.y * scale.y,
       0.0,
       1.0
     );
