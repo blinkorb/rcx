@@ -14,5 +14,9 @@ export const compileShader = (
   gl.shaderSource(shader, source);
   gl.compileShader(shader);
 
+  if ('console' in globalThis && typeof globalThis.console.log === 'function') {
+    globalThis.console.log(gl.getShaderInfoLog(shader));
+  }
+
   return shader;
 };
