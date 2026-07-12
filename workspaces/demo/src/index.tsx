@@ -482,7 +482,11 @@ const initGl = () => {
 
   document.body.appendChild(canvas);
 
-  const ctxGl = canvas.getContext('webgl');
+  const ctxGl = canvas.getContext('webgl', {
+    premultipliedAlpha: false,
+    alpha: true,
+    antialias: true,
+  });
 
   if (!ctxGl) {
     alert('Could not get canvas GL context');
