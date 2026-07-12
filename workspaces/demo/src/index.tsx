@@ -1,7 +1,6 @@
 import {
   Canvas,
   createRoot,
-  CreateRootResult,
   RCXChildren,
   RCXComponent,
   resolveStyles,
@@ -393,11 +392,25 @@ const Page: RCXComponent = () => {
 
 Page.displayName = 'Page';
 
-const App = () => {
+const PIXEL_RATIO = 2;
+
+const App2d = () => {
   return (
-    <Canvas>
+    <Canvas pixelRatio={PIXEL_RATIO}>
       {/* <Page /> */}
       <ClearCanvas fill="yellow">
+        <Text
+          x={10}
+          y={10}
+          style={{
+            align: 'left',
+            baseline: 'top',
+            fill: 'black',
+            fontSize: 16,
+          }}
+        >
+          2D
+        </Text>
         <Rectangle
           x={100}
           y={100}
@@ -413,6 +426,13 @@ const App = () => {
           style={{ fill: 'red', strokeWidth: 1, stroke: 'black' }}
         />
       </ClearCanvas>
+    </Canvas>
+  );
+};
+
+const AppGl = () => {
+  return (
+    <Canvas pixelRatio={PIXEL_RATIO}>
       <ClearCanvasGl fill="yellow">
         <RectangleGl
           x={100}
@@ -433,32 +453,19 @@ const App = () => {
   );
 };
 
-const init = (mode: 'gl' | '2d') => {
+const init2d = () => {
   const canvas = document.createElement('canvas');
 
   document.body.appendChild(canvas);
 
-  let root: CreateRootResult;
+  const ctx2d = canvas.getContext('2d');
 
-  if (mode === '2d') {
-    const ctx2d = canvas.getContext('2d');
-
-    if (!ctx2d) {
-      alert('Could not get canvas 2D context');
-      return;
-    }
-
-    root = createRoot({ ctx2d });
-  } else {
-    const ctxGl = canvas.getContext('webgl');
-
-    if (!ctxGl) {
-      alert('Could not get canvas GL context');
-      return;
-    }
-
-    root = createRoot({ ctxGl });
+  if (!ctx2d) {
+    alert('Could not get canvas 2D context');
+    return;
   }
+
+  const root = createRoot({ ctx2d });
 
   if ('error' in root) {
     if (globalThis.console && typeof globalThis.console.error === 'function') {
@@ -466,8 +473,33 @@ const init = (mode: 'gl' | '2d') => {
       console.error(root.error);
     }
   } else {
-    root.render(<App />);
+    root.render(<App2d />);
   }
 };
 
-init('gl');
+const initGl = () => {
+  const canvas = document.createElement('canvas');
+
+  document.body.appendChild(canvas);
+
+  const ctxGl = canvas.getContext('webgl');
+
+  if (!ctxGl) {
+    alert('Could not get canvas GL context');
+    return;
+  }
+
+  const root = createRoot({ ctxGl });
+
+  if ('error' in root) {
+    if (globalThis.console && typeof globalThis.console.error === 'function') {
+      // eslint-disable-next-line no-console
+      console.error(root.error);
+    }
+  } else {
+    root.render(<AppGl />);
+  }
+};
+
+init2d();
+initGl();
