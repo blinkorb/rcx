@@ -24,27 +24,17 @@ const vertexShaderSource2d = `
   uniform vec2 uOffset;
   uniform vec2 uSize;
   uniform vec2 uCanvasSize;
-  uniform float uPixelRatio;
   uniform float uStrokeWidth;
 
-  varying vec2 vCenterOffset;
+  float scaleX = (2.0 / uCanvasSize.x);
+  float scaleY = (2.0 / uCanvasSize.y);
+  vec2 effOffset = uOffset - uStrokeWidth * 0.5;
+  vec2 effSize = uSize + uStrokeWidth;
 
   void main() {
-    // Grow the drawn quad by half the stroke width on every side so the outer
-    // half of a centered stroke isn't clipped.
-    vec2 effOffset = uOffset - uStrokeWidth * 0.5;
-    vec2 effSize = uSize + uStrokeWidth;
-
-    // Position of this fragment relative to the rect center, in CSS pixels.
-    // aVertex.x is in [0, 1], aVertex.y is in [-1, 0].
-    vCenterOffset = vec2(
-      (aVertex.x - 0.5) * effSize.x,
-      (aVertex.y + 0.5) * effSize.y
-    );
-
     gl_Position = vec4(
-      ((aVertex.x*effSize.x + effOffset.x)/uCanvasSize.x) * uPixelRatio - 1.0,
-      ((aVertex.y*effSize.y - effOffset.y)/uCanvasSize.y) * uPixelRatio + 1.0,
+      -1.0 + effOffset.x * scaleX + aVertex.x * effSize.x * scaleX,
+      +1.0 + effOffset.y * -scaleY + aVertex.y * effSize.y * scaleY,
       0.0,
       1.0
     );
@@ -128,7 +118,6 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       const uOffset = gl.getUniformLocation(program, 'uOffset');
       const uSize = gl.getUniformLocation(program, 'uSize');
       const uCanvasSize = gl.getUniformLocation(program, 'uCanvasSize');
-      const uPixelRatio = gl.getUniformLocation(program, 'uPixelRatio');
       const uColor = gl.getUniformLocation(program, 'uColor');
       const uStrokeColor = gl.getUniformLocation(program, 'uStrokeColor');
       const uStrokeWidth = gl.getUniformLocation(program, 'uStrokeWidth');
@@ -140,7 +129,6 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
         uOffset,
         uSize,
         uCanvasSize,
-        uPixelRatio,
         uColor,
         uStrokeColor,
         uStrokeWidth,
@@ -155,7 +143,6 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
         uOffset,
         uSize,
         uCanvasSize,
-        uPixelRatio,
         uColor,
         uStrokeColor,
         uStrokeWidth,
@@ -183,7 +170,6 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       gl.uniform2f(uOffset, x, y);
       gl.uniform2f(uSize, width, height);
       gl.uniform2f(uCanvasSize, canvasContext.width, canvasContext.height);
-      gl.uniform1f(uPixelRatio, canvasContext.pixelRatio);
 
       if (styles.fill) {
         const color = Color(styles.fill);
