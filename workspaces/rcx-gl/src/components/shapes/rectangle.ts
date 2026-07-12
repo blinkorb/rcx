@@ -42,38 +42,11 @@ const vertexShaderSource2d = `
 `;
 
 const fragmentShaderSourceSolid = `
-  // highp must match the vertex shader's default float precision, otherwise the
-  // shared uSize/uStrokeWidth/uPixelRatio uniforms fail to link.
-  precision highp float;
+  precision mediump float;
   uniform vec4 uColor;
-  uniform vec4 uStrokeColor;
-  uniform vec2 uSize;
-  uniform float uStrokeWidth;
-  uniform float uPixelRatio;
-
-  varying vec2 vCenterOffset;
 
   void main() {
-    // Signed distance to the rectangle boundary, in CSS pixels (< 0 inside).
-    vec2 d = abs(vCenterOffset) - uSize * 0.5;
-    float dist = length(max(d, 0.0)) + min(max(d.x, d.y), 0.0);
-
-    float distPx = dist * uPixelRatio;
-    float halfStrokePx = uStrokeWidth * uPixelRatio * 0.5;
-
-    // Linear box-filter coverage: a 1px-wide ramp that is exactly 0.5 at the
-    // boundary, so a 1px stroke straddling the edge reads as 50% each side.
-    float coverageOuter = clamp(0.5 - (distPx - halfStrokePx), 0.0, 1.0);
-    float coverageInner = clamp(0.5 - (distPx + halfStrokePx), 0.0, 1.0);
-    float coverageStroke = coverageOuter - coverageInner;
-
-    // Premultiplied composite of two disjoint sub-areas (fill under, stroke over).
-    float fillA = uColor.a * coverageInner;
-    float strokeA = uStrokeColor.a * coverageStroke;
-    gl_FragColor = vec4(
-      uColor.rgb * fillA + uStrokeColor.rgb * strokeA,
-      fillA + strokeA
-    );
+    gl_FragColor = uColor;
   }
 `;
 
