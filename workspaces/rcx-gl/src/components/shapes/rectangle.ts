@@ -171,8 +171,14 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
 
       // The fragment outputs premultiplied alpha so it can composite the
       // straddled, anti-aliased border over the fill in a single pass.
+      gl.disable(gl.DEPTH_TEST);
       gl.enable(gl.BLEND);
-      gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+      gl.blendFuncSeparate(
+        gl.SRC_ALPHA,
+        gl.ONE_MINUS_SRC_ALPHA, // RGB: normal source-over
+        gl.ONE,
+        gl.ONE_MINUS_SRC_ALPHA // alpha: standard, keeps 1.0 at 1.0
+      );
 
       gl.uniform2f(uOffset, x, y);
       gl.uniform2f(uSize, width, height);
