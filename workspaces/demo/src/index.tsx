@@ -416,14 +416,22 @@ const App2d = () => {
           y={100}
           width={100}
           height={100}
-          style={{ fill: 'cyan', strokeWidth: 1, stroke: 'black' }}
+          style={{
+            fill: 'rgba(0, 255, 255, 0.5)',
+            strokeWidth: 1,
+            stroke: 'black',
+          }}
         />
         <Rectangle
           x={125}
           y={125}
           width={50}
           height={50}
-          style={{ fill: 'red', strokeWidth: 1, stroke: 'black' }}
+          style={{
+            fill: 'rgba(255, 0, 0, 0.5)',
+            strokeWidth: 1,
+            stroke: 'black',
+          }}
         />
       </ClearCanvas>
     </Canvas>
@@ -439,14 +447,22 @@ const AppGl = () => {
           y={100}
           width={100}
           height={100}
-          style={{ fill: 'cyan', strokeWidth: 1, stroke: 'black' }}
+          style={{
+            fill: 'rgba(0, 255, 255, 0.5)',
+            strokeWidth: 1,
+            stroke: 'black',
+          }}
         />
         <RectangleGl
           x={125}
           y={125}
           width={50}
           height={50}
-          style={{ fill: 'red', strokeWidth: 1, stroke: 'black' }}
+          style={{
+            fill: 'rgba(255, 0, 0, 0.5)',
+            strokeWidth: 1,
+            stroke: 'black',
+          }}
         />
       </ClearCanvasGl>
     </Canvas>
