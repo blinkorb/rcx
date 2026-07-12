@@ -483,7 +483,7 @@ const initGl = () => {
   document.body.appendChild(canvas);
 
   const ctxGl = canvas.getContext('webgl', {
-    premultipliedAlpha: false,
+    premultipliedAlpha: true,
     alpha: true,
     antialias: true,
   });
