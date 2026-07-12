@@ -128,8 +128,6 @@ export const Rectangle: RCXComponent<RectangleProps> = (props) => {
       gl.vertexAttribPointer(aVertex, 2, gl.FLOAT, false, 0, 0);
       gl.enableVertexAttribArray(aVertex);
 
-      // The fragment outputs premultiplied alpha so it can composite the
-      // straddled, anti-aliased border over the fill in a single pass.
       gl.disable(gl.DEPTH_TEST);
       gl.enable(gl.BLEND);
       gl.blendFuncSeparate(
