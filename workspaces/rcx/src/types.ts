@@ -68,7 +68,7 @@ export type RCXNodeAny = RCXNode<RCXComponentAny, AnyObject>;
 
 export interface RCXRenderingContext {
   readonly ctx2d?: CanvasRenderingContext2D;
-  readonly ctxGl?: WebGLRenderingContext;
+  readonly ctxGl?: WebGL2RenderingContext;
 }
 
 export interface RCXComponentInterface {
@@ -94,7 +94,7 @@ export interface RCXCanvasContext {
   readonly actualWidth: number;
   readonly actualHeight: number;
   readonly ctx2d?: CanvasRenderingContext2D;
-  readonly ctxGl?: WebGLRenderingContext;
+  readonly ctxGl?: WebGL2RenderingContext;
 }
 
 export interface RCXGlobal {
@@ -169,12 +169,12 @@ export type CreateRootResult = CreateRootFailure | CreateRootSuccess;
 
 export interface CreateRootOptionsCtx2d {
   readonly ctx2d: CanvasRenderingContext2D;
-  readonly ctxGl?: WebGLRenderingContext;
+  readonly ctxGl?: WebGL2RenderingContext;
 }
 
 export interface CreateRootOptionsCtxGl {
   readonly ctx2d?: CanvasRenderingContext2D;
-  readonly ctxGl: WebGLRenderingContext;
+  readonly ctxGl: WebGL2RenderingContext;
 }
 
 export type CreateRootOptions = CreateRootOptionsCtx2d | CreateRootOptionsCtxGl;

@@ -10,14 +10,14 @@ import {
 import { getHasCtxGl } from '../utils/get-has-ctx-gl.js';
 
 export interface UseRenderGlOptionsWithSetup<T extends AnyObject> {
-  setup: (ctx: WebGLRenderingContext) => T;
-  renderBeforeChildren?: (ctx: WebGLRenderingContext, info: T) => void;
-  renderAfterChildren?: (ctx: WebGLRenderingContext, info: T) => void;
+  setup: (ctx: WebGL2RenderingContext) => T;
+  renderBeforeChildren?: (ctx: WebGL2RenderingContext, info: T) => void;
+  renderAfterChildren?: (ctx: WebGL2RenderingContext, info: T) => void;
 }
 
 export interface UseRenderGlOptionsWithoutSetup {
-  renderBeforeChildren?: (ctx: WebGLRenderingContext) => void;
-  renderAfterChildren?: (ctx: WebGLRenderingContext) => void;
+  renderBeforeChildren?: (ctx: WebGL2RenderingContext) => void;
+  renderAfterChildren?: (ctx: WebGL2RenderingContext) => void;
 }
 
 export function useRenderGl<T extends AnyObject>(

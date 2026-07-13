@@ -1,5 +1,5 @@
 export const compileShader = (
-  gl: WebGLRenderingContext,
+  gl: WebGL2RenderingContext,
   type: number,
   source: string
 ) => {
