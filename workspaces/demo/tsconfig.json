@@ -1,0 +1,24 @@
+{
+  "extends": "../rcx/tsconfig.json",
+  "compilerOptions": {
+    "sourceMap": true,
+    "paths": {
+      "@blinkorb/rcx": ["../../rcx/src/index.ts"],
+      "@blinkorb/rcx/canvas": ["../../rcx/src/canvas/index.ts"],
+      "@blinkorb/rcx/hooks": ["../../rcx/src/hooks/index.ts"],
+      "@blinkorb/rcx/utils": ["../../rcx/src/utils/index.ts"],
+      "@blinkorb/rcx-2d": ["../../rcx-2d/src/index.ts"],
+      "@blinkorb/rcx-2d/hooks": ["../../rcx-2d/src/hooks/index.ts"],
+      "@blinkorb/rcx-2d/utils": ["../../rcx-2d/src/utils/index.ts"],
+      "@blinkorb/rcx-2d/components": [
+        "../../rcx-2d/src/utils/components/index.ts"
+      ],
+      "@blinkorb/rcx-gl": ["../../rcx-gl/src/index.ts"],
+      "@blinkorb/rcx-gl/utils": ["../../rcx-gl/src/utils/index.ts"],
+      "@blinkorb/rcx-gl/components": [
+        "../../rcx-gl/src/utils/components/index.ts"
+      ]
+    }
+  },
+  "include": ["./src/", "../rcx/src", "../rcx-2d", "../rcx-gl"]
+}

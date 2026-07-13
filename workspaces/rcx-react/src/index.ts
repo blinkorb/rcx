@@ -1,1 +1,1 @@
-export { useRCXInReact } from './useRCXInReact.js';
+export * from './useRCXInReact.js';

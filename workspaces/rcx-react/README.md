@@ -19,11 +19,11 @@ If you're already using JSX with another view library, such as React, you'll lik
 
 You can tell TypeScript to treat your RCX components differently (using the JSX types from RCX itself) by adding the following to the top of any RCX component files.
 
-Note that you cannot use JSX for both React and RCX within the same file - the types will clash - instead you create separate files for your RCX app/components.
-
 ```tsx
 /** @jsxImportSource @blinkorb/rcx */
 ```
+
+Note that you cannot use JSX for both React and RCX within the same file - the types will clash - instead you create separate files for your RCX app/components.
 
 ### Example Usage
 

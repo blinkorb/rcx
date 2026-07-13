@@ -1,7 +1,7 @@
-import { canvasContext } from '../components/canvas/context.js';
+import { useInjectCanvasContext } from '../canvas/context.js';
 
 export const useCanvasContext = () => {
-  const context = canvasContext.useInject();
+  const context = useInjectCanvasContext();
 
   if (!context) {
     throw new Error('useCanvasContext must be used below a Canvas component');

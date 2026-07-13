@@ -1,8 +1,9 @@
-import {
-  type AnyObject,
-  type CreateRootSuccess,
-  type RCXComponent,
-  type RCXElement,
+import type {
+  AnyObject,
+  CreateRootOptions,
+  CreateRootSuccess,
+  RCXComponent,
+  RCXElement,
 } from '@blinkorb/rcx';
 import { createRoot } from '@blinkorb/rcx/root';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -12,46 +13,35 @@ export const useRCXInReact = <C extends RCXComponent<P>, P extends AnyObject>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dependencies: readonly any[]
 ) => {
-  const elementRef = useRef<HTMLCanvasElement | null>(null);
-  const rootRef = useRef<CreateRootSuccess | null>(null);
   const [root, setRoot] = useState<CreateRootSuccess | null>(null);
+  const rootRef = useRef(root);
+  // eslint-disable-next-line react-hooks/refs
+  rootRef.current = root;
 
-  const onCanvasChange = useCallback((element: HTMLCanvasElement | null) => {
-    // unmount the RCX instance when we don't have a canvas element
-    if (!element) {
-      elementRef.current = element;
-      rootRef.current?.unmount();
-      rootRef.current = null;
-      setRoot(null);
-      return;
-    }
-
-    // create a new root when we first mount the canvas or we have a new canvas element
-    if (element && element !== elementRef.current) {
-      // unmount existing RCX instance
-      rootRef.current?.unmount();
-      const rootOrError = createRoot(element);
-
-      if ('error' in rootOrError) {
-        rootRef.current = null;
+  const setCreateRootOptions = useCallback(
+    (options: CreateRootOptions | null) => {
+      if (!options) {
         setRoot(null);
-
-        if (
-          globalThis.console &&
-          typeof globalThis.console.error === 'function'
-        ) {
-          // eslint-disable-next-line no-console
-          console.error(rootOrError.error);
-        }
       } else {
-        rootRef.current = rootOrError;
-        setRoot(rootOrError);
-      }
-    }
+        const rootOrError = createRoot(options);
 
-    // update our element ref for future comparisons
-    elementRef.current = element;
-  }, []);
+        if ('error' in rootOrError) {
+          setRoot(null);
+
+          if (
+            globalThis.console &&
+            typeof globalThis.console.error === 'function'
+          ) {
+            // eslint-disable-next-line no-console
+            console.error(rootOrError.error);
+          }
+        } else {
+          setRoot(rootOrError);
+        }
+      }
+    },
+    []
+  );
 
   useEffect(() => {
     // render the canvas if our root or any props have changed
@@ -66,5 +56,5 @@ export const useRCXInReact = <C extends RCXComponent<P>, P extends AnyObject>(
     };
   }, []);
 
-  return onCanvasChange;
+  return setCreateRootOptions;
 };

@@ -1,0 +1,47 @@
+{
+  "name": "@blinkorb/rcx-demo",
+  "version": "0.0.0",
+  "description": "RCX Demo",
+  "type": "module",
+  "main": "./src/index.ts",
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "tsb serve",
+    "type-check": "tsc --noEmit",
+    "format-check": "prettier --check *",
+    "format-fix": "prettier --write *",
+    "lint-check": "eslint '**/*.{ts,tsx,js,jsx}'",
+    "lint-fix": "eslint '**/*.{ts,tsx,js,jsx}' --fix",
+    "test": "npm run format-check && npm run type-check && npm run lint-check",
+    "prepublishOnly": "npm run test && echo 'Now run publish from the dist directory' && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blinkorb/rcx.git"
+  },
+  "keywords": [
+    "canvas",
+    "jsx",
+    "view",
+    "library",
+    "reactive",
+    "html5",
+    "game"
+  ],
+  "author": "BlinkOrb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blinkorb/rcx/issues"
+  },
+  "homepage": "https://github.com/blinkorb/rcx#readme",
+  "devDependencies": {
+    "@blinkorb/eslint-config-rcx-dev": "^0.0.0",
+    "@blinkorb/rcx": "^0.1.3",
+    "@blinkorb/rcx-2d": "^0.0.0",
+    "@blinkorb/rcx-gl": "^0.0.0",
+    "@jakesidsmith/tsb": "^4.0.0",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

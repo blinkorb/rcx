@@ -8,7 +8,7 @@ This library is in early development, and so the interfaces you interact with ma
 
 ## About
 
-RCX closely resembles other JSX-based view libraries such as React/Vue, but allows you to render to canvas. It can even be used in conjunction with other view libraries (see [Integrating With React](#integrating-with-react) example).
+RCX closely resembles other JSX-based view libraries such as React/Vue, but allows you to render to canvas. It can even be used in conjunction with other view libraries (see [rcx-react readme](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md)). It allows you to render using either 2D canvas context or WebGL (or both).
 
 ## Installation
 
@@ -47,185 +47,58 @@ import { Canvas } from '@blinkorb/rcx';
 const App = () => {
   return (
     <Canvas pixelRatio={getRecommendedPixelRatio()}>
-      {/* Your component here */}
+      {/* Your component(s) here */}
     </Canvas>
   );
 };
 ```
 
-You can then render this component using the `render` function. The render function's second argument is the DOM node where you would like the canvas to appear. If the node is already a canvas RCX will render to that canvas, otherwise it will add a canvas within that node.
+You can then render this component using the by creating an RCX root and calling the `render` function. The `createRoot` takes an object containing at least one of `ctx2d` (for 2D canvas drawings) and or `ctxGl` (for WebGL drawings). The `render` function receives the JSX element of your canvas app.
+
+You should handle cases where your canvas element does not exist, the browser does not support the context you want to use, or you've failed to provide at least one canvas context to the `createRoot` function, and display a nice error message to the user. The below example uses alerts, but you can do something better.
 
 ```tsx
 import { createRoot } from '@blinkorb/rcx';
 
-const root = createRoot(document.body);
+const init = () => {
+  // Get an existing canvas from the DOM
+  const canvas = document.getElementById('canvas');
+  // Or you could create and mount one yourself e.g.
+  //
+  // const canvas = document.createElement('canvas');
+  // document.body.appendChild(canvas);
 
-if ('error' in root) {
-  console.error(root.error);
-} else {
-  root.render(<App />);
-}
+  if (!canvas) {
+    alert('Could not get canvas element');
+    return;
+  }
+
+  const ctx2d = canvas.getContext('2d');
+
+  if (!ctx2d) {
+    alert('Canvas 2D context is not supported in this browser');
+    return;
+  }
+
+  const root = createRoot({ ctx2d });
+
+  if ('error' in root) {
+    alert(root.error);
+  } else {
+    root.render(<App />);
+  }
+};
+
+init();
 ```
 
-### Basic Components
+## 2D Context Components
 
-#### Transform Components
+You can find some documentation on the 2D context components/utils that we supply in the [rcx-2d readme](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md).
 
-We provide `Translate`, `Scale`, and `Rotate` components that will transform any of their children.
+## WebGL Components
 
-In the below example the `Offset` component will be offset by 10 pixels in both the `x` and `y` axis. The `NoOffset` component will not be affected by the transform.
-
-```tsx
-<>
-  <Translate x={10} y={10}>
-    <Offset />
-  </Translate>
-  <NoOffset />
-</>
-```
-
-#### Shape Components
-
-We provide `Circle`, `Ellipse`, and `Rectangle` components for rendering some basic shapes. Each of these can receive a style prop to apply a stroke/border, and fill. You can also define (for some of these components) if the shape should continue from any existing drawings, or begin a new path by setting the `beginPath` prop. You can also choose to close these shapes by setting the `closePath` prop.
-
-```tsx
-<>
-  <Circle
-    x={50}
-    y={50}
-    radius={50}
-    beginPath
-    closePath
-    style={{
-      strokeWidth: 1,
-      stroke: 'black',
-    }}
-  />
-  <Ellipse
-    x={50}
-    y={50}
-    radiusX={20}
-    radiusY={50}
-    beginPath
-    closePath
-    style={{
-      strokeWidth: 1,
-      stroke: 'black',
-      fill: 'red',
-    }}
-  />
-  <Rectangle
-    x={0}
-    y={0}
-    width={100}
-    height={50}
-    beginPath
-    style={{ fill: 'blue' }}
-  />
-</>
-```
-
-#### Path Components
-
-We provide a selection of components for drawing paths. These components can be combined to draw more complex shapes.
-
-All path plotting components can have stroke styles. `Path` and `ArcTo` components can also have fill styles (fills are excluded from `Line` as it is more performant to use `Path`).
-
-```tsx
-<>
-  {/* Plot a single line */}
-  <Line
-    startX={0}
-    startY={0}
-    endX={10}
-    endY={10}
-    beginPath
-    style={{
-      strokeWidth: 2,
-      stroke: 'black',
-    }}
-  />
-  {/* Plot an arc */}
-  <ArcTo
-    startControlX={0}
-    startControlY={0}
-    endControlX={10}
-    endControlY={10}
-    radius={10}
-    style={{
-      strokeWidth: 2,
-      stroke: 'black',
-    }}
-  />
-  {/* Plot a path from an array of points */}
-  <Path
-    points={[
-      {
-        x: 0,
-        y: 0,
-      },
-      {
-        x: 10,
-        y: 10,
-      },
-    ]}
-    beginPath
-    style={{
-      strokeWidth: 2,
-      stroke: 'black',
-    }}
-  />
-  {/* Plot a path from an array of points using the Point component */}
-  <Path
-    beginPath
-    style={{
-      strokeWidth: 2,
-      stroke: 'black',
-    }}
-  >
-    {points.map((point, index) => (
-      <Point $key={index} x={point.x} x={point.y} lineTo={index > 0} />
-    ))}
-  </Path>
-  {/* Plot a path using manually specified Points */}
-  <Path
-    beginPath
-    style={{
-      strokeWidth: 2,
-      stroke: 'black',
-    }}
-  >
-    <Point x={0} x={0} lineTo={false} />
-    <Point x={10} x={10} lineTo={true} />
-  </Path>
-</>
-```
-
-In addition to the path plotting components we provide, we also have a `Clip` component that can be used to apply a clipping mask to future drawings.
-
-```tsx
-<>
-  <Circle x={50} y={50} radius={50}>
-    <Clip>
-      <ComponentWillOnlyDrawInsideCircle />
-    </Clip>
-  </Circle>
-</>
-```
-
-#### Text Components
-
-We currently only provide a single `Text` component that will render a single line of raw text. We hope to add multi-line and rich text components in the future. You can also render components that contain text or number within a `Text` component.
-
-```tsx
-<Text x={10} y={10} style={{
-  fill: 'black',
-  align: 'center,
-}}>
-  The count is {count}
-  <ContainsSomeText />
-</Text>
-```
+You can find some documentation on the WebGL components/utils that we supply in the [rcx-gl readme](https://github.com/blinkorb/rcx-gl/blob/master/workspaces/rcx/README.md).
 
 ## Custom Components
 
@@ -233,11 +106,13 @@ You can define your own components with complex drawing logic directly applied v
 
 It is highly recommended to `.save()` the canvas state before beginning drawing in `useRenderBeforeChildren` and to `.restore()` the canvas state after drawing in the `useRenderAfterChildren`.
 
-We also provide some utils for resolving and applying styles as styles can be provided as an array, and all fills and strokes are always applied in the same way.
+We also provide some utils for ensuring the context you want to use was provided before drawing, and for resolving and applying styles (as styles can be provided as an array, and all fills and strokes are always applied in the same way for 2D contexts).
 
-Here's an example that draws a rectangle with rounded corners.
+Here's an example that draws a rectangle with rounded corners (using 2D context).
 
 ```tsx
+import { getHasCtx2d, applyFillAndStrokeStyles } from '@blinkorb/rcx-2d';
+
 interface RoundedRectangleProps extends RectangleProps {
   radius: number;
   closePath?: boolean;
@@ -245,50 +120,122 @@ interface RoundedRectangleProps extends RectangleProps {
 
 const RoundedRectangle: RCXComponent<RoundedRectangleProps> = (props) => {
   useRenderBeforeChildren((renderingContext) => {
-    const { x, y, width, height, radius, beginPath = true, closePath } = props;
+    if (getHasCtx2d(renderingContext)) {
+      const {
+        x,
+        y,
+        width,
+        height,
+        radius,
+        beginPath = true,
+        closePath,
+      } = props;
 
-    renderingContext.ctx2d.save();
+      renderingContext.ctx2d.save();
 
-    if (beginPath) {
-      renderingContext.ctx2d.beginPath();
-    }
+      if (beginPath) {
+        renderingContext.ctx2d.beginPath();
+      }
 
-    renderingContext.ctx2d.moveTo(x + radius, y);
-    renderingContext.ctx2d.lineTo(x + width - radius, y);
-    renderingContext.ctx2d.arcTo(x + width, y, x + width, y + radius, radius);
-    renderingContext.ctx2d.lineTo(x + width, y + height - radius);
-    renderingContext.ctx2d.arcTo(
-      x + width,
-      y + height,
-      x + width - radius,
-      y + height,
-      radius
-    );
-    renderingContext.ctx2d.lineTo(x + radius, y + height);
-    renderingContext.ctx2d.arcTo(x, y + height, x, y + height - radius, radius);
-    renderingContext.ctx2d.lineTo(x, y + radius);
-    renderingContext.ctx2d.arcTo(x, y, x + radius, y, radius);
+      renderingContext.ctx2d.moveTo(x + radius, y);
+      renderingContext.ctx2d.lineTo(x + width - radius, y);
+      renderingContext.ctx2d.arcTo(x + width, y, x + width, y + radius, radius);
+      renderingContext.ctx2d.lineTo(x + width, y + height - radius);
+      renderingContext.ctx2d.arcTo(
+        x + width,
+        y + height,
+        x + width - radius,
+        y + height,
+        radius
+      );
+      renderingContext.ctx2d.lineTo(x + radius, y + height);
+      renderingContext.ctx2d.arcTo(
+        x,
+        y + height,
+        x,
+        y + height - radius,
+        radius
+      );
+      renderingContext.ctx2d.lineTo(x, y + radius);
+      renderingContext.ctx2d.arcTo(x, y, x + radius, y, radius);
 
-    if (closePath) {
-      renderingContext.ctx2d.closePath();
+      if (closePath) {
+        renderingContext.ctx2d.closePath();
+      }
     }
   });
 
   useRenderAfterChildren((renderingContext) => {
-    applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
+    if (getHasCtx2d(renderingContext)) {
+      applyFillAndStrokeStyles(renderingContext, resolveStyles(props.style));
 
-    renderingContext.ctx2d.restore();
+      renderingContext.ctx2d.restore();
+    }
   });
 
   return props.children;
 };
 ```
 
+## Context/Provide/Inject
+
+Similarly to React and Vue we provide a context/provide/inject API that allows you to pass state down to child components without prop drilling (every component has to define and forward on props to their children).
+
+First you create your context by calling the `createContext` function.
+
+It's recommended that you destructure and name the provider/hooks that this returns so that these can be easily imported and used elsewhere.
+
+```ts
+export const {
+  Provider: MyContextProvider,
+  useProvide: useProvideMyContext,
+  useInject: useInjectMyContext,
+} = createContext<TypeForTheValueOfTheContext>(
+  'Optional name to help with debugging'
+);
+```
+
+And then you can use this in one of two ways (or both) depending on whether you're more familiar with React or Vue.
+
+The React-like way:
+
+```tsx
+const Example = () => {
+  return (
+    <MyContextProvider value={theThingToProvide}>
+      {/* Your component(s) go here */}
+    </MyContextProvider>
+  );
+};
+```
+
+Or the Vue-like way:
+
+```tsx
+const Example = () => {
+  useProvideMyContext(theThingToProvide);
+
+  return {
+    /* Your component(s) go here */
+  };
+};
+```
+
+In both cases to access your context within a child component you use the following:
+
+```tsx
+const Child = () => {
+  const providedThing = useInjectMyContext();
+};
+```
+
+This is because under the hook the React-like provider is actually just a component that calls `useProvide`.
+
 ## Hooks
 
 ### useCanvasContext
 
-Provides the context from the current canvas including its `pixelRatio`, `width` and `height` (scaled by `pixelRatio`), and actual width/height (e.g. with a `pixelRatio` of `2` and `width` of `100` the `actualWidth` of the canvas will be `200` - you should generally avoid using the actual sizes and rely on the scaled `width` and `height` values).
+Provides the context from the current canvas (not the drawing context, but information about the canvas itself using our context/provide/inject API) including its `pixelRatio`, `width` and `height` (scaled by `pixelRatio`), and actual width/height (e.g. with a `pixelRatio` of `2` and `width` of `100` the `actualWidth` of the canvas will be `200` - you should generally avoid using the actual sizes and rely on the scaled `width` and `height` values).
 
 ### useRenderBeforeChildren
 
@@ -297,54 +244,6 @@ Used for creating custom components with complex rendering logic. Takes a callba
 ### useRenderAfterChildren
 
 Used for creating custom components with complex rendering logic. Takes a callback that receives the current canvas rendering context to allow manually drawing with the canvas context. The callback is called after any children are rendered. See [Custom Components](#custom-components) for a full example.
-
-### useLinearGradient
-
-Can be used to create a linear gradient that can then be applied as a fill/stroke style.
-
-```tsx
-const stroke = useLinearGradient({
-  startX: 0,
-  startY: 0,
-  endX: 10,
-  endY: 10,
-  stops: [
-    {
-      offset: 0,
-      color: '#f00',
-    },
-    {
-      offset: 1,
-      color: '#000',
-    },
-  ],
-});
-```
-
-### useRadialGradient
-
-Can be used to create a radial gradient that can then be applied as a fill/stroke style.
-
-```tsx
-const fill = useRadialGradient({
-  startX: 10,
-  startY: 10,
-  startRadius: 0,
-  endX: 0,
-  endY: 0,
-  endRadius: 10,
-  stops: [
-    {
-      offset: 0,
-      color: '#000',
-    },
-    {
-      offset: 1,
-      color: '#00f',
-    },
-  ],
-});
-```
 
 ### useLoop
 
@@ -412,4 +311,4 @@ Returns the current window size. This will update when the window is resized.
 
 ## Integrating With React
 
-See [`rcx-react`](../rcx-react/README.md) for documentation about integrating RCX into a React application.
+See [`rcx-react`](https://github.com/blinkorb/rcx-2d/blob/master/workspaces/rcx/README.md) for documentation about integrating RCX into a React application.

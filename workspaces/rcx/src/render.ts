@@ -1,4 +1,4 @@
-import { renderingContext } from './components/canvas/context.js';
+import { useProvideRenderingContext } from './canvas/context.js';
 import { cxGlobal } from './internal/global.js';
 import type {
   AnyObject,
@@ -145,7 +145,7 @@ export const renderElement = (
   cxGlobal.currentNode = node;
   cxGlobal.hookIndex = 0;
 
-  renderingContext.useProvide(renderingContextState);
+  useProvideRenderingContext(renderingContextState);
 
   node.rendered = element.type(element.props);
 

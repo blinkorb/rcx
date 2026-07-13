@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import { type RCXComponent } from '@blinkorb/rcx';
 import { jsx } from '@blinkorb/rcx/jsx-runtime';
 import { render, screen } from '@testing-library/react';
-import { act, useState } from 'react';
+import { act, useCallback, useState } from 'react';
 
 import { useRCXInReact } from './useRCXInReact.js';
 
@@ -17,11 +17,33 @@ describe('useRCXInReact', () => {
     const TestReactComponent = () => {
       const [count, setCount] = useState(0);
 
-      const setCanvas = useRCXInReact(() => rerenderSpy({ count }), [count]);
+      const setCreateRootOptions = useRCXInReact(
+        () => rerenderSpy({ count }),
+        [count]
+      );
+
+      const onCanvasChange = useCallback(
+        (element: HTMLCanvasElement | null) => {
+          if (!element) {
+            setCreateRootOptions(null);
+            return;
+          }
+
+          const ctx2d = element.getContext('2d');
+
+          if (ctx2d) {
+            setCreateRootOptions({ ctx2d });
+          } else {
+            // Display an error to the user
+            setCreateRootOptions(null);
+          }
+        },
+        [setCreateRootOptions]
+      );
 
       return (
         <>
-          <canvas ref={setCanvas} />
+          <canvas ref={onCanvasChange} />
           <p>Count: {count}</p>
           <button onClick={() => setCount((prev) => prev + 1)}>
             Increment

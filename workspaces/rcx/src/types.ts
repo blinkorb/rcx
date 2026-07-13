@@ -1,4 +1,4 @@
-import type { CanvasProps } from './components/canvas/index.js';
+import type { CanvasProps } from './canvas/index.js';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -18,7 +18,11 @@ export type AnyArray = readonly any[];
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type AnyFunction = (...args: any[]) => any;
 
+export type EmptyObject = Record<PropertyKey, never>;
+
 export type NestedArray<T> = T | readonly NestedArray<T>[];
+
+export type Merge<T extends AnyObject> = Pick<T, keyof T>;
 
 export interface RCXElement<C extends RCXComponent<P>, P extends AnyObject> {
   type: C;
@@ -63,8 +67,8 @@ export interface RCXNode<C extends RCXComponent<P>, P extends AnyObject> {
 export type RCXNodeAny = RCXNode<RCXComponentAny, AnyObject>;
 
 export interface RCXRenderingContext {
-  readonly canvas: HTMLCanvasElement;
-  readonly ctx2d: CanvasRenderingContext2D;
+  readonly ctx2d?: CanvasRenderingContext2D;
+  readonly ctxGl?: WebGL2RenderingContext;
 }
 
 export interface RCXComponentInterface {
@@ -89,8 +93,8 @@ export interface RCXCanvasContext {
   readonly pixelRatio: number;
   readonly actualWidth: number;
   readonly actualHeight: number;
-  readonly canvas: Omit<HTMLCanvasElement, 'width' | 'height'>;
-  readonly ctx2d: CanvasRenderingContext2D;
+  readonly ctx2d?: CanvasRenderingContext2D;
+  readonly ctxGl?: WebGL2RenderingContext;
 }
 
 export interface RCXGlobal {
@@ -162,3 +166,15 @@ export interface CreateRootSuccess {
 }
 
 export type CreateRootResult = CreateRootFailure | CreateRootSuccess;
+
+export interface CreateRootOptionsCtx2d {
+  readonly ctx2d: CanvasRenderingContext2D;
+  readonly ctxGl?: WebGL2RenderingContext;
+}
+
+export interface CreateRootOptionsCtxGl {
+  readonly ctx2d?: CanvasRenderingContext2D;
+  readonly ctxGl: WebGL2RenderingContext;
+}
+
+export type CreateRootOptions = CreateRootOptionsCtx2d | CreateRootOptionsCtxGl;
