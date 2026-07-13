@@ -22,6 +22,8 @@ export type EmptyObject = Record<PropertyKey, never>;
 
 export type NestedArray<T> = T | readonly NestedArray<T>[];
 
+export type Merge<T extends AnyObject> = Pick<T, keyof T>;
+
 export interface RCXElement<C extends RCXComponent<P>, P extends AnyObject> {
   type: C;
   props: P;
